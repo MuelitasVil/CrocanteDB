@@ -85,7 +85,7 @@ public class MysqlConexion {
         // ----------------------------- Funcion para iniciar la conexion ------------------------------------------------ 
         
         
-    public static Connection Iniciar_conexion(){
+    public static Connection iniciarConexion(){
     
         
          try {
@@ -111,7 +111,7 @@ public class MysqlConexion {
            // ----------------------------- Funcion para cerrar la conexion ------------------------------------------------ 
     
     
-     public static void cerrar_conexion(Connection conexion){
+     public static void cerrarConexion(Connection conexion){
    
             try {
             conexion.close();

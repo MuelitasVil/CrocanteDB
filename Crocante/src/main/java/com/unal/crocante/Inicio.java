@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unal.crocante;
 
-import com.mysql.cj.jdbc.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,8 +18,8 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         initComponents();
     }
-    
-    MysqlConexion Conexion = new MysqlConexion();
+
+    MysqlConexion conexion = new MysqlConexion();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,86 +105,68 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jButton_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AceptarActionPerformed
 
-// Se llaman todos los string necdesarios de los cuadros de texto 
-            
-            String usuario  = Texto_Usuario.getText();
-            String apellido  = Texto_Apellido.getText();
-            String contraseña  = Texto_Contraseña.getText();
+// Se llaman todos los string necdesarios de los cuadros de texto
+        String usuario = Texto_Usuario.getText();
+        String apellido = Texto_Apellido.getText();
+        String contraseña = Texto_Contraseña.getText();
 
-            
 // Se envia al objeto conexion el usuario y la contraseña
+        conexion.setPassword(contraseña);
+        conexion.setUser(usuario);
 
-            Conexion.setPassword(contraseña);
-            Conexion.setUser(usuario);
-        
-// Se llama la funcion Iniciar_conexion() y se crea la variable conectar que va a servir para todo lo de mysql
-            
-            Connection Conectar = Conexion.Iniciar_conexion();
-            
-        
+// Se llama la funcion iniciarConexion() y se crea la variable conectar que va a servir para todo lo de mysql
+        Connection Conectar = conexion.iniciarConexion();
+
 // Se comprueba si la conexion fue exitosa
-
-            if (Conectar != null){
+        if (Conectar != null) {
             try {
-// Preparamos la consulta para buscar el cargo de la persona y que pueda acceder a su vista correspondiente 
+// Preparamos la consulta para buscar el cargo de la persona y que pueda acceder a su vista correspondiente
 
-            String consulta = "select Mostrar_Cargo('"+usuario+"', '"+apellido+"')";
-            
-            PreparedStatement s = Conectar.prepareStatement(consulta);
-            ResultSet resultado = s.executeQuery();
-            resultado.next();
-            
-            String cargo = resultado.getString(1);
-            
-            if  ("Gerente".equals(cargo)){
-                
-                JOptionPane.showMessageDialog(null, "Bienvenido gerente : "+usuario+" "+apellido);
-                new Menu().setVisible(true);
-                dispose();
-                
-            }
-            
-     
-            else if  ("Cajero".equals(cargo)){
-                
-                JOptionPane.showMessageDialog(null, "Bienvenido Cajero : "+usuario+" "+apellido);
-                
-            }
-            
-            else {
-                
-                JOptionPane.showMessageDialog(null, "Su cargo no tiene permitido entrar a la base de datos");
-                
-            }
-            
-            System.out.println(cargo);
-       
+                String consulta = "select Mostrar_Cargo('" + usuario + "', '" + apellido + "')";
+
+                PreparedStatement s = Conectar.prepareStatement(consulta);
+                ResultSet resultado = s.executeQuery();
+                resultado.next();
+
+                String cargo = resultado.getString(1);
+
+                if ("Gerente".equals(cargo)) {
+
+                    JOptionPane.showMessageDialog(null, "Bienvenido gerente : " + usuario + " " + apellido);
+                    new Menu().setVisible(true);
+                    dispose();
+
+                } else if ("Cajero".equals(cargo)) {
+
+                    JOptionPane.showMessageDialog(null, "Bienvenido Cajero : " + usuario + " " + apellido);
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Su cargo no tiene permitido entrar a la base de datos");
+
+                }
+
+                System.out.println(cargo);
+
 // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
-            }catch (SQLException sqle){ 
-            System.out.println("Imposible realizar consulta ... FAIL");
+            } catch (SQLException sqle) {
+                System.out.println("Imposible realizar consulta ... FAIL");
             }
-                
-            }
-            else {
-            
+
+        } else {
+
             JOptionPane.showMessageDialog(null, "No se ha podido conectar correctamente a la base de datos\nVuelva a ingresar su ingresario y contraseña");
-            
-            }
-            
 
+        }
 
-       
 // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
-
-
-
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_AceptarActionPerformed
 
     private void jButton_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarActionPerformed
-                
-        new Registro().setVisible(true);  
-                
+
+        new Registro().setVisible(true);
+
     }//GEN-LAST:event_jButton_RegistrarActionPerformed
 
     private void Texto_ApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Texto_ApellidoActionPerformed
@@ -206,7 +180,7 @@ public class Inicio extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
