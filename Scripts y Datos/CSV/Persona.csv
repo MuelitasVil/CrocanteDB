@@ -1,0 +1,16 @@
+per_id;per_nombre;per_apellido;per_direccion;per_telefono;per_correo
+8439834999;Venus;Baquero;Calle 71B ## 84;555432100;vbaquero@unal.edu.co
+9489385088;Santiago;Flórez;Calle 116a;555432101;sflorezca@unal.edu.co
+4958493856;Manuel;Martinez;Calle 80 #7426;555432102;mmartinezve@unal.edu.co
+1023584212;Juan;Perez;NULL;NULL;NULL
+1023584112;Ana;Martinez;Calle 1;5556789000;srcliente0@gmail.com
+1023584012;Manuel;Zapata;Calle 23 #4;5556789001;srcliente2@gmail.com
+1023583912;Juan;Martinez;NULL;5556789002;srcliente3@gmail.com
+1023583812;Laura;Perez;Calle 45;5556789003;srcliente4@gmail.com
+1023583712;Miguel;Gonzales;NULL;5556789004;srcliente5@gmail.com
+1023583612;Sara;Vera;NULL;5556789005;srcliente6@gmail.com
+1023583512;Felipe;Baquero;NULL;5556789006;sracliente1@gmail.com
+1023583412;Paula;Vargas;NULL;5556789007;sracliente2@gmail.com
+1023583312;Carlos;Díaz;NULL;5556789008;sracliente3@gmail.com
+1023583212;Andres;García;NULL;5556789009;sracliente4@gmail.com
+0;Anonima;NULL;NULL;NULL;NULL
