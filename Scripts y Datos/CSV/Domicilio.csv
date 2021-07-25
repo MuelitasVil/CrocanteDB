@@ -1,0 +1,5 @@
+dom_id;dom_dirEntrega;dom_tiempoEntrega;dom_estado;dom_precio;emp_id*;ven_id*;bar_id*
+1;Calle 23 #4;1200;Entregado;2000;3;1;1
+2;Carrera 7 # 84-72;4000;Entregado;7000;3;3;5
+3;Calle 4 # 5-10;800;Entregado;2000;3;5;1
+4;Carrera 3 # 18-45;1000;Cancelado;2000;3;7;1

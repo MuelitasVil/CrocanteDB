@@ -1,0 +1,9 @@
+ven_id;ven_fecha;ven_precioTotal;ven_formaPago;ven_estadoPago;ven_modalidad;ven_diaSemana;per_id;sede_id;ven_estado
+1;2021-08-12;10000;Efectivo;Pagado;Domicilio;Miercoles;1023584012;1;1
+2;2021-07-10;39000;Tarjeta;Pagado;Presencial;Sabado;1023583212;1;1
+3;2021-06-13;14500;Online;No Pago;Domicilio;Sabado;1023583712;1;1
+4;2021-07-21;12000;Online;Pagado;Presencial;Domingo;1023584112;1;1
+5;2021-04-14;19000;Efectivo;No Pago;Domicilio;Domingo;1023583912;1;1
+6;2021-06-27;7000;Tarjeta;Pagado;Presencial;Viernes;1023583412;1;1
+7;2021-04-10;15500;Efectivo;No Pago;Domicilio;Martes;0;1;1
+8;2021-04-13;14000;Online;Pagado;Presencial;Lunes;0;1;1
