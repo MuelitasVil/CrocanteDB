@@ -90,6 +90,19 @@ public class LocalMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+    private void ProveedoresActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        LocalProveedor prov = new LocalProveedor();
+        prov.setVisible(true);
+        //dispose();
+    }      
+
+
+    private void GastosActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        LocalGasto gasto = new LocalGasto();
+        gasto.setVisible(true);
+        //dispose();
+    }      
     /**
      * @param args the command line arguments
      */
