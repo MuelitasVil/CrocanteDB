@@ -31,7 +31,6 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         Texto_Usuario = new javax.swing.JTextField();
-        Texto_Contraseña = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -39,6 +38,7 @@ public class Inicio extends javax.swing.JFrame {
         jButton_Aceptar = new javax.swing.JButton();
         Texto_Apellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        textoContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -48,14 +48,7 @@ public class Inicio extends javax.swing.JFrame {
                 Texto_UsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(Texto_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 314, 41));
-
-        Texto_Contraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Texto_ContraseñaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Texto_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 310, 40));
+        getContentPane().add(Texto_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 310, 41));
 
         jLabel1.setText("Contraseña");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 92, 38));
@@ -87,10 +80,11 @@ public class Inicio extends javax.swing.JFrame {
                 Texto_ApellidoActionPerformed(evt);
             }
         });
-        getContentPane().add(Texto_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 314, 41));
+        getContentPane().add(Texto_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 310, 41));
 
         jLabel4.setText("Usuario");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 102, 38));
+        getContentPane().add(textoContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 222, 310, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -99,44 +93,40 @@ public class Inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Texto_UsuarioActionPerformed
 
-    private void Texto_ContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Texto_ContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Texto_ContraseñaActionPerformed
-
     private void jButton_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AceptarActionPerformed
 
 // Se llaman todos los string necdesarios de los cuadros de texto
         String usuario = Texto_Usuario.getText();
         String apellido = Texto_Apellido.getText();
-        String contraseña = Texto_Contraseña.getText();
+        String contrasena = String.valueOf(textoContrasena.getPassword());
 
-// Se envia al objeto conexion el usuario y la contraseña
-        conexion.setPassword(contraseña);
+// Se envia al objeto conexion el usuario y la contrasena
+        conexion.setPassword(contrasena);
         conexion.setUser(usuario);
 
 // Se llama la funcion iniciarConexion() y se crea la variable conectar que va a servir para todo lo de mysql
-        Connection Conectar = conexion.iniciarConexion();
+        Connection conectar = conexion.iniciarConexion();
 
 // Se comprueba si la conexion fue exitosa
-        if (Conectar != null) {
+        if (conectar != null) {
             try {
 // Preparamos la consulta para buscar el cargo de la persona y que pueda acceder a su vista correspondiente
 
-                String consulta = "select Mostrar_Cargo('" + usuario + "', '" + apellido + "')";
+                String consulta = "select Mostrar_Cargo('" + usuario + "')";
 
-                PreparedStatement s = Conectar.prepareStatement(consulta);
+                PreparedStatement s = conectar.prepareStatement(consulta);
                 ResultSet resultado = s.executeQuery();
                 resultado.next();
 
                 String cargo = resultado.getString(1);
 
-                if ("Gerente".equals(cargo)) {
+                if (GERENTE.equals(cargo)) {
 
-                    JOptionPane.showMessageDialog(null, "Bienvenido gerente : " + usuario + " " + apellido);
+                    JOptionPane.showMessageDialog(null, "Bienvenido Gerente : " + usuario + " " + apellido);
                     new Menu().setVisible(true);
                     dispose();
 
-                } else if ("Cajero".equals(cargo)) {
+                } else if (CAJERO.equals(cargo)) {
 
                     JOptionPane.showMessageDialog(null, "Bienvenido Cajero : " + usuario + " " + apellido);
 
@@ -163,6 +153,8 @@ public class Inicio extends javax.swing.JFrame {
 // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_AceptarActionPerformed
+    private static final String CAJERO = "Cajero";
+    private static final String GERENTE = "Gerente";
 
     private void jButton_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarActionPerformed
 
@@ -212,7 +204,6 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField Texto_Apellido;
-    public javax.swing.JTextField Texto_Contraseña;
     public javax.swing.JTextField Texto_Usuario;
     public javax.swing.JButton jButton_Aceptar;
     public javax.swing.JButton jButton_Registrar;
@@ -220,6 +211,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField textoContrasena;
     // End of variables declaration//GEN-END:variables
 
     private void If(boolean b) {

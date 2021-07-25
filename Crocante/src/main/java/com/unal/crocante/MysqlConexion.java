@@ -7,31 +7,24 @@ package com.unal.crocante;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
  * @author Manuel Martinez
  */
 public class MysqlConexion {
-    
-    
-    // ----------------------------- Datos Para iniciar la conexion ------------------------------------------------ 
+
+    // ----------------------------- Datos Para iniciar la conexion ------------------------------------------------
     private static Connection conexion;
- 
+
     private static String bd = "proyecto";
     private static String user;
     private static String password;
     private static String host = "localhost:3306";
-    private static String server = "jdbc:mysql://" + host + "/" + bd + "?zeroDateTimeBehavior=CONVERT_TO_NULL";
+    private static String server = "jdbc:mysql://" + host + "/" + bd + "?zeroDateTimeBehavior=convertToNull";
 
-
-
-        // ----------------------------- Los respectivos get y sets de los datos ------------------------------------------------ 
-    
+    // ----------------------------- Los respectivos get y sets de los datos ------------------------------------------------
     public static void setHost(String host) {
         MysqlConexion.host = host;
     }
@@ -47,7 +40,6 @@ public class MysqlConexion {
     public static String getPassword() {
         return password;
     }
-    
 
     public static void setServer(String server) {
         MysqlConexion.server = server;
@@ -56,8 +48,6 @@ public class MysqlConexion {
     public static String getServer() {
         return server;
     }
-    
-    
 
     public static void setUser(String user) {
         MysqlConexion.user = user;
@@ -66,63 +56,54 @@ public class MysqlConexion {
     public static String getUser() {
         return user;
     }
-    
-    
+
     public static void setbd(String bd) {
-        
+
         MysqlConexion.bd = bd;
-    
+
     }
 
     public static String getBd() {
         return bd;
     }
-    
-        public static void setBd(String bd) {
+
+    public static void setBd(String bd) {
         MysqlConexion.bd = bd;
     }
-    
-        // ----------------------------- Funcion para iniciar la conexion ------------------------------------------------ 
-        
-        
-    public static Connection iniciarConexion(){
-    
-        
+
+    // ----------------------------- Funcion para iniciar la conexion ------------------------------------------------
+    public static Connection iniciarConexion() {
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println(String.format( "Info: %s %s %s",server, user, password));
+            System.out.println(String.format("Info: %s %s %s", server, user, password));
             conexion = DriverManager.getConnection(server, user, password);
 
-            System.out.println("ConexiÃ3n a base de datos " + server + " ... OK");
-            return  conexion;
+            System.out.println("Conexión a base de datos " + server + " ... OK");
+            return conexion;
         } catch (ClassNotFoundException ex) {
 
             System.out.println("Error cargando el Driver MySQL JDBC ... FAIL");
 
         } catch (SQLException ex) {
-            System.out.println("Imposible realizar conexion con " + server + " ... FAIL");
+            System.out.println("Imposible realizar conexión con " + server + " ... FAIL");
             ex.printStackTrace();
         }
         return null;
-         
-         
-         
+
     }
-    
-    
-           // ----------------------------- Funcion para cerrar la conexion ------------------------------------------------ 
-    
-    
-     public static void cerrarConexion(Connection conexion){
-   
-            try {
+
+    // ----------------------------- Funcion para cerrar la conexion ------------------------------------------------
+    public static void cerrarConexion(Connection conexion) {
+
+        try {
             conexion.close();
             System.out.println("Cerrar conexion con " + server + " ... OK");
         } catch (SQLException ex) {
             System.out.println("Imposible cerrar conexion ... FAIL");
         }
-    
-     }
+
+    }
 
     /*
     public static void main(String[] args) {
@@ -197,13 +178,6 @@ public class MysqlConexion {
             System.out.println("Imposible cerrar conexion ... FAIL");
         }
     }
-*/
-
- //To change body of generated methods, choose Tools | Templates.
-    
-
-
+     */
+    //To change body of generated methods, choose Tools | Templates.
 }
-
-    
-
