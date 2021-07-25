@@ -106,7 +106,9 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientesActionPerformed
-        // TODO add your handling code here:
+        MenuCliente cliente = new MenuCliente();
+        cliente.setVisible(true);
+        dispose();
     }//GEN-LAST:event_ClientesActionPerformed
 
     private void VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VentaActionPerformed
@@ -114,11 +116,15 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_VentaActionPerformed
 
     private void GananciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GananciasActionPerformed
-        // TODO add your handling code here:
+        Ganancias ganancia = new Ganancias();
+        ganancia.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GananciasActionPerformed
 
     private void LocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocalActionPerformed
-        // TODO add your handling code here:
+        LocalMenu local = new LocalMenu();
+        local.setVisible(true);
+        dispose();
     }//GEN-LAST:event_LocalActionPerformed
 
     /**

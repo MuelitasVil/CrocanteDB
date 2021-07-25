@@ -151,6 +151,7 @@ public class Inicio extends javax.swing.JFrame {
 // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
             } catch (SQLException sqle) {
                 System.out.println("Imposible realizar consulta ... FAIL");
+                sqle.printStackTrace();
             }
 
         } else {

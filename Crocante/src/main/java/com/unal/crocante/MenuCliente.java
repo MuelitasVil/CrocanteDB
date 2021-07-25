@@ -75,8 +75,15 @@ public class MenuCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        Clientes_Comentarios coments = new Clientes_Comentarios();
+        coments.setVisible(true);
+        //dispose();
+    }      
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        CalificacionCliente rank = new CalificacionCliente();
+        rank.setVisible(true);
+        //dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

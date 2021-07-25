@@ -25,8 +25,8 @@ public class MysqlConexion {
     private static String bd = "proyecto";
     private static String user;
     private static String password;
-    private static String host = "localhost";
-    private static String server = "jdbc:mysql://" + host + "/" + bd + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static String host = "localhost:3306";
+    private static String server = "jdbc:mysql://" + host + "/" + bd + "?zeroDateTimeBehavior=CONVERT_TO_NULL";
 
 
 
@@ -88,18 +88,20 @@ public class MysqlConexion {
     public static Connection iniciarConexion(){
     
         
-         try {
+        try {
             Class.forName("com.mysql.jdbc.Driver");
+            System.out.println(String.format( "Info: %s %s %s",server, user, password));
             conexion = DriverManager.getConnection(server, user, password);
 
             System.out.println("ConexiÃ3n a base de datos " + server + " ... OK");
             return  conexion;
-           } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
 
             System.out.println("Error cargando el Driver MySQL JDBC ... FAIL");
 
         } catch (SQLException ex) {
             System.out.println("Imposible realizar conexion con " + server + " ... FAIL");
+            ex.printStackTrace();
         }
         return null;
          
