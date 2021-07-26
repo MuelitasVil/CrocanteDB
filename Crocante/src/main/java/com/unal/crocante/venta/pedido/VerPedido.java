@@ -99,7 +99,7 @@ public class VerPedido extends javax.swing.JFrame {
         pedidoLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         pedidoLabel.setText("Detalles Pedido");
 
-        addButton.setText("Agregar");
+        addButton.setText("Crear");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
