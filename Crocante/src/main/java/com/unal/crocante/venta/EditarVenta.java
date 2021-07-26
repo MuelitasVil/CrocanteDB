@@ -146,6 +146,11 @@ public class EditarVenta extends javax.swing.JFrame {
         });
 
         cerrarButton.setText("Terminar Venta");
+        cerrarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,6 +236,31 @@ public class EditarVenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Imposible actualizar", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_editBtnActionPerformed
+
+    private void cerrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarButtonActionPerformed
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        Connection conexion = conector.iniciarConexion();
+
+        String consulta = "update venta set ven_estado = 0 "
+                + "where ven_id = " + idVenta + ";";
+        System.out.println(consulta);
+
+        PreparedStatement s;
+        try {
+            s = conexion.prepareStatement(consulta);
+            int resultado = s.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Actualización satisfactoria", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(AgregarVenta.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Imposible actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_cerrarButtonActionPerformed
 
     /**
      * @param args the command line arguments
