@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +22,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AgregarPedido extends javax.swing.JFrame {
 
-    String tipoProd;
+    private String tipoProd;
+    private int idVenta;
+    private Connection conexion;
 
     /**
      * Creates new form AgregarPedido
@@ -30,6 +33,15 @@ public class AgregarPedido extends javax.swing.JFrame {
         initComponents();
 
         llenarInfoMenu();
+    }
+
+    public AgregarPedido(int idVenta) {
+        this();
+        this.idVenta = idVenta;
+        llenarInfoMenu();
+
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        conexion = conector.iniciarConexion();
     }
 
     /**
@@ -63,11 +75,11 @@ public class AgregarPedido extends javax.swing.JFrame {
 
             },
             new String [] {
-                "producto", "tipo", "precio"
+                "idProducto", "producto", "tipo", "precio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -78,6 +90,11 @@ public class AgregarPedido extends javax.swing.JFrame {
         jScrollPane1.setViewportView(menu);
 
         addBtn.setText("Añadir");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         seleccionLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         seleccionLabel.setText("Crear Pedido");
@@ -151,8 +168,6 @@ public class AgregarPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBtnActionPerformed
-        VerPedido vwpedido = new VerPedido();
-        vwpedido.setVisible(true);
         dispose();
     }//GEN-LAST:event_volverBtnActionPerformed
 
@@ -164,6 +179,42 @@ public class AgregarPedido extends javax.swing.JFrame {
         }
         llenarInfoMenu();
     }//GEN-LAST:event_menuComboBoxActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        int row = menu.getSelectedRow();
+        if (row >= 0) {
+            int producto = (int) menu.getModel().getValueAt(row, 0);
+            System.out.println(producto);
+            int cedula = obtenerCedula();
+
+            String queryInsert = "insert into pedido values (" + producto + "," + idVenta + "," + cedula + ");";
+            PreparedStatement s;
+            try {
+                s = conexion.prepareStatement(queryInsert);
+                int result = s.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ningun producto.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private int obtenerCedula() {
+        int cc = -1;
+        String queryGetCc = "select get_CC_venta(" + idVenta + ");";
+        PreparedStatement s;
+        try {
+            s = conexion.prepareStatement(queryGetCc);
+            ResultSet result = s.executeQuery();
+            result.next();
+            cc = result.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cc;
+    }
 
     /**
      * @param args the command line arguments
@@ -221,11 +272,11 @@ public class AgregarPedido extends javax.swing.JFrame {
         tipoProd = (String) menuComboBox.getSelectedItem();
         String consulta;
         if (!"Menu".equals(tipoProd)) {
-            consulta = "select pro_nombre, tip_tipo, pro_precio "
+            consulta = "select pro_id, pro_nombre, tip_tipo, pro_precio "
                     + "from producto join tipo on (tip_id=Tipo_tip_id) "
                     + "where tip_tipo = '" + tipoProd + "';";
         } else {
-            consulta = "select pro_nombre, tip_tipo, pro_precio "
+            consulta = "select pro_id, pro_nombre, tip_tipo, pro_precio "
                     + "from producto join tipo on (tip_id=Tipo_tip_id) ";
         }
 
@@ -234,12 +285,13 @@ public class AgregarPedido extends javax.swing.JFrame {
             s = conexion.prepareStatement(consulta);
             ResultSet resultado = s.executeQuery();
             while (resultado.next()) {
-                String producto = resultado.getString(1);
-                String tipo = resultado.getString(2);
-                int precio = resultado.getInt(3);
-                System.out.println(String.format("%s %s %s", producto, tipo, Integer.toString(precio)));
+                int id = resultado.getInt(1);
+                String producto = resultado.getString(2);
+                String tipo = resultado.getString(3);
+                int precio = resultado.getInt(4);
+                System.out.println(String.format("%s %s %s %s", Integer.toString(id), producto, tipo, Integer.toString(precio)));
                 DefaultTableModel model = (DefaultTableModel) menu.getModel();
-                model.addRow(new Object[]{producto, tipo, precio});
+                model.addRow(new Object[]{id, producto, tipo, precio});
             }
 
         } catch (SQLException ex) {

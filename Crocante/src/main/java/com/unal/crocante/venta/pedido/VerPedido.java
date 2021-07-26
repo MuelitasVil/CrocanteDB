@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,8 +22,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VerPedido extends javax.swing.JFrame {
 
-    int idVenta;
-    int total;
+    private int idVenta;
+    private int total;
+    private Connection conexion;
 
     /**
      * Creates new form AgregarPedido
@@ -34,6 +36,8 @@ public class VerPedido extends javax.swing.JFrame {
     public VerPedido(int idVenta) {
         this();
         this.idVenta = idVenta;
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        conexion = conector.iniciarConexion();
         llenarInfoPedido();
     }
 
@@ -51,7 +55,6 @@ public class VerPedido extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         pedido = new javax.swing.JTable();
         dltBtn = new javax.swing.JButton();
-        editBtn = new javax.swing.JButton();
         pedidoLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
         precioLabel = new javax.swing.JLabel();
@@ -93,8 +96,11 @@ public class VerPedido extends javax.swing.JFrame {
         jScrollPane1.setViewportView(pedido);
 
         dltBtn.setText("Eliminar");
-
-        editBtn.setText("Editar");
+        dltBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dltBtnActionPerformed(evt);
+            }
+        });
 
         pedidoLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         pedidoLabel.setText("Detalles Pedido");
@@ -108,7 +114,6 @@ public class VerPedido extends javax.swing.JFrame {
 
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(dltBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(editBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(pedidoLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(addButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -124,8 +129,6 @@ public class VerPedido extends javax.swing.JFrame {
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(addButton)
-                        .addGap(52, 52, 52)
-                        .addComponent(editBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(dltBtn)
                         .addGap(53, 53, 53)))
@@ -140,7 +143,6 @@ public class VerPedido extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editBtn)
                     .addComponent(dltBtn)
                     .addComponent(addButton))
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -192,13 +194,38 @@ public class VerPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_volverBtnActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        System.out.println("identificado");
+        DefaultTableModel model = (DefaultTableModel) pedido.getModel();
+        while (model.getRowCount() > 0) {
+            model.setRowCount(0);
+        }
+        total = 0;
+        llenarInfoPedido();
         precioFormattedTextField.setValue(total);
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        AgregarPedido add = new AgregarPedido();
+        AgregarPedido add = new AgregarPedido(idVenta);
         add.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void dltBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dltBtnActionPerformed
+        int row = pedido.getSelectedRow();
+        if (row >= 0) {
+            int producto = (int) pedido.getModel().getValueAt(row, 0);
+            String queryGetCc = "select get_CC_venta(" + idVenta + ");";
+            PreparedStatement s;
+            try {
+                s = conexion.prepareStatement(queryGetCc);
+                ResultSet result = s.executeQuery();
+                result.next();
+            } catch (SQLException ex) {
+                Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ningun producto.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_dltBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,7 +266,6 @@ public class VerPedido extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton dltBtn;
-    private javax.swing.JButton editBtn;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable pedido;
@@ -250,13 +276,7 @@ public class VerPedido extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void llenarInfoPedido() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
-        Connection conexion = conector.iniciarConexion();
+
         String consulta = "select pro_id, pro_nombre, tip_tipo, pro_precio "
                 + "from pedido join producto on (Producto_pro_id = pro_id) "
                 + "join tipo on (tip_id= Tipo_tip_id) "
