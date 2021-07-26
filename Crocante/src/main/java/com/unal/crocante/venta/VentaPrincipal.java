@@ -76,10 +76,20 @@ public class VentaPrincipal extends javax.swing.JFrame {
         }
 
         addBtn.setText("Añadir");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         dltBtn.setText("Eliminar");
 
         editBtn.setText("Editar");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Ventas Activas");
@@ -184,6 +194,16 @@ public class VentaPrincipal extends javax.swing.JFrame {
     private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_payBtnActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        AgregarVenta add = new AgregarVenta();
+        add.setVisible(true);
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        EditarVenta edit = new EditarVenta();
+        edit.setVisible(true);
+    }//GEN-LAST:event_editBtnActionPerformed
 
     /**
      * @param args the command line arguments

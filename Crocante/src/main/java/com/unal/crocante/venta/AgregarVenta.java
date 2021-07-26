@@ -178,11 +178,23 @@ public class AgregarVenta extends javax.swing.JFrame {
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         Connection conexion = conector.iniciarConexion();
 
-        int precio = Integer.parseInt(precioFormattedTextField.getText());
-        String formaPago = formaPagoComboBox.getSelectedItem().toString();
-        String estadoPago = estadoPagoComboBox.getSelectedItem().toString();
-        String modalidad = modalidadComboBox.getSelectedItem().toString();
-        int id = Integer.parseInt(idFormattedTextField.getText());
+        int precio = 0;
+        String formaPago = null;
+        String estadoPago = null;
+        String modalidad = null;
+        int id = 0;
+        try {
+            precio = Integer.parseInt(precioFormattedTextField.getText());
+            formaPago = formaPagoComboBox.getSelectedItem().toString();
+            estadoPago = estadoPagoComboBox.getSelectedItem().toString();
+            modalidad = modalidadComboBox.getSelectedItem().toString();
+            id = Integer.parseInt(idFormattedTextField.getText());
+
+        } catch (NumberFormatException numberFormatException) {
+            Logger.getLogger(AgregarVenta.class.getName()).log(Level.SEVERE, null, numberFormatException);
+            JOptionPane.showMessageDialog(this, "No se insertaron datos validos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         String consulta = "insert into venta (ven_fecha, ven_precioTotal, ven_formaPago, ven_estadoPago, ven_modalidad, ven_diaSemana, Persona_per_id, Sede_sede_id,ven_estado) "
                 + "        values (curdate(), " + precio + ", '" + formaPago + "', '" + estadoPago + "', '" + modalidad + "', dayname(curdate()), " + id + ", 1, 1);";

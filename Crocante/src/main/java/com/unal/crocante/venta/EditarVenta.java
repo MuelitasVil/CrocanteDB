@@ -36,7 +36,7 @@ public class EditarVenta extends javax.swing.JFrame {
         precioFormattedTextField = new javax.swing.JFormattedTextField();
         editText = new javax.swing.JLabel();
         cancelBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        cerrarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,8 +116,13 @@ public class EditarVenta extends javax.swing.JFrame {
         editText.setText("Editar Venta");
 
         cancelBtn.setText("Cancelar");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("jButton1");
+        cerrarButton.setText("Terminar Venta");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,13 +136,13 @@ public class EditarVenta extends javax.swing.JFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(editText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
+                        .addGap(79, 79, 79)
                         .addComponent(editBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(cancelBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cerrarButton)))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,12 +155,16 @@ public class EditarVenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editBtn)
                     .addComponent(cancelBtn)
-                    .addComponent(jButton1))
+                    .addComponent(cerrarButton))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,13 +204,13 @@ public class EditarVenta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField IdFormattedTextField;
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton cerrarButton;
     private javax.swing.JButton editBtn;
     private javax.swing.JLabel editText;
     private javax.swing.JComboBox<String> estadoPagoComboBox;
     private javax.swing.JLabel estadoPagoLabel;
     private javax.swing.JComboBox<String> formaPagoComboBox;
     private javax.swing.JLabel formaPagoLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> modalidadComboBox;
     private javax.swing.JLabel modalidadLabel;
