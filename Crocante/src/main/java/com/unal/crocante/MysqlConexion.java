@@ -18,61 +18,51 @@ public class MysqlConexion {
     // ----------------------------- Datos Para iniciar la conexion ------------------------------------------------
     private static Connection conexion;
 
-    private static String bd = "proyecto";
-    private static String user;
-    private static String password;
-    private static String host = "localhost:3306";
-    private static String server = "jdbc:mysql://" + host + "/" + bd + "?zeroDateTimeBehavior=convertToNull";
+    private static final String bd = "proyecto";
+    private String user;
+    private String password;
+    private static final String host = "localhost:3306";
+    private static final String server = "jdbc:mysql://" + host + "/" + bd + "?zeroDateTimeBehavior=convertToNull";
 
-    // ----------------------------- Los respectivos get y sets de los datos ------------------------------------------------
-    public static void setHost(String host) {
-        MysqlConexion.host = host;
+    public MysqlConexion() {
     }
 
+    public MysqlConexion(String user, String password) {
+        this.user = user;
+        this.password = password;
+    }
+
+    // ----------------------------- Los respectivos get y sets de los datos ------------------------------------------------
     public static String getHost() {
         return host;
     }
 
-    public static void setPassword(String password) {
-        MysqlConexion.password = password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public static String getPassword() {
+    public String getPassword() {
         return password;
-    }
-
-    public static void setServer(String server) {
-        MysqlConexion.server = server;
     }
 
     public static String getServer() {
         return server;
     }
 
-    public static void setUser(String user) {
-        MysqlConexion.user = user;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public static String getUser() {
+    public String getUser() {
         return user;
-    }
-
-    public static void setbd(String bd) {
-
-        MysqlConexion.bd = bd;
-
     }
 
     public static String getBd() {
         return bd;
     }
 
-    public static void setBd(String bd) {
-        MysqlConexion.bd = bd;
-    }
-
     // ----------------------------- Funcion para iniciar la conexion ------------------------------------------------
-    public static Connection iniciarConexion() {
+    public Connection iniciarConexion() {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
