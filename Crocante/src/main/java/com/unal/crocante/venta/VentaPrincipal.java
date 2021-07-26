@@ -53,6 +53,13 @@ public class VentaPrincipal extends javax.swing.JFrame {
         volverBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         ventas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -212,6 +219,15 @@ public class VentaPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_editBtnActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        System.out.println("identificado");
+        DefaultTableModel model = (DefaultTableModel) ventas.getModel();
+        while (model.getRowCount() > 0) {
+            model.setRowCount(0);
+        }
+        llenarInfoVentas();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
