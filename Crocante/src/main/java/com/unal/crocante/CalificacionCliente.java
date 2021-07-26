@@ -35,6 +35,9 @@ public class CalificacionCliente extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,13 +87,15 @@ public class CalificacionCliente extends javax.swing.JFrame {
         });
         getContentPane().add(Tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 84, 70, -1));
 
-        jButton1.setText("Buscar");
+        jButton1.setText("Ir a Cliente");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 122, 341, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 110, -1));
+
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -105,7 +110,21 @@ public class CalificacionCliente extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 370, 380));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 370, 200));
+
+        jButton2.setText("Insertar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 120, -1));
+
+        jButton3.setLabel("Volver");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 110, -1));
+
+        jButton4.setText("Buscar");
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 120, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -122,6 +141,39 @@ public class CalificacionCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//try {
+   //         Class.forName("com.mysql.jdbc.Driver");
+   //     } catch (ClassNotFoundException ex) {
+     //       Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+       // }
+       // MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        //Connection conexion = conector.iniciarConexion();
+
+       // int precio = Integer.parseInt(precioFormattedTextField.getText());
+        //String formaPago = formaPagoComboBox.getSelectedItem().toString();
+        //String estadoPago = estadoPagoComboBox.getSelectedItem().toString();
+        //String modalidad = modalidadComboBox.getSelectedItem().toString();
+        //int id = Integer.parseInt(idFormattedTextField.getText());
+
+        //String consulta = "insert into venta (ven_fecha, ven_precioTotal, ven_formaPago, ven_estadoPago, ven_modalidad, ven_diaSemana, Persona_per_id, Sede_sede_id,ven_estado) "
+          //      + "        values (curdate(), " + precio + ", '" + formaPago + "', '" + estadoPago + "', '" + modalidad + "', dayname(curdate()), " + id + ", 1, 1);";
+        //System.out.println(consulta);
+
+        //PreparedStatement s;
+        //try {
+           // s = conexion.prepareStatement(consulta);
+           // int resultado = s.executeUpdate();
+           // JOptionPane.showMessageDialog(this, "Registro satisfactorio", "Exito", JOptionPane.INFORMATION_MESSAGE);
+           // dispose();
+        // } catch (SQLException ex) {
+          //  Logger.getLogger(AgregarVenta.class.getName()).log(Level.SEVERE, null, ex);
+          //  JOptionPane.showMessageDialog(this, "Imposible añadir el registro", "Error", JOptionPane.ERROR_MESSAGE);
+        //}
+
+    //GEN-LAST:event_editBtnActionPerformed        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -169,6 +221,9 @@ public class CalificacionCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Sedes;
     private javax.swing.JComboBox<String> Tipo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
