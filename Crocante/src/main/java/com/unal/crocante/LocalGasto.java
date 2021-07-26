@@ -5,18 +5,93 @@
  */
 package com.unal.crocante;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Set;
+
 /**
  *
  * @author Manuel Martinez
  */
 public class LocalGasto extends javax.swing.JFrame {
 
+        
+   
     /**
      * Creates new form Local_Gastos
      */
     public LocalGasto() {
+
         initComponents();
+
+        MysqlConexion conexion = new MysqlConexion();
+
+        String usuario = "Venus";
+        String apellido = "Baquero";
+        String contrasena = "gerente";
+
+        conexion.setPassword(contrasena);
+        conexion.setUser(usuario);
+
+        Connection conectar = conexion.iniciarConexion();
+
+        int num_gastos = conexion.Contar_tablas(conectar, "Gasto");
+
+        System.out.println(num_gastos);
+        try {
+
+            String matris[][] = new String[num_gastos][6];
+
+            Statement s = conectar.createStatement();
+            ResultSet rs = s.executeQuery("select * from Gasto");
+
+// Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
+            int i = 0;
+
+            while (rs.next()) {
+
+                matris[i][0] = rs.getString(1);
+                matris[i][1] = rs.getString(2);
+                matris[i][2] = rs.getString(3);
+                matris[i][3] = rs.getString(4);
+                matris[i][4] = rs.getString(5);
+                matris[i][5] = rs.getString(5);
+
+                i++;
+
+            }
+
+            System.out.println(matris);
+
+            jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                    matris,
+                    new String[]{
+                        "ID", "Nombre del Gasto", "Costo", "fecha", "gast_tipo", "sede"
+                    }));
+
+        } catch (SQLException sqle) {
+            System.out.println("Imposible realizar consulta ... FAIL");
+            sqle.printStackTrace();
+        }
+
     }
+
+    
+
+
+
+
+
+
+        
+        
+      
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,24 +161,24 @@ public class LocalGasto extends javax.swing.JFrame {
                         .addGap(169, 169, 169)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jLabel2))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton3)
-                        .addGap(70, 70, 70)
-                        .addComponent(jButton2)
-                        .addGap(94, 94, 94)
-                        .addComponent(jButton4)))
+                                .addGap(19, 19, 19)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(10, 10, 10)
+                                            .addComponent(jLabel2)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addGap(70, 70, 70)
+                                .addComponent(jButton2)
+                                .addGap(94, 94, 94)
+                                .addComponent(jButton4)))))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,18 +186,19 @@ public class LocalGasto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton4)
