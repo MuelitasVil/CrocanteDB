@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -201,8 +202,15 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        EditarVenta edit = new EditarVenta();
-        edit.setVisible(true);
+        int row = ventas.getSelectedRow();
+        if (row >= 0) {
+            System.out.println(ventas.getModel().getValueAt(row, 0));
+            EditarVenta edit = new EditarVenta((Integer) ventas.getModel().getValueAt(row, 0));
+            edit.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ninguna venta.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_editBtnActionPerformed
 
     /**

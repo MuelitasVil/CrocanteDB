@@ -30,7 +30,7 @@ public class AgregarVenta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        editBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         precioLabel = new javax.swing.JLabel();
         precioFormattedTextField = new javax.swing.JFormattedTextField();
@@ -47,10 +47,10 @@ public class AgregarVenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        editBtn.setText("Aceptar");
-        editBtn.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setText("Aceptar");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtnActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
 
@@ -147,7 +147,7 @@ public class AgregarVenta extends javax.swing.JFrame {
                             .addComponent(editText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
-                        .addComponent(editBtn)
+                        .addComponent(addBtn)
                         .addGap(27, 27, 27)
                         .addComponent(cancelBtn)))
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -161,7 +161,7 @@ public class AgregarVenta extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editBtn)
+                    .addComponent(addBtn)
                     .addComponent(cancelBtn))
                 .addContainerGap())
         );
@@ -169,7 +169,7 @@ public class AgregarVenta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
@@ -211,7 +211,7 @@ public class AgregarVenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Imposible añadir el registro", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-    }//GEN-LAST:event_editBtnActionPerformed
+    }//GEN-LAST:event_addBtnActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         dispose();
@@ -254,8 +254,8 @@ public class AgregarVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBtn;
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JButton editBtn;
     private javax.swing.JLabel editText;
     private javax.swing.JComboBox<String> estadoPagoComboBox;
     private javax.swing.JLabel estadoPagoLabel;

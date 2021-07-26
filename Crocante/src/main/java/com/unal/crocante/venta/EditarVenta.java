@@ -1,16 +1,34 @@
 package com.unal.crocante.venta;
 
+import com.unal.crocante.MysqlConexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author VenusBaquero
  */
 public class EditarVenta extends javax.swing.JFrame {
 
+    int idVenta;
+
     /**
      * Creates new form EditarVenta
      */
     public EditarVenta() {
         initComponents();
+    }
+
+    public EditarVenta(int idVenta) {
+        this();
+        this.idVenta = idVenta;
+
+        llenarDatosVenta();
     }
 
     /**
@@ -32,7 +50,7 @@ public class EditarVenta extends javax.swing.JFrame {
         modalidadLabel = new javax.swing.JLabel();
         modalidadComboBox = new javax.swing.JComboBox<>();
         personaIdLabel = new javax.swing.JLabel();
-        IdFormattedTextField = new javax.swing.JFormattedTextField();
+        idFormattedTextField = new javax.swing.JFormattedTextField();
         precioFormattedTextField = new javax.swing.JFormattedTextField();
         editText = new javax.swing.JLabel();
         cancelBtn = new javax.swing.JButton();
@@ -41,6 +59,11 @@ public class EditarVenta extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         editBtn.setText("Aceptar");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         precioLabel.setLabelFor(precioFormattedTextField);
         precioLabel.setText("Precio:");
@@ -53,7 +76,7 @@ public class EditarVenta extends javax.swing.JFrame {
         estadoPagoLabel.setLabelFor(estadoPagoComboBox);
         estadoPagoLabel.setText("Estado del pago:");
 
-        estadoPagoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No pago", "Pagado", " " }));
+        estadoPagoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No pago", "Pagado" }));
 
         modalidadLabel.setText("Modalidad:");
 
@@ -61,9 +84,9 @@ public class EditarVenta extends javax.swing.JFrame {
 
         personaIdLabel.setText("Id Cliente:");
 
-        IdFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        idFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        precioFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        precioFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,7 +105,7 @@ public class EditarVenta extends javax.swing.JFrame {
                     .addComponent(estadoPagoComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(formaPagoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(modalidadComboBox, 0, 102, Short.MAX_VALUE)
-                    .addComponent(IdFormattedTextField)
+                    .addComponent(idFormattedTextField)
                     .addComponent(precioFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                 .addGap(45, 45, 45))
         );
@@ -107,7 +130,7 @@ public class EditarVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(personaIdLabel)
-                    .addComponent(IdFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 19, Short.MAX_VALUE))
         );
 
@@ -166,6 +189,49 @@ public class EditarVenta extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        Connection conexion = conector.iniciarConexion();
+
+        int precio = 0;
+        String formaPago = null;
+        String estadoPago = null;
+        String modalidad = null;
+        int id = 0;
+        try {
+            precio = Integer.parseInt(precioFormattedTextField.getText());
+            formaPago = formaPagoComboBox.getSelectedItem().toString();
+            estadoPago = estadoPagoComboBox.getSelectedItem().toString();
+            modalidad = modalidadComboBox.getSelectedItem().toString();
+            id = Integer.parseInt(idFormattedTextField.getText());
+
+        } catch (NumberFormatException numberFormatException) {
+            Logger.getLogger(AgregarVenta.class.getName()).log(Level.SEVERE, null, numberFormatException);
+            JOptionPane.showMessageDialog(this, "No se insertaron datos validos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String consulta = "update venta set ven_precioTotal= " + precio + ", ven_formaPago='" + formaPago + "', ven_estadoPago='" + estadoPago + "', ven_modalidad='" + modalidad + "', Persona_per_id=" + id + " "
+                + "        where ven_id = " + idVenta + ";";
+        System.out.println(consulta);
+
+        PreparedStatement s;
+        try {
+            s = conexion.prepareStatement(consulta);
+            int resultado = s.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Actualización satisfactoria", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(AgregarVenta.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Imposible actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_editBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,7 +268,6 @@ public class EditarVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField IdFormattedTextField;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JButton cerrarButton;
     private javax.swing.JButton editBtn;
@@ -211,6 +276,7 @@ public class EditarVenta extends javax.swing.JFrame {
     private javax.swing.JLabel estadoPagoLabel;
     private javax.swing.JComboBox<String> formaPagoComboBox;
     private javax.swing.JLabel formaPagoLabel;
+    private javax.swing.JFormattedTextField idFormattedTextField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> modalidadComboBox;
     private javax.swing.JLabel modalidadLabel;
@@ -218,4 +284,34 @@ public class EditarVenta extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField precioFormattedTextField;
     private javax.swing.JLabel precioLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarDatosVenta() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        Connection conexion = conector.iniciarConexion();
+
+        String consulta = "select * from venta where ven_id = " + idVenta + ";";
+        PreparedStatement s;
+        try {
+            s = conexion.prepareStatement(consulta);
+            ResultSet resultado = s.executeQuery();
+            resultado.next();
+            System.out.println(resultado.getInt(1));
+            System.out.println(resultado.getInt(3));
+            System.out.println(resultado.getString(4));
+            precioFormattedTextField.setValue(resultado.getInt(3));
+            formaPagoComboBox.setSelectedItem(resultado.getString(4));
+            estadoPagoComboBox.setSelectedItem(resultado.getString(5));
+            modalidadComboBox.setSelectedItem(resultado.getString(6));
+            idFormattedTextField.setValue(resultado.getInt(8));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "No se insertaron datos validos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }
