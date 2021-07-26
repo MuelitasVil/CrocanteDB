@@ -22,7 +22,7 @@ public class MysqlConexion {
     private String user;
     private String password;
     private static final String host = "localhost:3306";
-    private static final String server = "jdbc:mysql://" + host + "/" + bd + "?zeroDateTimeBehavior=convertToNull";
+    private static final String server = "jdbc:mysql://" + host + "/" + bd + "?zeroDateTimeBehavior=convertToNull&sessionVariables=LC_TIME_NAMES='es_CO'";
 
     public MysqlConexion() {
     }

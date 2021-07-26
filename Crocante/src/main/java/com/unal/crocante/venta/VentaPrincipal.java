@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -52,6 +53,13 @@ public class VentaPrincipal extends javax.swing.JFrame {
         volverBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         ventas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,10 +84,20 @@ public class VentaPrincipal extends javax.swing.JFrame {
         }
 
         addBtn.setText("Añadir");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         dltBtn.setText("Eliminar");
 
         editBtn.setText("Editar");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Ventas Activas");
@@ -184,6 +202,32 @@ public class VentaPrincipal extends javax.swing.JFrame {
     private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_payBtnActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        AgregarVenta add = new AgregarVenta();
+        add.setVisible(true);
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        int row = ventas.getSelectedRow();
+        if (row >= 0) {
+            System.out.println(ventas.getModel().getValueAt(row, 0));
+            EditarVenta edit = new EditarVenta((Integer) ventas.getModel().getValueAt(row, 0));
+            edit.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ninguna venta.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_editBtnActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        System.out.println("identificado");
+        DefaultTableModel model = (DefaultTableModel) ventas.getModel();
+        while (model.getRowCount() > 0) {
+            model.setRowCount(0);
+        }
+        llenarInfoVentas();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
