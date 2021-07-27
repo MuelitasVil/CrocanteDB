@@ -5,6 +5,7 @@
  */
 package com.unal.crocante;
 
+import com.mysql.cj.xdevapi.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -170,4 +171,8 @@ public class MysqlConexion {
     }
      */
     //To change body of generated methods, choose Tools | Templates.
+
+    Statement createStatement() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
