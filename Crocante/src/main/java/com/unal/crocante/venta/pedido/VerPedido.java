@@ -105,7 +105,7 @@ public class VerPedido extends javax.swing.JFrame {
         pedidoLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         pedidoLabel.setText("Detalles Pedido");
 
-        addButton.setText("Crear");
+        addButton.setText("Añadir");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
@@ -127,11 +127,10 @@ public class VerPedido extends javax.swing.JFrame {
                     .addComponent(pedidoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(113, 113, 113)
                         .addComponent(addButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dltBtn)
-                        .addGap(53, 53, 53)))
+                        .addGap(42, 42, 42)
+                        .addComponent(dltBtn)))
                 .addContainerGap())
         );
         jLayeredPane1Layout.setVerticalGroup(
