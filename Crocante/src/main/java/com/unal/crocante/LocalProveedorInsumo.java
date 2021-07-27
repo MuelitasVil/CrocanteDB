@@ -5,6 +5,15 @@
  */
 package com.unal.crocante;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Manuel Martinez
@@ -16,6 +25,19 @@ public class LocalProveedorInsumo extends javax.swing.JFrame {
      */
     public LocalProveedorInsumo() {
         initComponents();
+
+        String matris[][] = new String[20][4];
+        
+        matris[0][0] = "";
+        matris[0][1] = "";
+        matris[0][2] = "";
+        matris[0][3] = "";
+        
+                            jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                matris,
+                new String[]{
+                    "Nombre del Proveedor", "ID insumo", "Nombre Insumo", "Cantidad",}));
+
     }
 
     /**
@@ -29,12 +51,21 @@ public class LocalProveedorInsumo extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        Buscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        id_txt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        Precio = new javax.swing.JTextField();
+        Cantidad = new javax.swing.JTextField();
+        Insumo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -49,55 +80,144 @@ public class LocalProveedorInsumo extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton3.setText("Agregar");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 540, 350));
 
-        jButton2.setText("Borrar");
+        Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 120, 30));
 
-        jButton4.setText("Editar");
+        jLabel1.setText("Insumo Proveedor");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 12, -1, -1));
+        getContentPane().add(id_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 230, 32));
 
-        jLabel1.setText("Insumo");
+        jLabel2.setText("Id :");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 30, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(12, 12, 12)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(159, 159, 159)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addComponent(jButton3)
-                            .addGap(70, 70, 70)
-                            .addComponent(jButton2)
-                            .addGap(94, 94, 94)
-                            .addComponent(jButton4)))
-                    .addContainerGap(13, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel1)
-                    .addGap(18, 18, 18)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton4)
-                        .addComponent(jButton3))
-                    .addContainerGap()))
-        );
+        jLabel7.setText("Precio : ");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 590, 63, -1));
+
+        Precio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrecioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 580, 120, 30));
+
+        Cantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CantidadActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 540, 120, 30));
+
+        Insumo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsumoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Insumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, 120, 30));
+
+        jLabel3.setText("ID Insumo : ");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 510, 63, -1));
+
+        jLabel4.setText("Cantidad : ");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 550, 63, -1));
+
+        jLabel5.setText("Realizar compra");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, -1, -1));
+
+        jButton4.setText("Comprar");
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 510, 110, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+
+        MysqlConexion conexion = new MysqlConexion();
+
+        String usuario = "Venus";
+        String apellido = "Baquero";
+        String contrasena = "gerente";
+
+        conexion.setPassword(contrasena);
+        conexion.setUser(usuario);
+
+        Connection conectar = conexion.iniciarConexion();
+
+        String S_ID = id_txt.getText();
+
+        try {
+
+            if (("".equals(S_ID))) {
+
+                JOptionPane.showMessageDialog(this, "La informacion esta incompleta vuelva a intentar");
+
+            } else {
+
+                int id = Integer.parseInt(S_ID);
+
+                int num_gastos = conexion.Contar_tablas(conectar, "proveedor");
+
+                System.out.println(num_gastos);
+                try {
+
+                    String matris[][] = new String[num_gastos][6];
+
+                    Statement s = conectar.createStatement();
+                    ResultSet rs = s.executeQuery("select prov_nombre,ins_id, ins_nombre, ins_existencia from inventarioproveedor join proveedor on (Proveedor_prov_id = prov_ID) join Insumo on (Insumo_ins_id = ins_id) where prov_id = " + S_ID + ";");
+
+// Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
+                    int i = 0;
+
+                    while (rs.next()) {
+
+                        matris[i][0] = rs.getString(1);
+                        matris[i][1] = rs.getString(2);
+                        matris[i][2] = rs.getString(3);
+                        matris[i][3] = rs.getString(4);
+
+                        i++;
+
+                    }
+
+                    System.out.println(matris);
+
+                    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                            matris,
+                            new String[]{
+                                "Nombre del Proveedor", "ID insumo", "Nombre Insumo", "Cantidad",}));
+
+                } catch (SQLException sqle) {
+                    System.out.println("Imposible realizar consulta ... FAIL");
+                    sqle.printStackTrace();
+                }
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
+
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarActionPerformed
+
+    private void PrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PrecioActionPerformed
+
+    private void CantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CantidadActionPerformed
+
+    private void InsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsumoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InsumoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,10 +258,18 @@ public class LocalProveedorInsumo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton Buscar;
+    private javax.swing.JTextField Cantidad;
+    private javax.swing.JTextField Insumo;
+    private javax.swing.JTextField Precio;
+    private javax.swing.JTextField id_txt;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
