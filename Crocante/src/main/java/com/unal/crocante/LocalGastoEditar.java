@@ -221,11 +221,12 @@ public class LocalGastoEditar extends javax.swing.JFrame {
                     
                     int retorno = actualizar.executeUpdate();
 
-
-                    JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+                     JOptionPane.showMessageDialog(this, "La informacion se ha actualizado con exito");
+                    
 
                 } catch (SQLException ex) {
                     Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
                 }
 
             } else if (i == 2) {
