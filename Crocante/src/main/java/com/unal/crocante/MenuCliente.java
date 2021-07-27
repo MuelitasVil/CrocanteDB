@@ -38,11 +38,6 @@ public class MenuCliente extends javax.swing.JFrame {
         jLabel1.setText("MENU");
 
         jButton1.setLabel("Comentario");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jButton2.setText("Calificaciones");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -101,18 +96,18 @@ public class MenuCliente extends javax.swing.JFrame {
         //dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         ComentarioCliente coments = new ComentarioCliente();
         coments.setVisible(true);
         //dispose();
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-     Menu m = new Menu();
-          m.setVisible(true); 
-          dispose();
-        
+        Menu m = new Menu();
+        m.setVisible(true);
+        dispose();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
