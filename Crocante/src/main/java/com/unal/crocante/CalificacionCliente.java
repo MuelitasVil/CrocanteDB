@@ -26,30 +26,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
      * Creates new form Clientes_Calificacion
      */
     public CalificacionCliente() {
-        initComponents();
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
-        Connection conexion = conector.iniciarConexion();
-        String consulta1 = "select pro_nombre from producto ";
-        PreparedStatement s;
-        try {
-            s = conexion.prepareStatement(consulta1);
-            ResultSet resultado = s.executeQuery();
-            while (resultado.next()) {
-                             
-                              
-                ProductoText1.addItem(resultado.getString(consulta1));
-                
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
+        initComponents();       
         
     }
 
@@ -239,7 +216,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
         String Productoname = ProductoText1.getSelectedItem().toString();
 
         int IDCal = 0;
-        int IDPer = 0;
+        int IDPer = -2;
         int IDPro = 1;
         int IDCom = -1;
         int num = 6;
@@ -340,7 +317,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
         }
 
         String consulta = "insert into calificación(cal_id, cal_estrellas, cal_fecha, Persona_per_id, Comentario_com_id,Producto_pro_id) "
-                + "        values ('" + IDCal + "', " + num + ", 'curdate()', '" + IDPer + "', '" + IDCom + "', " + IDPro + ");";
+                + "        values ('" + IDCal + "', '" + num + "', curdate(), '" + IDPer + "', '" + IDCom + "', " + IDPro + ");";
         System.out.println(consulta);
 
         PreparedStatement s;
