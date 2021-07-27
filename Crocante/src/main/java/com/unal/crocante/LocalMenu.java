@@ -44,6 +44,11 @@ public class LocalMenu extends javax.swing.JFrame {
         Insumos.setText("Productos");
 
         Gastos.setText("Gastos");
+        Gastos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GastosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,6 +95,14 @@ public class LocalMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void GastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GastosActionPerformed
+        
+        LocalGasto gasto = new LocalGasto();
+        gasto.setVisible(true);
+        dispose(); 
+
+    }//GEN-LAST:event_GastosActionPerformed
+
 
     private void ProveedoresActionPerformed(java.awt.event.ActionEvent evt) {                                         
         LocalProveedor prov = new LocalProveedor();
@@ -98,11 +111,7 @@ public class LocalMenu extends javax.swing.JFrame {
     }      
 
 
-    private void GastosActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        LocalGasto gasto = new LocalGasto();
-        gasto.setVisible(true);
-        //dispose();
-    }      
+
     /**
      * @param args the command line arguments
      */

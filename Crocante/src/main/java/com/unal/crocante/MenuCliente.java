@@ -95,7 +95,6 @@ public class MenuCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         CalificacionCliente rank = new CalificacionCliente();
         rank.setVisible(true);
