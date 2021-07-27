@@ -6,7 +6,6 @@
 package com.unal.crocante;
 
 import com.unal.crocante.venta.VentaPrincipal;
-
 /**
  *
  * @author Manuel Martinez
