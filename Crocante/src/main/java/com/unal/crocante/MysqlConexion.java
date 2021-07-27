@@ -7,7 +7,10 @@ package com.unal.crocante;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -94,6 +97,44 @@ public class MysqlConexion {
         }
 
     }
+    
+    
+    // ------------------------------ Funcion para contar Gastos ------------------------
+    
+    // ----------------------------- Funcion para cerrar la conexion ------------------------------------------------
+    public static int Contar_tablas(Connection conexion, String tabla) {
+
+        try {
+        
+        PreparedStatement s = conexion.prepareStatement("select count(*) from "+tabla);
+        
+        ResultSet resultado = s.executeQuery();
+        
+        resultado.next();
+
+        String num_gastos_String = resultado.getString(1);
+        
+        int num_gastos = Integer.parseInt(num_gastos_String);  
+        
+        num_gastos = num_gastos + 20;
+        
+        return num_gastos;
+        
+ 
+        
+                }catch (SQLException sqle) {
+                System.out.println("Imposible realizar consulta ... FAIL");
+                sqle.printStackTrace();
+            }
+        
+        return 0;
+        
+    }
+    
+    
+    
+
+    
 
     /*
     public static void main(String[] args) {
@@ -170,4 +211,6 @@ public class MysqlConexion {
     }
      */
     //To change body of generated methods, choose Tools | Templates.
+
+
 }
