@@ -233,6 +233,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        
         System.out.println("identificado");
         DefaultTableModel model = (DefaultTableModel) ventas.getModel();
         while (model.getRowCount() > 0) {

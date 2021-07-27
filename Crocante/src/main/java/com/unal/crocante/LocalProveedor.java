@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,8 +23,12 @@ public class LocalProveedor extends javax.swing.JFrame {
     public LocalProveedor() {
         initComponents();
         
-        MysqlConexion conexion = new MysqlConexion();
+        llenarDatos();
+    }
 
+    private void llenarDatos() {
+        MysqlConexion conexion = new MysqlConexion();
+        
         String usuario = "Venus";
         String apellido = "Baquero";
         String contrasena = "gerente";
@@ -41,29 +46,29 @@ public class LocalProveedor extends javax.swing.JFrame {
             String matris[][] = new String[num_gastos][6];
 
             Statement s = conectar.createStatement();
-            ResultSet rs = s.executeQuery("select prov_id, prov_nombre, prov_número, prov_correo from proveedor;");
+            ResultSet rs = s.executeQuery("select prov_id, prov_nombre, prov_número, prov_correo from proveedor where prov_estado = 1;");
 
 // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
-            int i = 0;
+int i = 0;
 
-            while (rs.next()) {
+while (rs.next()) {
+    
+    matris[i][0] = rs.getString(1);
+    matris[i][1] = rs.getString(2);
+    matris[i][2] = rs.getString(3);
+    matris[i][3] = rs.getString(4);
+    
+    i++;
+    
+}
 
-                matris[i][0] = rs.getString(1);
-                matris[i][1] = rs.getString(2);
-                matris[i][2] = rs.getString(3);
-                matris[i][3] = rs.getString(4);
+System.out.println(matris);
 
-                i++;
-
-            }
-
-            System.out.println(matris);
-
-            jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                    matris,
-                    new String[]{
-                        "ID", "Nombre del Proveedor", "numero", "correo"
-                    }));
+jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        matris,
+        new String[]{
+            "ID", "Nombre del Proveedor", "numero", "correo"
+        }));
 
         } catch (SQLException sqle) {
             System.out.println("Imposible realizar consulta ... FAIL");
@@ -88,6 +93,13 @@ public class LocalProveedor extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jLabel1.setText("Proveedores");
 
@@ -119,6 +131,11 @@ public class LocalProveedor extends javax.swing.JFrame {
         });
 
         jButton4.setText("Borrar Proveedores");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,12 +185,27 @@ public class LocalProveedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+         new LocalProveedorEditar().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        System.out.println("identificado");
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        while (model.getRowCount() > 0) {
+            model.setRowCount(0);
+        }
+        llenarDatos();
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+         
+        new LocalProveedorEliminar().setVisible(true);
+         
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

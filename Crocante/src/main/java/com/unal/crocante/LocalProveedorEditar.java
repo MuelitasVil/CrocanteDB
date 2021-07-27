@@ -184,7 +184,7 @@ public class LocalProveedorEditar extends javax.swing.JFrame {
 
                     try {
 
-                        PreparedStatement actualizar = conectar.prepareStatement("Update Gasto set prov_nombre = ?, prov_número = ?, prov_correo = ? where prov_id = ?");
+                        PreparedStatement actualizar = conectar.prepareStatement("Update Proveedor set prov_nombre = ?, prov_número = ?, prov_correo = ? where prov_id = ?");
 
                         actualizar.setString(1, nombre);
                         actualizar.setInt(2, Numero);
