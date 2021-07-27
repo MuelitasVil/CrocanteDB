@@ -280,7 +280,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `proyecto`.`Comentario` ;
 
 CREATE TABLE IF NOT EXISTS `proyecto`.`Comentario` (
-  `com_id` INT(10) UNSIGNED NOT NULL,
+  `com_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `com_descripcion` TEXT NULL,
   `Persona_per_id` BIGINT(10) UNSIGNED NOT NULL,
   `Venta_ven_id` INT(10) UNSIGNED NOT NULL,
