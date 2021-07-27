@@ -283,20 +283,13 @@ CREATE TABLE IF NOT EXISTS `proyecto`.`Comentario` (
   `com_id` INT(10) UNSIGNED NOT NULL,
   `com_descripcion` TEXT NULL,
   `Persona_per_id` BIGINT(10) UNSIGNED NOT NULL,
-  `Producto_pro_id` INT(2) UNSIGNED NOT NULL,
   `Venta_ven_id` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`com_id`, `Persona_per_id`),
   INDEX `fk_Comentario_Persona1_idx` (`Persona_per_id` ASC) VISIBLE,
-  INDEX `fk_Comentario_Producto1_idx` (`Producto_pro_id` ASC) VISIBLE,
   INDEX `fk_Comentario_Venta1_idx` (`Venta_ven_id` ASC) VISIBLE,
   CONSTRAINT `fk_Comentario_Persona1`
     FOREIGN KEY (`Persona_per_id`)
     REFERENCES `proyecto`.`Persona` (`per_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Comentario_Producto1`
-    FOREIGN KEY (`Producto_pro_id`)
-    REFERENCES `proyecto`.`Producto` (`pro_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Comentario_Venta1`
