@@ -62,7 +62,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         IDProducto = new javax.swing.JTextField();
         ProductoText4 = new javax.swing.JTextField();
-        ProductoText1 = new javax.swing.JComboBox<>();
+        productoText1 = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,13 +182,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
         getContentPane().add(IDProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 70, -1));
         getContentPane().add(ProductoText4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 80, -1));
-
-        ProductoText1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProductoText1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ProductoText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 80, 20));
+        getContentPane().add(productoText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 80, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -213,10 +207,10 @@ public class CalificacionCliente extends javax.swing.JFrame {
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         Connection conexion = conector.iniciarConexion();
 
-        String Productoname = ProductoText1.getSelectedItem().toString();
+        String Productoname = productoText1.toString();
 
         int IDCal = 0;
-        int IDPer = -2;
+        int IDPer = 0;
         int IDPro = 1;
         int IDCom = -1;
         int num = 6;
@@ -241,7 +235,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
         }
 
         String consulta = "select * from calificación where cal_id LIke '" + IDCal + "' OR cal_estrellas Like '" + num + "' OR cal_fecha Like '2021-08-05'"
-                + "AND Persona_per_id like '" + IDPer + "' OR Comentario_com_id Like '" + IDCom + "' OR Producto_pro_id Like '" + IDPro + "';";
+                + "OR Persona_per_id like '" + IDPer + "' OR Comentario_com_id Like '" + IDCom + "' OR Producto_pro_id Like '" + IDPro + "';";
 
         PreparedStatement s;
         try {
@@ -289,7 +283,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         Connection conexion = conector.iniciarConexion();
 
-        String Productoname = ProductoText1.toString();
+        String Productoname = productoText1.toString();
 
         int IDCal = 0;
         int IDPer = 0;
@@ -336,10 +330,6 @@ public class CalificacionCliente extends javax.swing.JFrame {
     private void estrellasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estrellasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_estrellasActionPerformed
-
-    private void ProductoText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductoText1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ProductoText1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 //try {
@@ -418,7 +408,6 @@ public class CalificacionCliente extends javax.swing.JFrame {
     private javax.swing.JTextField IDComentario;
     private javax.swing.JTextField IDPersona;
     private javax.swing.JTextField IDProducto;
-    private javax.swing.JComboBox<String> ProductoText1;
     private javax.swing.JTextField ProductoText4;
     private javax.swing.JTable calificacion;
     private javax.swing.JComboBox<String> estrellas;
@@ -437,5 +426,6 @@ public class CalificacionCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField productoText1;
     // End of variables declaration//GEN-END:variables
 }
