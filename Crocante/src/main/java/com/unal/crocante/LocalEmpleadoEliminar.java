@@ -16,20 +16,14 @@ import javax.swing.JOptionPane;
  *
  * @author Manuel Martinez
  */
-public class LocalGastoEliminar extends javax.swing.JFrame {
+public class LocalEmpleadoEliminar extends javax.swing.JFrame {
 
     /**
-     * Creates new form LocalGastoEliminar
+     * Creates new form LocalEmpleadoEliminar
      */
-    public LocalGastoEliminar() {
+    public LocalEmpleadoEliminar() {
         initComponents();
     }
-
-    MysqlConexion conexion = new MysqlConexion();
-
-    String usuario = "Venus";
-    String apellido = "Baquero";
-    String contrasena = "gerente";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,24 +34,17 @@ public class LocalGastoEliminar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         id_txt = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Eliminiar");
-
         jLabel6.setText("ID :");
 
-        jButton1.setText("ELIMINAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Eliminar Empleado");
 
         jButton2.setText("Atras");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -66,36 +53,42 @@ public class LocalGastoEliminar extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(72, 72, 72)
-                                .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 22, Short.MAX_VALUE)))
+                .addGap(158, 158, 158)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton2))
-                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -107,7 +100,18 @@ public class LocalGastoEliminar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        MysqlConexion conexion = new MysqlConexion();
+
+        String usuario = "Venus";
+        String apellido = "Baquero";
+        String contrasena = "gerente";
 
         conexion.setPassword(contrasena);
         conexion.setUser(usuario);
@@ -118,7 +122,7 @@ public class LocalGastoEliminar extends javax.swing.JFrame {
 
         try {
 
-            if (("".equals(S_ID))) {
+            if (("".equals(id_txt))) {
 
                 JOptionPane.showMessageDialog(this, "La informacion esta incompleta vuelva a intentar");
 
@@ -126,22 +130,23 @@ public class LocalGastoEliminar extends javax.swing.JFrame {
 
                 int id = Integer.parseInt(S_ID);
 
-                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de Eliminar el producto con el ID :" + id, "ELIMINAR GASTO", JOptionPane.WARNING_MESSAGE);
+                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar al empleado con el ID :"+id);
 
                 if (i == 0) {
 
                     try {
 
-                        PreparedStatement eliminar = conectar.prepareStatement("DELETE FROM Gasto where gast_id = ?");
+                        PreparedStatement actualizar = conectar.prepareStatement("Update Empleado set emp_estado = 0 where emp_id = ?");
 
-                        eliminar.setInt(1, id);
+                        actualizar.setInt(1, id);
 
-                        int retorno = eliminar.executeUpdate();
+                        int retorno = actualizar.executeUpdate();
 
-                        JOptionPane.showMessageDialog(this, "La informacion se ha eliminado con exito");
+                        JOptionPane.showMessageDialog(this, "La eliminacion del empleado fue un exito");
 
                     } catch (SQLException ex) {
                         Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
                     }
 
                 } else if (i == 2) {
@@ -149,21 +154,12 @@ public class LocalGastoEliminar extends javax.swing.JFrame {
                     dispose();
                 }
 
+            }} catch (Exception ex) {
+                Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
+
             }
-        } catch (Exception ex) {
-            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
-
-        }
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        dispose();
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,20 +178,20 @@ public class LocalGastoEliminar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LocalGastoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalEmpleadoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LocalGastoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalEmpleadoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LocalGastoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalEmpleadoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LocalGastoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalEmpleadoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LocalGastoEliminar().setVisible(true);
+                new LocalEmpleadoEliminar().setVisible(true);
             }
         });
     }
