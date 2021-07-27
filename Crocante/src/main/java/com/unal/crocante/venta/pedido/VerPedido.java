@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author JFCowboy
+ * @author VenusBaquero
  */
 public class VerPedido extends javax.swing.JFrame {
 

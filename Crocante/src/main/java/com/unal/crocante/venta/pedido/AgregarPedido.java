@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author JFCowboy
+ * @author VenusBaquero
  */
 public class AgregarPedido extends javax.swing.JFrame {
 

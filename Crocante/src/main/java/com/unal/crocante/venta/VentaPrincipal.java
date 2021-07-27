@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author JFCowboy
+ * @author VenusBaquero
  */
 public class VentaPrincipal extends javax.swing.JFrame {
 
