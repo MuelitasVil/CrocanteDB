@@ -49,7 +49,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
         addBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        payBtn = new javax.swing.JButton();
         opinionBtn = new javax.swing.JButton();
         pedidoButton = new javax.swing.JButton();
         volverBtn = new javax.swing.JButton();
@@ -102,13 +101,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Ventas Activas");
 
-        payBtn.setText("Pago");
-        payBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                payBtnActionPerformed(evt);
-            }
-        });
-
         opinionBtn.setText("Añadir Opiniones");
         opinionBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +119,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jLayeredPane1.setLayer(addBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(editBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(payBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(opinionBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(pedidoButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -141,18 +132,16 @@ public class VentaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(payBtn)
-                                .addGap(252, 252, 252)
+                                .addGap(152, 152, 152)
                                 .addComponent(opinionBtn))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(addBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(editBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pedidoButton)))))
+                                .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(45, 45, 45)
+                                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addComponent(pedidoButton)))
                 .addContainerGap())
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -167,10 +156,8 @@ public class VentaPrincipal extends javax.swing.JFrame {
                     .addComponent(addBtn)
                     .addComponent(editBtn)
                     .addComponent(pedidoButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(payBtn)
-                    .addComponent(opinionBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(opinionBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -211,10 +198,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_volverBtnActionPerformed
 
-    private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
-
-    }//GEN-LAST:event_payBtnActionPerformed
-
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         AgregarVenta add = new AgregarVenta();
         add.setVisible(true);
@@ -233,7 +216,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        
+
         System.out.println("identificado");
         DefaultTableModel model = (DefaultTableModel) ventas.getModel();
         while (model.getRowCount() > 0) {
@@ -307,7 +290,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton opinionBtn;
-    private javax.swing.JButton payBtn;
     private javax.swing.JButton pedidoButton;
     private javax.swing.JTable ventas;
     private javax.swing.JButton volverBtn;

@@ -6,6 +6,12 @@
 package com.unal.crocante;
 
 import com.unal.crocante.venta.VentaPrincipal;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Manuel Martinez
@@ -28,10 +34,9 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Clientes = new javax.swing.JButton();
-        Venta = new javax.swing.JButton();
-        Ganancias = new javax.swing.JButton();
-        Local = new javax.swing.JButton();
+        Clientes = crearBoton("https://resizeimage.net/mypic/7AUIyIDPJCRWlrnQ/LS1kJ/cliente.jpg");
+        Venta = crearBoton("https://resizeimage.net/mypic/io15Js9cFpssz1iL/5IG1f/venta.png");
+        Local = crearBoton("https://resizeimage.net/mypic/AGJgus92TsHaGKWC/QfDlZ/tienda.jpg");
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,13 +55,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        Ganancias.setText("Ganancias");
-        Ganancias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GananciasActionPerformed(evt);
-            }
-        });
-
         Local.setText("Local");
         Local.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +62,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Menu Gerente");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -78,13 +77,11 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Local, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
+                        .addGap(125, 125, 125)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Ganancias, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(101, 101, 101)
+                        .addComponent(Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -97,10 +94,8 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(Clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Local, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Ganancias, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -117,12 +112,6 @@ public class Menu extends javax.swing.JFrame {
         venta.setVisible(true);
         dispose();
     }//GEN-LAST:event_VentaActionPerformed
-
-    private void GananciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GananciasActionPerformed
-        Ganancias ganancia = new Ganancias();
-        ganancia.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_GananciasActionPerformed
 
     private void LocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocalActionPerformed
         LocalMenu local = new LocalMenu();
@@ -168,9 +157,19 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Clientes;
-    public javax.swing.JButton Ganancias;
     public javax.swing.JButton Local;
     public javax.swing.JButton Venta;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton crearBoton(String url) {
+        try {
+            ImageIcon imageIcon = new ImageIcon(new URL(url));
+            return new javax.swing.JButton(imageIcon);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            return new javax.swing.JButton();
+        }
+    }
+
 }

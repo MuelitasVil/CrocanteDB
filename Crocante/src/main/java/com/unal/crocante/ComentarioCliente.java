@@ -7,7 +7,6 @@ package com.unal.crocante;
 
 import com.mysql.cj.util.StringUtils;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,6 +56,7 @@ public class ComentarioCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("COMENTARIOS");
 
         jButton2.setText("Volver");
@@ -95,7 +95,7 @@ public class ComentarioCliente extends javax.swing.JFrame {
 
         Descripcion.setColumns(20);
         Descripcion.setRows(5);
-        Descripcion.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        Descripcion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setViewportView(Descripcion);
 
         jLabel11.setText("Descripción");
@@ -125,28 +125,6 @@ public class ComentarioCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(IDComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(IDPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel8)
-                                .addGap(24, 24, 24)
-                                .addComponent(IDVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -167,13 +145,35 @@ public class ComentarioCliente extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(114, 114, 114))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(IDComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(IDPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel8)
+                                .addGap(24, 24, 24)
+                                .addComponent(IDVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
+                .addGap(6, 6, 6)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -199,16 +199,14 @@ public class ComentarioCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     MenuCliente m = new MenuCliente();
-          m.setVisible(true); 
-          dispose();        // TODO add your handling code here:
+        dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -230,13 +228,10 @@ public class ComentarioCliente extends javax.swing.JFrame {
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         Connection conexion = conector.iniciarConexion();
 
-        
-
         int IDCom = -5;
         int IDPer = -3;
         int IDVen = 1;
         int IDPro = -1;
-        
 
         if (!StringUtils.isNullOrEmpty(IDComentario.getText())) {
             IDCom = Integer.parseInt(IDComentario.getText());
@@ -247,11 +242,8 @@ public class ComentarioCliente extends javax.swing.JFrame {
         if (!StringUtils.isNullOrEmpty(IDVenta.getText())) {
             IDVen = Integer.parseInt(IDVenta.getText());
         }
-       
 
         String Descrip = Descripcion.toString();
-
-        
 
         String consulta = "select com_descripcion from Comentario where com_id LIke '" + IDCom + "' OR com_descripcion Like '" + Descrip + "'OR Persona_per_id like '" + IDPer + "' OR Venta_ven_id Like '" + IDVen + "';";
         PreparedStatement s;
@@ -259,11 +251,10 @@ public class ComentarioCliente extends javax.swing.JFrame {
             s = conexion.prepareStatement(consulta);
             ResultSet resultado = s.executeQuery();
             while (resultado.next()) {
-               
+
                 String D = resultado.getString(1);
-                
-                
-                System.out.println(String.format("%s",D));
+
+                System.out.println(String.format("%s", D));
                 DefaultTableModel model = (DefaultTableModel) Comentario.getModel();
                 model.addRow(new Object[]{D});
             }
@@ -275,8 +266,8 @@ public class ComentarioCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-         //INSERTAR****************
-         try {
+        //INSERTAR****************
+        try {
             DefaultTableModel model = (DefaultTableModel) Comentario.getModel();
             while (model.getRowCount() > 0) {
                 model.setRowCount(0);
@@ -288,13 +279,10 @@ public class ComentarioCliente extends javax.swing.JFrame {
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         Connection conexion = conector.iniciarConexion();
 
-        
-
         int IDCom = 0;
         int IDPer = 0;
         int IDVen = 1;
         int IDPro = -1;
-        
 
         if (!StringUtils.isNullOrEmpty(IDComentario.getText())) {
             IDCom = Integer.parseInt(IDComentario.getText());
@@ -305,13 +293,12 @@ public class ComentarioCliente extends javax.swing.JFrame {
         if (!StringUtils.isNullOrEmpty(IDVenta.getText())) {
             IDVen = Integer.parseInt(IDVenta.getText());
         }
-       
 
-        String Descrip = Descripcion.toString();   
-                      
-          String consulta = "insert into comentario(com_id, com_descripcion, Persona_per_id, Venta_ven_id) "
+        String Descrip = Descripcion.toString();
+
+        String consulta = "insert into comentario(com_id, com_descripcion, Persona_per_id, Venta_ven_id) "
                 + " values ('" + IDCom + "', '" + Descrip + "', '" + IDPer + "', '" + IDVen + "');";
-          
+
         System.out.println(consulta);
 
         PreparedStatement s;
