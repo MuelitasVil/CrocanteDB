@@ -212,12 +212,11 @@ public class DarOpinion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane1)
-                        .addContainerGap())
+                    .addComponent(jLayeredPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(volverBtn)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(265, 265, 265)
                 .addComponent(opinionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,10 +260,10 @@ public class DarOpinion extends javax.swing.JFrame {
         String getIdProducto = "select Producto_pro_id from Pedido where Venta_ven_id =" + idVenta + "; ";
         PreparedStatement prod;
         try {
-            prod = conexion.prepareStatement(getCC);
-            ResultSet cedula = prod.executeQuery();
-            cedula.next();
-            cc = cedula.getInt(1);
+            prod = conexion.prepareStatement(getIdProducto);
+            ResultSet producto = prod.executeQuery();
+            producto.next();
+
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
