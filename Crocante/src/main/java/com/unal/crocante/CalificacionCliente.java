@@ -27,7 +27,30 @@ public class CalificacionCliente extends javax.swing.JFrame {
      */
     public CalificacionCliente() {
         initComponents();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        Connection conexion = conector.iniciarConexion();
+        String consulta1 = "select pro_nombre from producto ";
+        PreparedStatement s;
+        try {
+            s = conexion.prepareStatement(consulta1);
+            ResultSet resultado = s.executeQuery();
+            while (resultado.next()) {
+                             
+                              
+                ProductoText1.addItem(resultado.getString(consulta1));
+                
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        
     }
 
     /**
@@ -51,8 +74,6 @@ public class CalificacionCliente extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         Fecha = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        ProductoText1 = new javax.swing.JTextField();
-        ProductoText2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         IDComentario = new javax.swing.JTextField();
         estrellas = new javax.swing.JComboBox<>();
@@ -64,6 +85,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         IDProducto = new javax.swing.JTextField();
         ProductoText4 = new javax.swing.JTextField();
+        ProductoText1 = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,8 +172,6 @@ public class CalificacionCliente extends javax.swing.JFrame {
 
         jLabel6.setText("Producto");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
-        getContentPane().add(ProductoText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 80, -1));
-        getContentPane().add(ProductoText2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 80, -1));
 
         jLabel7.setText("IDComentario");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
@@ -183,8 +203,15 @@ public class CalificacionCliente extends javax.swing.JFrame {
 
         jLabel10.setText("IDProducto");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
-        getContentPane().add(IDProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 70, -1));
-        getContentPane().add(ProductoText4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 80, -1));
+        getContentPane().add(IDProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 70, -1));
+        getContentPane().add(ProductoText4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 80, -1));
+
+        ProductoText1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProductoText1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ProductoText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 80, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -209,7 +236,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         Connection conexion = conector.iniciarConexion();
 
-        String Productoname = ProductoText1.toString();
+        String Productoname = ProductoText1.getSelectedItem().toString();
 
         int IDCal = 0;
         int IDPer = 0;
@@ -297,7 +324,6 @@ public class CalificacionCliente extends javax.swing.JFrame {
             IDCal = Integer.parseInt(IDCalificacion.getText());
         }
         if (!StringUtils.isNullOrEmpty(IDPersona.getText())) {
-
             IDPer = Integer.parseInt(IDPersona.getText());
         }
         if (!StringUtils.isNullOrEmpty(IDProducto.getText())) {
@@ -333,6 +359,10 @@ public class CalificacionCliente extends javax.swing.JFrame {
     private void estrellasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estrellasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_estrellasActionPerformed
+
+    private void ProductoText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductoText1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ProductoText1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 //try {
@@ -411,8 +441,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
     private javax.swing.JTextField IDComentario;
     private javax.swing.JTextField IDPersona;
     private javax.swing.JTextField IDProducto;
-    private javax.swing.JTextField ProductoText1;
-    private javax.swing.JTextField ProductoText2;
+    private javax.swing.JComboBox<String> ProductoText1;
     private javax.swing.JTextField ProductoText4;
     private javax.swing.JTable calificacion;
     private javax.swing.JComboBox<String> estrellas;
