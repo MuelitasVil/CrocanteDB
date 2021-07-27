@@ -267,7 +267,7 @@ public class DarOpinion extends javax.swing.JFrame {
             while (producto.next()) {
 
                 int idProd = producto.getInt(1);
-                String commentInsert = "insert into comentario (com_descripcion, Persona_per_id, Producto_pro_id, Venta_ven_id) "
+                String commentInsert = "insert into comentario (com_descripcion, Persona_per_id, Venta_ven_id) "
                         + "values ('" + comment + "', " + cc + "," + idProd + " , '" + idVenta + "');";
 
                 PreparedStatement comentarios;
