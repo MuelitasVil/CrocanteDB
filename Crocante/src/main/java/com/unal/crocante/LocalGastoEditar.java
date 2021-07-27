@@ -5,7 +5,7 @@
  */
 package com.unal.crocante;
 
-import com.mysql.cj.jdbc.CallableStatement;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,23 +16,27 @@ import javax.swing.JOptionPane;
  *
  * @author Manuel Martinez
  */
-public class LocalGasto_insertar extends javax.swing.JFrame {
+public class LocalGastoEditar extends javax.swing.JFrame {
 
     /**
-     * Creates new form LocalGasto_insertar
+     * Creates new form LocalGasto_editar
      */
-    public LocalGasto_insertar() {
+    public LocalGastoEditar() {
+        
         initComponents();
+        
+
+
     }
-    
-    
+        
+
+
         MysqlConexion conexion = new MysqlConexion();
 
         String usuario = "Venus";
         String apellido = "Baquero";
         String contrasena = "gerente";
-
-
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,24 +47,31 @@ public class LocalGasto_insertar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        Nombre_txt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        Nombre_txt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         Costo_txt = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tipo_txt = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        sede_txt = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        tipo_txt = new javax.swing.JComboBox<>();
+        sede_txt = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Insertar");
-
         jLabel2.setText("Nombre Gasto :");
 
+        jLabel1.setText("Insertar");
+
         jLabel3.setText("Costo :");
+
+        tipo_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nomina", "Servicio", "Insumo", "Otro", " " }));
+        tipo_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipo_txtActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Tipo :");
 
@@ -71,16 +82,9 @@ public class LocalGasto_insertar extends javax.swing.JFrame {
             }
         });
 
-        sede_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
-
         jLabel5.setText("Sede");
 
-        tipo_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nomina", "Servicio", "Insumo", "Otro", " " }));
-        tipo_txt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo_txtActionPerformed(evt);
-            }
-        });
+        sede_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,18 +103,17 @@ public class LocalGasto_insertar extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(79, 79, 79)
                                 .addComponent(jLabel1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(203, 203, 203)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                .addComponent(sede_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Costo_txt, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Nombre_txt, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tipo_txt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(tipo_txt, 0, 287, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(sede_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,31 +132,37 @@ public class LocalGasto_insertar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tipo_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sede_txt)
-                    .addComponent(jLabel5))
-                .addGap(28, 28, 28))
+                    .addComponent(jLabel5)
+                    .addComponent(sede_txt))
+                .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tipo_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipo_txtActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
+
+
         conexion.setPassword(contrasena);
         conexion.setUser(usuario);
         Connection conectar = conexion.iniciarConexion();
-        
+
         String nombre = Nombre_txt.getText();
 
         String S_Costo = Costo_txt.getText();
-        
+
         String Tipo =(String) tipo_txt.getSelectedItem();
-        
+
         String s_Sede =(String) sede_txt.getSelectedItem();
-        
+
         System.out.println(Tipo);
 
         if (("".equals(nombre)) || ("".equals(S_Costo)) || ("".equals(Tipo))) {
@@ -161,9 +170,9 @@ public class LocalGasto_insertar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La informacion esta incompleta vuelva a intentar");
 
         } else {
-            
+
             int costo = Integer.parseInt(S_Costo);
-            
+
             int sede = Integer.parseInt(s_Sede);
 
             int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de agregar esta informacion?\nnombre :"+nombre+"\ncosto :"+S_Costo+"\ntipo :"+Tipo+"\nsede :"+s_Sede);
@@ -171,39 +180,32 @@ public class LocalGasto_insertar extends javax.swing.JFrame {
             if (i == 0) {
 
                 try {
-                    
+
                     String Consulta = "{call Agregar_Gasto(?,?,?,?)}";
-                    
+
                     CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
-                    
+
                     procedimiento.setString(1, nombre);
                     procedimiento.setInt(2, costo);
                     procedimiento.setString(3, Tipo);
                     procedimiento.setInt(4, sede);
-                    
+
                     procedimiento.execute();
-                    
+
                     JOptionPane.showMessageDialog(this, "La informacion se ha insertado con exito");
-                    
-                    
-                    
+
                 } catch (SQLException ex) {
-                    Logger.getLogger(LocalGasto_insertar.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             } else if (i == 2) {
-                
+
                 dispose();
-            } 
+            }
 
         }
 
-
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void tipo_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo_txtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo_txtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,20 +224,21 @@ public class LocalGasto_insertar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LocalGasto_insertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalGastoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LocalGasto_insertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalGastoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LocalGasto_insertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalGastoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LocalGasto_insertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalGastoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LocalGasto_insertar().setVisible(true);
+                new LocalGastoEditar().setVisible(true);
             }
         });
     }

@@ -246,7 +246,7 @@ public class LocalGasto extends javax.swing.JFrame {
 
     private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
         
-        new LocalGasto_insertar().setVisible(true);
+        new LocalGastoInsertar().setVisible(true);
         
     }//GEN-LAST:event_InsertarActionPerformed
 
