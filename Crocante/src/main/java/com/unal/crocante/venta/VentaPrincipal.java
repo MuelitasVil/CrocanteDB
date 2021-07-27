@@ -7,6 +7,7 @@ package com.unal.crocante.venta;
 
 import com.unal.crocante.Menu;
 import com.unal.crocante.MysqlConexion;
+import com.unal.crocante.venta.pedido.VerPedido;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author JFCowboy
+ * @author VenusBaquero
  */
 public class VentaPrincipal extends javax.swing.JFrame {
 
@@ -50,6 +51,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         payBtn = new javax.swing.JButton();
         opinionBtn = new javax.swing.JButton();
+        pedidoButton = new javax.swing.JButton();
         volverBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -111,6 +113,13 @@ public class VentaPrincipal extends javax.swing.JFrame {
 
         opinionBtn.setText("Añadir Opiniones");
 
+        pedidoButton.setText("Acceder a pedido");
+        pedidoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pedidoButtonActionPerformed(evt);
+            }
+        });
+
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(addBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(dltBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -118,6 +127,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(payBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(opinionBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(pedidoButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -127,20 +137,23 @@ public class VentaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(payBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(opinionBtn))
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(addBtn)
-                                .addGap(55, 55, 55)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(editBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                                .addComponent(dltBtn)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addComponent(payBtn)
+                                .addGap(82, 82, 82)
+                                .addComponent(pedidoButton)
+                                .addGap(39, 39, 39)))
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dltBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(opinionBtn, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -158,7 +171,8 @@ public class VentaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(payBtn)
-                    .addComponent(opinionBtn))
+                    .addComponent(opinionBtn)
+                    .addComponent(pedidoButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -229,6 +243,17 @@ public class VentaPrincipal extends javax.swing.JFrame {
         llenarInfoVentas();
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void pedidoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoButtonActionPerformed
+        int row = ventas.getSelectedRow();
+        if (row >= 0) {
+            System.out.println(ventas.getModel().getValueAt(row, 0));
+            VerPedido pedido = new VerPedido((Integer) ventas.getModel().getValueAt(row, 0));
+            pedido.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ninguna venta.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_pedidoButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -273,6 +298,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton opinionBtn;
     private javax.swing.JButton payBtn;
+    private javax.swing.JButton pedidoButton;
     private javax.swing.JTable ventas;
     private javax.swing.JButton volverBtn;
     // End of variables declaration//GEN-END:variables

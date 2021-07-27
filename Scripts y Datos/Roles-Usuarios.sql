@@ -25,6 +25,7 @@ GRANT SELECT, INSERT ON Comentario TO 'Gerencia'@'localhost';
 GRANT SELECT, INSERT ON Calificación TO 'Gerencia'@'localhost';
 GRANT ALL ON Domicilio TO 'Gerencia'@'localhost';
 GRANT INSERT, SELECT, UPDATE ON Salario TO 'Gerencia'@'localhost';
+GRANT ALL ON PEDIDO TO 'Gerencia'@'localhost';
 
 GRANT ALL ON vw_Carta TO 'Gerencia'@'localhost';
 GRANT ALL ON vw_Hamburguesas TO 'Gerencia'@'localhost';
