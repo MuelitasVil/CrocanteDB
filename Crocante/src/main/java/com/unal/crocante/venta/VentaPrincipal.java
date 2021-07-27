@@ -76,6 +76,11 @@ public class VentaPrincipal extends javax.swing.JFrame {
         }
 
         addBtn.setText("Añadir");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         dltBtn.setText("Eliminar");
 
@@ -182,8 +187,14 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_volverBtnActionPerformed
 
     private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
-        // TODO add your handling code here:
+       
+        
+        
     }//GEN-LAST:event_payBtnActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,7 +252,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
         }
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         Connection conexion = conector.iniciarConexion();
-        String consulta = "select * from venta where ven_estado = 1;";
+        String consulta = "select * from venta where ven_estado = 0;";
         PreparedStatement s;
         try {
             s = conexion.prepareStatement(consulta);
