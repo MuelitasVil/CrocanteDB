@@ -292,13 +292,11 @@ public class DarOpinion extends javax.swing.JFrame {
                 int idProd = producto.getInt(1);
 
                 String insertCalificacion = "insert into calificación (cal_estrellas, cal_fecha, Persona_per_id, Comentario_com_id, Producto_pro_id) "
-                        + "values (" + stars + ", curdate()," + cc + ", " + idComment + ",);";
-                PreparedStatement getcomentario;
+                        + "values (" + stars + ", curdate()," + cc + ", " + idComment + ", " + idProd + ");";
+                PreparedStatement calif;
                 try {
-                    getcomentario = conexion.prepareStatement(getIdComment);
-                    ResultSet idcom = getcomentario.executeQuery();
-                    idcom.next();
-                    idComment = idcom.getInt(1);
+                    calif = conexion.prepareStatement(insertCalificacion);
+                    int insertcalif = calif.executeUpdate();
                 } catch (SQLException ex) {
                     Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -308,6 +306,8 @@ public class DarOpinion extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        dispose();
 
     }//GEN-LAST:event_addButtonActionPerformed
 
