@@ -195,6 +195,10 @@ public class VerPedido extends javax.swing.JFrame {
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         System.out.println("identificado");
+        recargarLista();
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void recargarLista() {
         DefaultTableModel model = (DefaultTableModel) pedido.getModel();
         while (model.getRowCount() > 0) {
             model.setRowCount(0);
@@ -202,7 +206,7 @@ public class VerPedido extends javax.swing.JFrame {
         total = 0;
         llenarInfoPedido();
         precioFormattedTextField.setValue(total);
-    }//GEN-LAST:event_formWindowGainedFocus
+    }
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         AgregarPedido add = new AgregarPedido(idVenta);
@@ -213,15 +217,15 @@ public class VerPedido extends javax.swing.JFrame {
         int row = pedido.getSelectedRow();
         if (row >= 0) {
             int producto = (int) pedido.getModel().getValueAt(row, 0);
-            String queryGetCc = "select get_CC_venta(" + idVenta + ");";
+            String queryDltPedido = "delete from pedido where Producto_pro_id = " + producto + " AND Venta_ven_id = " + idVenta + ";";
             PreparedStatement s;
             try {
-                s = conexion.prepareStatement(queryGetCc);
-                ResultSet result = s.executeQuery();
-                result.next();
+                s = conexion.prepareStatement(queryDltPedido);
+                int result = s.executeUpdate();
             } catch (SQLException ex) {
                 Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
+            recargarLista();
         } else {
             JOptionPane.showMessageDialog(this, "No se seleccionó ningun producto.", "Error", JOptionPane.ERROR_MESSAGE);
         }
