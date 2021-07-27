@@ -27,72 +27,163 @@ public class LocalGasto_editar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Agregar = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        Nombre_txt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        Costo_txt = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tipo_txt = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        sede_txt = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Agregar.setText("Insertar ");
-        Agregar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Nombre Gasto :");
+
+        jLabel1.setText("Insertar");
+
+        jLabel3.setText("Costo :");
+
+        tipo_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nomina", "Servicio", "Insumo", "Otro", " " }));
+        tipo_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarActionPerformed(evt);
+                tipo_txtActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("Eliminar");
+        jLabel4.setText("Tipo :");
 
-        jRadioButton3.setText("Editar");
-
-        jTextField1.setText("jTextField1");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel5.setText("Sede");
+
+        sede_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(20, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(jLabel1))
+                            .addComponent(Costo_txt, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Nombre_txt, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tipo_txt, 0, 287, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Agregar)
-                        .addGap(31, 31, 31)
-                        .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(sede_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Agregar)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
-                .addGap(26, 26, 26))
+                    .addComponent(Nombre_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Costo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tipo_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(jLabel4))
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(sede_txt))
+                .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
+    private void tipo_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo_txtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AgregarActionPerformed
+    }//GEN-LAST:event_tipo_txtActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        conexion.setPassword(contrasena);
+        conexion.setUser(usuario);
+        Connection conectar = conexion.iniciarConexion();
+
+        String nombre = Nombre_txt.getText();
+
+        String S_Costo = Costo_txt.getText();
+
+        String Tipo =(String) tipo_txt.getSelectedItem();
+
+        String s_Sede =(String) sede_txt.getSelectedItem();
+
+        System.out.println(Tipo);
+
+        if (("".equals(nombre)) || ("".equals(S_Costo)) || ("".equals(Tipo))) {
+
+            JOptionPane.showMessageDialog(this, "La informacion esta incompleta vuelva a intentar");
+
+        } else {
+
+            int costo = Integer.parseInt(S_Costo);
+
+            int sede = Integer.parseInt(s_Sede);
+
+            int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de agregar esta informacion?\nnombre :"+nombre+"\ncosto :"+S_Costo+"\ntipo :"+Tipo+"\nsede :"+s_Sede);
+
+            if (i == 0) {
+
+                try {
+
+                    String Consulta = "{call Agregar_Gasto(?,?,?,?)}";
+
+                    CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
+
+                    procedimiento.setString(1, nombre);
+                    procedimiento.setInt(2, costo);
+                    procedimiento.setString(3, Tipo);
+                    procedimiento.setInt(4, sede);
+
+                    procedimiento.execute();
+
+                    JOptionPane.showMessageDialog(this, "La informacion se ha insertado con exito");
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(LocalGasto_insertar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else if (i == 2) {
+
+                dispose();
+            }
+
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,9 +221,15 @@ public class LocalGasto_editar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton Agregar;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField Costo_txt;
+    private javax.swing.JTextField Nombre_txt;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JComboBox<String> sede_txt;
+    private javax.swing.JComboBox<String> tipo_txt;
     // End of variables declaration//GEN-END:variables
 }
