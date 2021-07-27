@@ -71,9 +71,8 @@ ORDER BY AVG(cal_estrellas) DESC;
 select * from vw_Mejores_Platos;
 
 -- Reseñas (Tambien sirve para gerente) 
-CREATE VIEW vw_Comentario AS SELECT com_descripcion, pro_nombre, ven_fecha 
-FROM Comentario JOIN Producto ON (pro_id = Producto_pro_id)
-	JOIN Venta ON (ven_id = Venta_ven_id); 
+CREATE VIEW vw_Comentario AS SELECT com_descripcion, ven_fecha 
+FROM Comentario JOIN Venta ON (ven_id = Venta_ven_id); 
 SELECT * FROM vw_Comentario;
 
 CREATE VIEW vw_recent_coments AS SELECT com_descripcion 

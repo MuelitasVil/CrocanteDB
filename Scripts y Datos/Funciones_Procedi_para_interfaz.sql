@@ -55,3 +55,30 @@ BEGIN
 	UPDATE Venta SET ven_precioTotal = total WHERE ven_id = OLD.Venta_ven_id;
 END $$
 DELIMITER ;
+
+
+
+drop function if exists Numero_gasto;
+
+DELIMITER $$
+CREATE function Numero_gasto() returns int deterministic 
+BEGIN
+
+	Declare numero int default 0;
+	select count(*) into numero from gasto; 
+	return numero;
+
+END $$
+DELIMITER ;
+
+
+Drop Procedure if exists Agregar_Gasto; 
+DELIMITER $$
+CREATE Procedure Agregar_Gasto(Nombre varchar(50), costo int, tipo varchar(50), sede tinyint)   
+BEGIN
+
+	INSERT INTO Gasto VALUES(null, Nombre, costo, now(), tipo, sede);
+
+END $$
+DELIMITER ;
+

@@ -14,6 +14,7 @@ CREATE USER if not exists 'Santiago'@'localhost' IDENTIFIED BY 'caja';
 -- Gerencia
 GRANT ALL ON Sede TO 'Gerencia'@'localhost';
 GRANT ALL ON Persona TO 'Gerencia'@'localhost';
+GRANT ALL ON Empleado TO 'Gerencia'@'localhost';
 GRANT SELECT, UPDATE ON Cargo TO 'Gerencia'@'localhost';
 GRANT INSERT, SELECT, UPDATE ON Insumo TO 'Gerencia'@'localhost';
 GRANT ALL ON Gasto TO 'Gerencia'@'localhost';

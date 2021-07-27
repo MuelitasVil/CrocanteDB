@@ -7,6 +7,7 @@ package com.unal.crocante.venta;
 
 import com.unal.crocante.Menu;
 import com.unal.crocante.MysqlConexion;
+import com.unal.crocante.venta.opinion.DarOpinion;
 import com.unal.crocante.venta.pedido.VerPedido;
 import java.sql.Connection;
 import java.sql.Date;
@@ -46,7 +47,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ventas = new javax.swing.JTable();
         addBtn = new javax.swing.JButton();
-        dltBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         payBtn = new javax.swing.JButton();
@@ -92,8 +92,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        dltBtn.setText("Eliminar");
-
         editBtn.setText("Editar");
         editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +110,11 @@ public class VentaPrincipal extends javax.swing.JFrame {
         });
 
         opinionBtn.setText("Añadir Opiniones");
+        opinionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opinionBtnActionPerformed(evt);
+            }
+        });
 
         pedidoButton.setText("Acceder a pedido");
         pedidoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +125,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
 
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(addBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(dltBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(editBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(payBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -140,20 +142,17 @@ public class VentaPrincipal extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addComponent(payBtn)
+                                .addGap(252, 252, 252)
+                                .addComponent(opinionBtn))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(addBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(editBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(payBtn)
-                                .addGap(82, 82, 82)
-                                .addComponent(pedidoButton)
-                                .addGap(39, 39, 39)))
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dltBtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(opinionBtn, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pedidoButton)))))
                 .addContainerGap())
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -166,13 +165,12 @@ public class VentaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
-                    .addComponent(dltBtn)
-                    .addComponent(editBtn))
+                    .addComponent(editBtn)
+                    .addComponent(pedidoButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(payBtn)
-                    .addComponent(opinionBtn)
-                    .addComponent(pedidoButton))
+                    .addComponent(opinionBtn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -214,9 +212,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_volverBtnActionPerformed
 
     private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
-       
-        
-        
+
     }//GEN-LAST:event_payBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
@@ -256,6 +252,18 @@ public class VentaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pedidoButtonActionPerformed
 
+    private void opinionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opinionBtnActionPerformed
+        int row = ventas.getSelectedRow();
+        if (row >= 0) {
+            System.out.println(ventas.getModel().getValueAt(row, 0));
+            DarOpinion opinion = new DarOpinion((Integer) ventas.getModel().getValueAt(row, 0));
+            opinion.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ninguna venta.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_opinionBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -293,7 +301,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
-    private javax.swing.JButton dltBtn;
     private javax.swing.JButton editBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -313,7 +320,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
         }
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         Connection conexion = conector.iniciarConexion();
-        String consulta = "select * from venta where ven_estado = 0;";
+        String consulta = "select * from venta where ven_estado = 1;";
         PreparedStatement s;
         try {
             s = conexion.prepareStatement(consulta);
