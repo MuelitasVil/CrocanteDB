@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,8 +21,6 @@ import java.util.Set;
  */
 public class LocalGasto extends javax.swing.JFrame {
 
-        
-   
     /**
      * Creates new form Local_Gastos
      */
@@ -46,7 +47,7 @@ public class LocalGasto extends javax.swing.JFrame {
             String matris[][] = new String[num_gastos][6];
 
             Statement s = conectar.createStatement();
-            ResultSet rs = s.executeQuery("select * from Gasto");
+            ResultSet rs = s.executeQuery(" select * from Gasto order by gast_id desc");
 
 // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
             int i = 0;
@@ -58,7 +59,7 @@ public class LocalGasto extends javax.swing.JFrame {
                 matris[i][2] = rs.getString(3);
                 matris[i][3] = rs.getString(4);
                 matris[i][4] = rs.getString(5);
-                matris[i][5] = rs.getString(5);
+                matris[i][5] = rs.getString(6);
 
                 i++;
 
@@ -78,7 +79,6 @@ public class LocalGasto extends javax.swing.JFrame {
         }
 
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,11 +95,17 @@ public class LocalGasto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
+        Editar = new javax.swing.JButton();
         Insertar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        Fecha_txt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        Costo_txt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        tipo_txt = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,37 +148,26 @@ public class LocalGasto extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        jTable1.setEnabled(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                EliminarActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Sede :");
-
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Editar.setText("Editar");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Editar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                EditarActionPerformed(evt);
             }
         });
 
@@ -183,72 +178,264 @@ public class LocalGasto extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Atras");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        Fecha_txt.setText("0000-00-00");
+
+        jLabel2.setText("Fecha");
+
+        jLabel3.setText("Minimo Costo ");
+
+        jLabel4.setText("Tipo Costo ");
+
+        tipo_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "Nomina", "Servicios", "Insumos", "Otro" }));
+        tipo_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipo_txtActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Recargar Datos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(Fecha_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Costo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tipo_txt, 0, 145, Short.MAX_VALUE)))))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(272, 272, 272)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel1))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Fecha_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Costo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(tipo_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1)
-                    .addComponent(Insertar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        new LocalGastoEliminar().setVisible(true);
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+        new LocalGastoEditar().setVisible(true);
+
+    }//GEN-LAST:event_EditarActionPerformed
 
     private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
-        
+
         new LocalGastoInsertar().setVisible(true);
-        
+
     }//GEN-LAST:event_InsertarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        dispose();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tipo_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipo_txtActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        int costo = 0;
+
+        MysqlConexion conexion = new MysqlConexion();
+
+        String usuario = "Venus";
+        String apellido = "Baquero";
+        String contrasena = "gerente";
+
+        conexion.setPassword(contrasena);
+        conexion.setUser(usuario);
+
+        Connection conectar = conexion.iniciarConexion();
+
+        int num_gastos = conexion.Contar_tablas(conectar, "Gasto");
+
+        System.out.println(num_gastos);
+
+        String Fecha = Fecha_txt.getText();
+        String S_Costo = Costo_txt.getText();
+        String S_Tipo = (String) tipo_txt.getSelectedItem();
+
+        try {
+
+            if ("Todo".equals(S_Tipo)) {
+
+               
+                try {
+                    
+                     if ("".equals(S_Costo)) {
+
+                    costo = 0;
+
+                } else {
+
+                    costo = Integer.parseInt(S_Costo);
+
+                }
+
+                     
+                    String matris[][] = new String[num_gastos][6];
+
+                    Statement s = conectar.createStatement();
+                    ResultSet rs = s.executeQuery("select * from Gasto where gast_fecha > '"+Fecha+"' and gast_costo > "+costo+" order by gast_id desc");
+
+// Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
+                    int i = 0;
+
+                    while (rs.next()) {
+
+                        matris[i][0] = rs.getString(1);
+                        matris[i][1] = rs.getString(2);
+                        matris[i][2] = rs.getString(3);
+                        matris[i][3] = rs.getString(4);
+                        matris[i][4] = rs.getString(5);
+                        matris[i][5] = rs.getString(6);
+
+                        i++;
+
+                    }
+
+                    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                            matris,
+                            new String[]{
+                                "ID", "Nombre del Gasto", "Costo", "fecha", "gast_tipo", "sede"
+                            }));
+
+                } catch (SQLException sqle) {
+                    System.out.println("Imposible realizar consulta ... FAIL");
+                    sqle.printStackTrace();
+                }
+
+            } else {
+
+                
+
+                try {
+                    
+
+                    if ("".equals(S_Costo)) {
+
+                        costo = 0;
+
+                    } else {
+
+                        costo = Integer.parseInt(S_Costo);
+
+                    }
+
+                    String matris[][] = new String[num_gastos][6];
+
+                    Statement s = conectar.createStatement();
+                    ResultSet rs = s.executeQuery("select * from Gasto where gast_fecha > '"+Fecha+"' and gast_costo > " +costo+ " and gast_tipo = '"+S_Tipo+"' order by gast_id desc");
+
+// Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
+                    int i = 0;
+
+                    while (rs.next()) {
+
+                        matris[i][0] = rs.getString(1);
+                        matris[i][1] = rs.getString(2);
+                        matris[i][2] = rs.getString(3);
+                        matris[i][3] = rs.getString(4);
+                        matris[i][4] = rs.getString(5);
+                        matris[i][5] = rs.getString(6);
+
+                        i++;
+
+                    }
+
+                    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                            matris,
+                            new String[]{
+                                "ID", "Nombre del Gasto", "Costo", "fecha", "gast_tipo", "sede"
+                            }));
+
+                } catch (SQLException sqle) {
+                    System.out.println("Imposible realizar consulta ... FAIL");
+                    sqle.printStackTrace();
+                }
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
+
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,16 +480,22 @@ public class LocalGasto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Costo_txt;
+    private javax.swing.JButton Editar;
+    private javax.swing.JButton Eliminar;
+    private javax.swing.JTextField Fecha_txt;
     private javax.swing.JButton Insertar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> tipo_txt;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package com.unal.crocante;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,11 +27,9 @@ public class LocalGastoEditar extends javax.swing.JFrame {
         initComponents();
         
 
-
     }
         
-
-
+    
         MysqlConexion conexion = new MysqlConexion();
 
         String usuario = "Venus";
@@ -57,12 +56,15 @@ public class LocalGastoEditar extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         sede_txt = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        id_txt = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setText("Nombre Gasto :");
 
-        jLabel1.setText("Insertar");
+        jLabel1.setText("Editar Gastos");
 
         jLabel3.setText("Costo :");
 
@@ -75,7 +77,7 @@ public class LocalGastoEditar extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo :");
 
-        jButton1.setText("Agregar");
+        jButton1.setText("Editar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -86,41 +88,60 @@ public class LocalGastoEditar extends javax.swing.JFrame {
 
         sede_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
+        jLabel6.setText("ID :");
+
+        jButton2.setText("Atras");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(79, 79, 79)
-                                .addComponent(jLabel1))
-                            .addComponent(Costo_txt, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Nombre_txt, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tipo_txt, 0, 287, Short.MAX_VALUE)))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Costo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tipo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Nombre_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(sede_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(sede_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton2))
                 .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Nombre_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -130,14 +151,14 @@ public class LocalGastoEditar extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tipo_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jLabel4))
-                .addGap(49, 49, 49)
+                    .addComponent(jLabel4)
+                    .addComponent(tipo_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(sede_txt))
-                .addGap(29, 29, 29))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -153,8 +174,11 @@ public class LocalGastoEditar extends javax.swing.JFrame {
 
         conexion.setPassword(contrasena);
         conexion.setUser(usuario);
+        
         Connection conectar = conexion.iniciarConexion();
-
+        
+        String S_ID = id_txt.getText();
+        
         String nombre = Nombre_txt.getText();
 
         String S_Costo = Costo_txt.getText();
@@ -165,34 +189,40 @@ public class LocalGastoEditar extends javax.swing.JFrame {
 
         System.out.println(Tipo);
 
+        
+        try {
+            
+        
         if (("".equals(nombre)) || ("".equals(S_Costo)) || ("".equals(Tipo))) {
 
             JOptionPane.showMessageDialog(this, "La informacion esta incompleta vuelva a intentar");
 
         } else {
+            
+            int id = Integer.parseInt(S_ID);
 
             int costo = Integer.parseInt(S_Costo);
 
             int sede = Integer.parseInt(s_Sede);
 
-            int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de agregar esta informacion?\nnombre :"+nombre+"\ncosto :"+S_Costo+"\ntipo :"+Tipo+"\nsede :"+s_Sede);
+            int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de actualizar el producto con el ID :"+id+"?\nnombre :"+nombre+"\ncosto :"+S_Costo+"\ntipo :"+Tipo+"\nsede :"+s_Sede);
 
             if (i == 0) {
 
                 try {
 
-                    String Consulta = "{call Agregar_Gasto(?,?,?,?)}";
+                    PreparedStatement actualizar = conectar.prepareStatement("Update Gasto set gast_descripción = ?, gast_costo = ?, gast_tipo = ?, Sede_sede_id = ?  where gast_id = ?");
+                   
+                    actualizar.setString(1, nombre);
+                    actualizar.setInt(2, costo);
+                    actualizar.setString(3, Tipo);
+                    actualizar.setInt(4, sede);
+                    actualizar.setInt(5, id);
+                    
+                    int retorno = actualizar.executeUpdate();
 
-                    CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
 
-                    procedimiento.setString(1, nombre);
-                    procedimiento.setInt(2, costo);
-                    procedimiento.setString(3, Tipo);
-                    procedimiento.setInt(4, sede);
-
-                    procedimiento.execute();
-
-                    JOptionPane.showMessageDialog(this, "La informacion se ha insertado con exito");
+                    JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
 
                 } catch (SQLException ex) {
                     Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
@@ -202,10 +232,22 @@ public class LocalGastoEditar extends javax.swing.JFrame {
 
                 dispose();
             }
+            
+        }} catch (Exception ex) {
+                Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
 
-        }
+            }
+
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        dispose();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,12 +288,15 @@ public class LocalGastoEditar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Costo_txt;
     private javax.swing.JTextField Nombre_txt;
+    private javax.swing.JTextField id_txt;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox<String> sede_txt;
     private javax.swing.JComboBox<String> tipo_txt;
     // End of variables declaration//GEN-END:variables
