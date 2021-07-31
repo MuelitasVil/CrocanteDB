@@ -7,6 +7,7 @@ package com.unal.crocante.venta;
 
 import com.unal.crocante.Menu;
 import com.unal.crocante.MysqlConexion;
+import com.unal.crocante.venta.domicilio.VerDomicilio;
 import com.unal.crocante.venta.opinion.DarOpinion;
 import com.unal.crocante.venta.pedido.VerPedido;
 import java.sql.Connection;
@@ -212,7 +213,8 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_volverBtnActionPerformed
 
     private void deliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryBtnActionPerformed
-
+        VerDomicilio dom = new VerDomicilio();
+        dom.setVisible(true);
     }//GEN-LAST:event_deliveryBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
