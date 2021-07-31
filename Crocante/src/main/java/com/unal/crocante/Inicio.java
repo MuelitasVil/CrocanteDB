@@ -152,7 +152,7 @@ public class Inicio extends javax.swing.JFrame {
 
         } else {
 
-            JOptionPane.showMessageDialog(null, "No se ha podido conectar correctamente a la base de datos\nVuelva a ingresar su ingresario y contraseña");
+            JOptionPane.showMessageDialog(null, "No se ha podido conectar correctamente a la base de datos\nVuelva a ingresar su usuario y contraseña");
 
         }
 
