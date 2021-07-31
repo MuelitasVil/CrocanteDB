@@ -49,7 +49,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
         addBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        payBtn = new javax.swing.JButton();
+        deliveryBtn = new javax.swing.JButton();
         opinionBtn = new javax.swing.JButton();
         pedidoButton = new javax.swing.JButton();
         volverBtn = new javax.swing.JButton();
@@ -102,10 +102,10 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Ventas Activas");
 
-        payBtn.setText("Pago");
-        payBtn.addActionListener(new java.awt.event.ActionListener() {
+        deliveryBtn.setText("Domicilio");
+        deliveryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                payBtnActionPerformed(evt);
+                deliveryBtnActionPerformed(evt);
             }
         });
 
@@ -127,7 +127,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jLayeredPane1.setLayer(addBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(editBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(payBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(deliveryBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(opinionBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(pedidoButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -144,7 +144,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(payBtn)
+                                .addComponent(deliveryBtn)
                                 .addGap(252, 252, 252)
                                 .addComponent(opinionBtn))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -169,7 +169,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
                     .addComponent(pedidoButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(payBtn)
+                    .addComponent(deliveryBtn)
                     .addComponent(opinionBtn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -211,9 +211,9 @@ public class VentaPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_volverBtnActionPerformed
 
-    private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
+    private void deliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryBtnActionPerformed
 
-    }//GEN-LAST:event_payBtnActionPerformed
+    }//GEN-LAST:event_deliveryBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         AgregarVenta add = new AgregarVenta();
@@ -233,7 +233,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        
+
         System.out.println("identificado");
         DefaultTableModel model = (DefaultTableModel) ventas.getModel();
         while (model.getRowCount() > 0) {
@@ -302,12 +302,12 @@ public class VentaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JButton deliveryBtn;
     private javax.swing.JButton editBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton opinionBtn;
-    private javax.swing.JButton payBtn;
     private javax.swing.JButton pedidoButton;
     private javax.swing.JTable ventas;
     private javax.swing.JButton volverBtn;
