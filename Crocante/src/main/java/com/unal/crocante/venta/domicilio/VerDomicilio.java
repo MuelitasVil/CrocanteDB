@@ -31,6 +31,7 @@ public class VerDomicilio extends javax.swing.JFrame {
         this.idVenta = idVenta;
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         conexion = conector.iniciarConexion();
+        confirmarExistencia();
         llenarInfoDomicilios();
     }
 
@@ -147,7 +148,7 @@ public class VerDomicilio extends javax.swing.JFrame {
                                             .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(estadoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                                             .addComponent(dirTextField))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -165,17 +166,17 @@ public class VerDomicilio extends javax.swing.JFrame {
                                     .addComponent(empleadoTextField)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(188, 188, 188)
-                                .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(addButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(editButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(backButton))
+                                    .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 48, Short.MAX_VALUE)))
                         .addGap(48, 48, 48)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(addButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(backButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,6 +320,26 @@ public class VerDomicilio extends javax.swing.JFrame {
                 precioTextField.setText(Integer.toString(precio));
                 empleadoTextField.setText(persona);
                 barrioTextField.setText(barrio);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VerDomicilio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void confirmarExistencia() {
+        String consulta = "select * from domicilio"
+                + " where Venta_ven_id = ?;";
+        PreparedStatement s;
+
+        try {
+            s = conexion.prepareStatement(consulta);
+            s.setInt(1, idVenta);
+            ResultSet resultado = s.executeQuery();
+            if (resultado.next() == false) {
+                editButton.setVisible(false);
+            } else {
+                addButton.setVisible(false);
             }
 
         } catch (SQLException ex) {
