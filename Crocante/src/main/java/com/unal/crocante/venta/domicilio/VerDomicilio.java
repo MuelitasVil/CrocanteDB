@@ -82,6 +82,11 @@ public class VerDomicilio extends javax.swing.JFrame {
         });
 
         editButton.setText("Editar");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
         backButton.setText("Volver");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -228,6 +233,11 @@ public class VerDomicilio extends javax.swing.JFrame {
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         llenarInfoDomicilios();
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        EditarDomicilio editdom = new EditarDomicilio(idVenta);
+        editdom.setVisible(true);
+    }//GEN-LAST:event_editButtonActionPerformed
 
     /**
      * @param args the command line arguments
