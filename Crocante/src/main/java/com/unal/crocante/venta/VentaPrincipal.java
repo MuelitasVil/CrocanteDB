@@ -213,8 +213,14 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_volverBtnActionPerformed
 
     private void deliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryBtnActionPerformed
-        VerDomicilio dom = new VerDomicilio();
-        dom.setVisible(true);
+        int row = ventas.getSelectedRow();
+        if (row >= 0) {
+            System.out.println(ventas.getModel().getValueAt(row, 0));
+            VerDomicilio dom = new VerDomicilio((Integer) ventas.getModel().getValueAt(row, 0));
+            dom.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ninguna venta.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_deliveryBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed

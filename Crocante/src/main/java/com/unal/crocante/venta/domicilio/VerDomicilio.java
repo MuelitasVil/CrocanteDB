@@ -5,17 +5,33 @@
  */
 package com.unal.crocante.venta.domicilio;
 
+import com.unal.crocante.MysqlConexion;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
- * @author JFCowboy
+ * @author VenusBaquero
  */
 public class VerDomicilio extends javax.swing.JFrame {
+
+    Connection conexion;
+    int idVenta;
 
     /**
      * Creates new form VerDomicilio
      */
     public VerDomicilio() {
         initComponents();
+    }
+
+    public VerDomicilio(int idVenta) {
+        this();
+        this.idVenta = idVenta;
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        conexion = conector.iniciarConexion();
+        llenarInfoDomicilios();
     }
 
     /**
@@ -28,37 +44,35 @@ public class VerDomicilio extends javax.swing.JFrame {
     private void initComponents() {
 
         deliveryText = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         timeLabel = new javax.swing.JLabel();
+        idLabel = new javax.swing.JLabel();
+        idTextField = new javax.swing.JTextField();
+        dirLabel = new javax.swing.JLabel();
+        dirTextField = new javax.swing.JTextField();
+        estadoLabel = new javax.swing.JLabel();
+        estadoTextField = new javax.swing.JTextField();
+        precioLabel = new javax.swing.JLabel();
+        precioTextField = new javax.swing.JTextField();
+        empleadoLabel = new javax.swing.JLabel();
+        empleadoTextField = new javax.swing.JTextField();
+        barrioLabel = new javax.swing.JLabel();
+        barrioTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         deliveryText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         deliveryText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         deliveryText.setText("Detalles Domicilio");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Dirección", "Estado", "Precio", "Empleado", "Barrio"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
 
         addButton.setText("Agregar");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,30 +94,82 @@ public class VerDomicilio extends javax.swing.JFrame {
         timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeLabel.setText("00:00:00");
 
+        idLabel.setText("ID:");
+
+        idTextField.setEditable(false);
+
+        dirLabel.setText("Dirección:");
+
+        dirTextField.setEditable(false);
+
+        estadoLabel.setText("Estado:");
+
+        estadoTextField.setEditable(false);
+
+        precioLabel.setText("Precio:");
+
+        precioTextField.setEditable(false);
+
+        empleadoLabel.setText("Empleado:");
+
+        empleadoTextField.setEditable(false);
+
+        barrioLabel.setText("Barrio:");
+
+        barrioTextField.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(deliveryText, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                .addGap(53, 53, 53))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(deliveryText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(addButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(backButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(idLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(dirLabel)
+                                            .addComponent(estadoLabel))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(estadoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                                            .addComponent(dirTextField))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(empleadoLabel)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(precioLabel)
+                                            .addGap(36, 36, 36)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(barrioLabel)
+                                        .addGap(37, 37, 37)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(precioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(barrioTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                    .addComponent(empleadoTextField)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(188, 188, 188)
+                                .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(48, 48, 48)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(addButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(backButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,11 +177,35 @@ public class VerDomicilio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(deliveryText)
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(precioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(precioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(empleadoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(empleadoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(barrioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(barrioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dirTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(estadoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(estadoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(32, 32, 32)
                 .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(editButton)
@@ -127,13 +217,17 @@ public class VerDomicilio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        GenerarDomicilio newdom = new GenerarDomicilio();
+        GenerarDomicilio newdom = new GenerarDomicilio(idVenta);
         newdom.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        llenarInfoDomicilios();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -173,10 +267,52 @@ public class VerDomicilio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JLabel barrioLabel;
+    private javax.swing.JTextField barrioTextField;
     private javax.swing.JLabel deliveryText;
+    private javax.swing.JLabel dirLabel;
+    private javax.swing.JTextField dirTextField;
     private javax.swing.JButton editButton;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel empleadoLabel;
+    private javax.swing.JTextField empleadoTextField;
+    private javax.swing.JLabel estadoLabel;
+    private javax.swing.JTextField estadoTextField;
+    private javax.swing.JLabel idLabel;
+    private javax.swing.JTextField idTextField;
+    private javax.swing.JLabel precioLabel;
+    private javax.swing.JTextField precioTextField;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarInfoDomicilios() {
+        String consulta = "select dom_id, dom_dirEntrega, dom_estado, dom_precio, per_nombre, bar_nombre"
+                + " from domicilio join empleado on (Empleado_emp_id = emp_id)"
+                + " join persona on (Persona_per_id = per_id)"
+                + " join barrio on (Barrio_bar_id = bar_id)"
+                + " where Venta_ven_id = ?;";
+        PreparedStatement s;
+        try {
+            s = conexion.prepareStatement(consulta);
+            s.setInt(1, idVenta);
+            ResultSet resultado = s.executeQuery();
+            if (resultado.next() != false) {
+                int id = resultado.getInt(1);
+                String direccion = resultado.getString(2);
+                String estado = resultado.getString(3);
+                int precio = resultado.getInt(4);
+                String persona = resultado.getString(5);
+                String barrio = resultado.getString(6);
+                System.out.println(String.format("%s %s %s %s %s %s", Integer.toString(id), direccion, estado, Integer.toString(precio), persona, barrio));
+                idTextField.setText(Integer.toString(id));
+                dirTextField.setText(direccion);
+                estadoTextField.setText(estado);
+                precioTextField.setText(Integer.toString(precio));
+                empleadoTextField.setText(persona);
+                barrioTextField.setText(barrio);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VerDomicilio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

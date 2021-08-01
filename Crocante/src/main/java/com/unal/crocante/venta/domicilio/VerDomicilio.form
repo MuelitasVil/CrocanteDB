@@ -8,6 +8,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowGainedFocus" listener="java.awt.event.WindowFocusListener" parameters="java.awt.event.WindowEvent" handler="formWindowGainedFocus"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -23,31 +26,71 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-              <Component id="deliveryText" pref="312" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                      <Component id="addButton" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="editButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="backButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="deliveryText" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
-                      <Component id="timeLabel" min="-2" pref="148" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="idLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="dirLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="estadoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="idTextField" min="-2" pref="69" max="-2" attributes="0"/>
+                                          <Component id="estadoTextField" pref="88" max="32767" attributes="0"/>
+                                          <Component id="dirTextField" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace pref="43" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="empleadoLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="precioLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="barrioLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="precioTextField" min="-2" pref="69" max="-2" attributes="0"/>
+                                  <Component id="barrioTextField" pref="128" max="32767" attributes="0"/>
+                                  <Component id="empleadoTextField" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
+                              <Component id="timeLabel" min="-2" pref="148" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
+              <Component id="addButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="editButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="backButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -57,11 +100,44 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="deliveryText" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="109" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="precioLabel" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="precioTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="empleadoLabel" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="empleadoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="barrioLabel" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="barrioTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="idLabel" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="idTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="dirLabel" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="dirTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="estadoLabel" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="estadoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="timeLabel" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="editButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -82,60 +158,6 @@
         <Property name="text" type="java.lang.String" value="Detalles Domicilio"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="0">
-                <Column editable="false" title="Direcci&#xf3;n" type="java.lang.Object"/>
-                <Column editable="false" title="Estado" type="java.lang.Object"/>
-                <Column editable="false" title="Precio" type="java.lang.Object"/>
-                <Column editable="false" title="Empleado" type="java.lang.Object"/>
-                <Column editable="false" title="Barrio" type="java.lang.Object"/>
-              </Table>
-            </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-              </TableColumnModel>
-            </Property>
-            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
-            </Property>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
     <Component class="javax.swing.JButton" name="addButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar"/>
@@ -164,6 +186,66 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="00:00:00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="idLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="idTextField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dirLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="dirTextField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="estadoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Estado:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="estadoTextField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="precioLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Precio:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="precioTextField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="empleadoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Empleado:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="empleadoTextField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="barrioLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Barrio:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="barrioTextField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
   </SubComponents>

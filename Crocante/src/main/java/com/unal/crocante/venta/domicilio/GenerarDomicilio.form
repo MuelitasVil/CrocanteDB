@@ -39,7 +39,7 @@
                       <Component id="cancelBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,9 +96,9 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="estadoComboBox" alignment="0" max="32767" attributes="0"/>
                       <Component id="empleadoComboBox" alignment="0" pref="102" max="32767" attributes="0"/>
-                      <Component id="barrioFormattedTextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="dirFormattedTextField" alignment="0" pref="0" max="32767" attributes="0"/>
                       <Component id="precioFormattedTextField" alignment="1" max="32767" attributes="0"/>
+                      <Component id="dirTextField" max="32767" attributes="0"/>
+                      <Component id="barrioComboBox" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               </Group>
@@ -109,7 +109,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="dirLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="dirFormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dirTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -127,9 +127,9 @@
                       <Component id="empleadoComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="barrioIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="barrioFormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="barrioIdLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="barrioComboBox" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
               </Group>
@@ -142,12 +142,7 @@
             <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="dirFormattedTextField">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="#0" subtype="-1" type="0"/>
-            </Property>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="dirTextField">
         </Component>
         <Component class="javax.swing.JLabel" name="estadoLabel">
           <Properties>
@@ -158,8 +153,8 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
-                <StringItem index="0" value="No enviado"/>
-                <StringItem index="1" value="En camino"/>
+                <StringItem index="0" value="No Enviado"/>
+                <StringItem index="1" value="En Camino"/>
                 <StringItem index="2" value="Entregado"/>
                 <StringItem index="3" value="Cancelado"/>
               </StringArray>
@@ -189,10 +184,7 @@
         <Component class="javax.swing.JComboBox" name="empleadoComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Presencial"/>
-                <StringItem index="1" value="Domicilio"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -201,15 +193,18 @@
         </Component>
         <Component class="javax.swing.JLabel" name="barrioIdLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Id Cliente:"/>
+            <Property name="text" type="java.lang.String" value="Barrio:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="barrioFormattedTextField">
+        <Component class="javax.swing.JComboBox" name="barrioComboBox">
           <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="#0" subtype="-1" type="0"/>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
