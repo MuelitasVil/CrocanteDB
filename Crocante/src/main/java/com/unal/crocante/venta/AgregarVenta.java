@@ -58,6 +58,7 @@ public class AgregarVenta extends javax.swing.JFrame {
         precioLabel.setText("Precio:");
 
         precioFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        precioFormattedTextField.setText("0");
 
         formaPagoLabel.setLabelFor(formaPagoComboBox);
         formaPagoLabel.setText("Forma de Pago:");

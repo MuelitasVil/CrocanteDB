@@ -225,6 +225,7 @@ public class VerDomicilio extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         GenerarDomicilio newdom = new GenerarDomicilio(idVenta);
         newdom.setVisible(true);
+        dispose();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

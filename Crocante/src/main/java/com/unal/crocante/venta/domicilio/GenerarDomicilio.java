@@ -230,6 +230,8 @@ public class GenerarDomicilio extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        VerDomicilio dom = new VerDomicilio(idVenta);
+        dom.setVisible(true);
         dispose();
     }//GEN-LAST:event_addBtnActionPerformed
 
