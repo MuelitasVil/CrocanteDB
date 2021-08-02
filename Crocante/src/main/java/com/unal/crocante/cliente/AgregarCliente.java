@@ -1,16 +1,27 @@
 package com.unal.crocante.cliente;
 
+import com.unal.crocante.MysqlConexion;
+import com.unal.crocante.venta.AgregarVenta;
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author VenusBaquero
  */
 public class AgregarCliente extends javax.swing.JFrame {
 
+    Connection conexion;
+
     /**
      * Creates new form AgregarCliente
      */
     public AgregarCliente() {
         initComponents();
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        conexion = conector.iniciarConexion();
     }
 
     /**
@@ -33,7 +44,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         dirLabel = new javax.swing.JLabel();
         dirTextField = new javax.swing.JTextField();
         phoneLabel = new javax.swing.JLabel();
-        idFormattedTextField4 = new javax.swing.JFormattedTextField();
+        phoneFormattedTextField = new javax.swing.JFormattedTextField();
         mailLabel = new javax.swing.JLabel();
         mailTextField = new javax.swing.JTextField();
         editText = new javax.swing.JLabel();
@@ -60,7 +71,7 @@ public class AgregarCliente extends javax.swing.JFrame {
 
         phoneLabel.setText("Teléfono:");
 
-        idFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        phoneFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         mailLabel.setText("Correo:");
 
@@ -80,7 +91,7 @@ public class AgregarCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(idFormattedTextField)
-                    .addComponent(idFormattedTextField4)
+                    .addComponent(phoneFormattedTextField)
                     .addComponent(nombreTextField)
                     .addComponent(apellidoTextField)
                     .addComponent(dirTextField)
@@ -108,7 +119,7 @@ public class AgregarCliente extends javax.swing.JFrame {
                     .addComponent(dirTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(idFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phoneFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(phoneLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -122,6 +133,11 @@ public class AgregarCliente extends javax.swing.JFrame {
         editText.setText("Agregar Cliente");
 
         addBtn.setText("Aceptar");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,6 +177,39 @@ public class AgregarCliente extends javax.swing.JFrame {
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        long id = -1;
+        String nombre = null;
+        String apellido = null;
+        String direccion = null;
+        long phone = 0;
+        String correo = null;
+        try {
+            id = Integer.parseInt(idFormattedTextField.getText());
+            nombre = nombreTextField.getText();
+            if (!(apellidoTextField.getText().equals(null))) {
+                apellido = apellidoTextField.getText();
+            }
+
+            if (!apellidoTextField.getText().equals(null)) {
+                direccion = dirTextField.getText();
+            }
+
+            if (!apellidoTextField.getText().equals(null)) {
+                phone = Integer.parseInt(phoneFormattedTextField.getText());
+            }
+
+            if (!apellidoTextField.getText().equals(null)) {
+                correo = mailTextField.getText();
+            }
+
+        } catch (NumberFormatException numberFormatException) {
+            Logger.getLogger(AgregarVenta.class.getName()).log(Level.SEVERE, null, numberFormatException);
+            JOptionPane.showMessageDialog(this, "No se insertaron datos validos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_addBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,13 +255,13 @@ public class AgregarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField dirTextField;
     private javax.swing.JLabel editText;
     private javax.swing.JFormattedTextField idFormattedTextField;
-    private javax.swing.JFormattedTextField idFormattedTextField4;
     private javax.swing.JLabel idLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel mailLabel;
     private javax.swing.JTextField mailTextField;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField nombreTextField;
+    private javax.swing.JFormattedTextField phoneFormattedTextField;
     private javax.swing.JLabel phoneLabel;
     // End of variables declaration//GEN-END:variables
 }

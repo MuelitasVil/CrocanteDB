@@ -179,7 +179,7 @@ public class AgregarPedido extends javax.swing.JFrame {
         if (row >= 0) {
             int producto = (int) menu.getModel().getValueAt(row, 0);
             System.out.println(producto);
-            int cedula = obtenerCedula();
+            long cedula = obtenerCedula();
 
             String queryInsert = "insert into pedido values (" + producto + "," + idVenta + "," + cedula + ");";
             PreparedStatement s;
@@ -195,8 +195,8 @@ public class AgregarPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addBtnActionPerformed
 
-    private int obtenerCedula() {
-        int cc = -1;
+    private long obtenerCedula() {
+        long cc = -1;
         String queryGetCc = "select get_CC_venta(" + idVenta + ");";
         PreparedStatement s;
         try {
