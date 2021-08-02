@@ -68,7 +68,7 @@ public class AgregarVenta extends javax.swing.JFrame {
         estadoPagoLabel.setLabelFor(estadoPagoComboBox);
         estadoPagoLabel.setText("Estado del pago:");
 
-        estadoPagoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No pago", "Pagado", " " }));
+        estadoPagoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No pago", "Pagado" }));
 
         modalidadLabel.setText("Modalidad:");
 

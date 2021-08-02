@@ -42,7 +42,7 @@ BEGIN
     WHERE Venta_ven_id=NEW.Venta_ven_id;
     
     SELECT ven_modalidad INTO modalidad FROM pedido JOIN venta ON (ven_id = Venta_ven_id)
-    WHERE ven_id = NEW.Venta_ven_id;
+    WHERE ven_id = NEW.Venta_ven_id limit 1;
     
     IF (modalidad = 'Domicilio') THEN
 		UPDATE Venta SET ven_precioTotal = (total+2000) WHERE ven_id = NEW.Venta_ven_id;
@@ -64,7 +64,7 @@ BEGIN
     WHERE Venta_ven_id=OLD.Venta_ven_id;
     
 	SELECT ven_modalidad INTO modalidad FROM pedido JOIN venta ON (ven_id = Venta_ven_id)
-    WHERE ven_id = OLD.Venta_ven_id;
+    WHERE ven_id = OLD.Venta_ven_id limit 1;
     
 	IF (modalidad = 'Domicilio') THEN
 		UPDATE Venta SET ven_precioTotal = (total+2000) WHERE ven_id = OLD.Venta_ven_id;
@@ -110,5 +110,30 @@ BEGIN
     SELECT Venta_ven_id INTO id FROM Domicilio WHERE dom_id = NEW.dom_id;
 	UPDATE Venta SET ven_precioTotal = ven_precioTotal + 2000 where ven_id = id;
     UPDATE Venta SET ven_modalidad = 'Domicilio' WHERE ven_id = id;
+END $$
+DELIMITER ;
+
+
+DROP FUNCTION IF EXISTS get_delivery_time;
+DELIMITER $$
+CREATE FUNCTION get_delivery_time (idVenta INT) RETURNS TIME 
+BEGIN 
+	DECLARE inicio TIME;
+    SELECT TIME(ven_fecha) INTO inicio FROM Venta WHERE ven_id = idVenta;
+	RETURN SUBTIME(CURTIME(), inicio);
+END $$
+DELIMITER ;
+
+SELECT get_delivery_time(11);
+
+DROP PROCEDURE IF EXISTS stop_domicilio;
+DELIMITER $$
+CREATE PROCEDURE stop_domicilio (IN idVenta INT)
+BEGIN 
+	DECLARE estado VARCHAR(30);
+    SELECT dom_estado INTO estado FROM Domicilio WHERE Venta_ven_id = idVenta;
+	IF (estado = 'Entregado' or estado = 'Cancelado')THEN
+		UPDATE Domicilio SET dom_tiempoEntrega = (select get_delivery_time(Venta_ven_id)) WHERE Venta_ven_id = idVenta;
+    END IF;
 END $$
 DELIMITER ;
