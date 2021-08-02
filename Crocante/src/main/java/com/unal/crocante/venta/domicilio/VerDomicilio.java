@@ -334,6 +334,7 @@ public class VerDomicilio extends javax.swing.JFrame {
                     th.start();
 
                 } else {
+                    editButton.setEnabled(false);
                     setTimeLabel(resultado.getString(7));
                     actualizarTimeLabel();
                 }

@@ -232,6 +232,17 @@ public class EditarDomicilio extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        String finish = "call stop_domicilio(?);";
+        PreparedStatement f;
+        try {
+            f = conexion.prepareStatement(finish);
+            f.setInt(1, idVenta);
+            int result = f.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         dispose();
     }//GEN-LAST:event_addBtnActionPerformed
 
