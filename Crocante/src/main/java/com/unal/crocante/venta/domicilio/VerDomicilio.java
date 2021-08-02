@@ -7,6 +7,8 @@ package com.unal.crocante.venta.domicilio;
 
 import com.unal.crocante.MysqlConexion;
 import java.sql.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +20,8 @@ public class VerDomicilio extends javax.swing.JFrame {
 
     Connection conexion;
     int idVenta;
+    private int h, m, s;
+    boolean test = true;
 
     /**
      * Creates new form VerDomicilio
@@ -32,7 +36,6 @@ public class VerDomicilio extends javax.swing.JFrame {
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         conexion = conector.iniciarConexion();
         confirmarExistencia();
-        llenarInfoDomicilios();
     }
 
     /**
@@ -229,14 +232,17 @@ public class VerDomicilio extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        test = false;
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        test = true;
         llenarInfoDomicilios();
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        test = false;
         EditarDomicilio editdom = new EditarDomicilio(idVenta);
         editdom.setVisible(true);
     }//GEN-LAST:event_editButtonActionPerformed
@@ -297,7 +303,7 @@ public class VerDomicilio extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void llenarInfoDomicilios() {
-        String consulta = "select dom_id, dom_dirEntrega, dom_estado, dom_precio, per_nombre, bar_nombre"
+        String consulta = "select dom_id, dom_dirEntrega, dom_estado, dom_precio, per_nombre, bar_nombre, dom_tiempoEntrega"
                 + " from domicilio join empleado on (Empleado_emp_id = emp_id)"
                 + " join persona on (Persona_per_id = per_id)"
                 + " join barrio on (Barrio_bar_id = bar_id)"
@@ -321,6 +327,17 @@ public class VerDomicilio extends javax.swing.JFrame {
                 precioTextField.setText(Integer.toString(precio));
                 empleadoTextField.setText(persona);
                 barrioTextField.setText(barrio);
+
+                if (resultado.getString(7) == null) {
+
+                    HiloTimer th = new HiloTimer();
+                    th.start();
+
+                } else {
+                    setTimeLabel(resultado.getString(7));
+                    actualizarTimeLabel();
+                }
+
             }
 
         } catch (SQLException ex) {
@@ -345,6 +362,61 @@ public class VerDomicilio extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             Logger.getLogger(VerDomicilio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void startTimer() {
+        String tiempo;
+        String consulta = "select get_delivery_time(?);";
+        PreparedStatement s;
+        try {
+            s = conexion.prepareStatement(consulta);
+            s.setInt(1, idVenta);
+            ResultSet resultado = s.executeQuery();
+            resultado.next();
+            tiempo = resultado.getString(1);
+            setTimeLabel(tiempo);
+        } catch (SQLException ex) {
+            Logger.getLogger(VerDomicilio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void setTimeLabel(String tiempo) {
+        List<String> domTime = Arrays.asList(tiempo.split(":"));
+        h = Integer.parseInt(domTime.get(0));
+        m = Integer.parseInt(domTime.get(1));
+        s = Integer.parseInt(domTime.get(2));
+
+    }
+
+    private void actualizarTimeLabel() {
+        String time = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s;
+        timeLabel.setText(time);
+    }
+
+    public class HiloTimer extends Thread {
+
+        @Override
+        public void run() {
+            startTimer();
+            while (test) {
+                try {
+                    this.sleep(1000);
+                    ++s;
+                    if (s == 60) {
+                        s = 0;
+                        ++m;
+                    }
+                    if (m == 60) {
+                        m = 0;
+                        ++h;
+                    }
+                    actualizarTimeLabel();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(VerDomicilio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }
     }
 }
