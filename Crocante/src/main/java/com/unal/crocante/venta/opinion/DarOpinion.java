@@ -244,7 +244,7 @@ public class DarOpinion extends javax.swing.JFrame {
 
         int stars = starSlider.getValue();
         String comment = commentTextArea.getText();
-        int cc = -1;
+        long cc = -1;
         int idComment = -1;
 
         String getCC = "select Persona_per_id from Venta where ven_id = " + idVenta + ";";
@@ -253,7 +253,7 @@ public class DarOpinion extends javax.swing.JFrame {
             s = conexion.prepareStatement(getCC);
             ResultSet cedula = s.executeQuery();
             cedula.next();
-            cc = cedula.getInt(1);
+            cc = cedula.getLong(1);
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

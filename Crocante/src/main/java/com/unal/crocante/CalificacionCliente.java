@@ -63,7 +63,6 @@ public class CalificacionCliente extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         calificacion = new javax.swing.JTable();
         jSeparator5 = new javax.swing.JSeparator();
-        jButton5 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,8 +81,9 @@ public class CalificacionCliente extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(390, 403));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Calificacion del Producto");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
         jButton1.setText("Ir a Comentario");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -107,10 +107,10 @@ public class CalificacionCliente extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 90, 20));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 90, 20));
 
         jLabel6.setText("Producto");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
 
         estrellas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "5", "4", "3", "2", "1" }));
         estrellas.addActionListener(new java.awt.event.ActionListener() {
@@ -118,22 +118,22 @@ public class CalificacionCliente extends javax.swing.JFrame {
                 estrellasActionPerformed(evt);
             }
         });
-        getContentPane().add(estrellas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
+        getContentPane().add(estrellas, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
 
         jLabel8.setText("Num estrellas");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 20));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, 20));
 
-        getContentPane().add(ComboProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 110, -1));
+        getContentPane().add(ComboProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 110, -1));
 
         jLabel11.setText("Tipo Producto");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, -1));
 
         ComboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboTipoActionPerformed(evt);
             }
         });
-        getContentPane().add(ComboTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 110, -1));
+        getContentPane().add(ComboTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 110, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
         getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
         getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, 130));
@@ -164,16 +164,8 @@ public class CalificacionCliente extends javax.swing.JFrame {
             calificacion.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 440, 150));
-        getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 440, 10));
-
-        jButton5.setText("Mejores Productos");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, -1, -1));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 140));
+        getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 470, 10));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -299,12 +291,6 @@ public class CalificacionCliente extends javax.swing.JFrame {
             Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ComboTipoActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    CalificacionPromedio m = new CalificacionPromedio();
-    m.setVisible(true);
-               // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 //try {
@@ -432,7 +418,6 @@ public class CalificacionCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel6;

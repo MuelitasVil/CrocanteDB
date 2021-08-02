@@ -183,13 +183,13 @@ public class AgregarVenta extends javax.swing.JFrame {
         String formaPago = null;
         String estadoPago = null;
         String modalidad = null;
-        int id = 0;
+        long id = 0;
         try {
             precio = Integer.parseInt(precioFormattedTextField.getText());
             formaPago = formaPagoComboBox.getSelectedItem().toString();
             estadoPago = estadoPagoComboBox.getSelectedItem().toString();
             modalidad = modalidadComboBox.getSelectedItem().toString();
-            id = Integer.parseInt(idFormattedTextField.getText());
+            id = Long.parseLong(idFormattedTextField.getText());
 
         } catch (NumberFormatException numberFormatException) {
             Logger.getLogger(AgregarVenta.class.getName()).log(Level.SEVERE, null, numberFormatException);

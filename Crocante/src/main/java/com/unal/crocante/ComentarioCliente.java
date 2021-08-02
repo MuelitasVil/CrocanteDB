@@ -6,6 +6,7 @@
 package com.unal.crocante;
 
 import com.mysql.cj.util.StringUtils;
+import com.unal.crocante.venta.VentaPrincipal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -51,6 +52,7 @@ Connection conexion;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("COMENTARIOS");
 
         jButton2.setText("Volver");
@@ -124,7 +126,7 @@ Connection conexion;
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
+                        .addGap(147, 147, 147)
                         .addComponent(jLabel1)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -139,7 +141,7 @@ Connection conexion;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
@@ -171,8 +173,8 @@ Connection conexion;
             s = conexion.prepareStatement(consulta);
             ResultSet resultado = s.executeQuery();
             while (resultado.next()) {
-                Date fecha = resultado.getDate(2);
-                String des = resultado.getString(1);
+                Date fecha = resultado.getDate(1);
+                String des = resultado.getString(2);
                 
 
                 System.out.println(String.format("%s %s", fecha.toString(), des.toString()));
@@ -187,7 +189,9 @@ Connection conexion;
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        VentaPrincipal m = new VentaPrincipal();
+        m.setVisible(true);
+        dispose();          // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
