@@ -21,12 +21,15 @@ import javax.swing.table.DefaultTableModel;
  * @author Manuel Martinez
  */
 public class ComentarioCliente extends javax.swing.JFrame {
-
+Connection conexion;
     /**
      * Creates new form Clientes_Cometarios
      */
     public ComentarioCliente() {
         initComponents();
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        conexion = conector.iniciarConexion();        
+        cargarTabla();
     }
 
     /**
@@ -42,18 +45,9 @@ public class ComentarioCliente extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        IDComentario = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        IDPersona = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        IDVenta = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Descripcion = new javax.swing.JTextArea();
-        jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         Comentario = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,32 +67,12 @@ public class ComentarioCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Buscar");
+        jButton4.setText("Comentarios recientes");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-
-        jButton5.setText("Insertar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("IDComentario");
-
-        jLabel9.setText("IDPersona");
-
-        jLabel8.setText("IDVenta");
-
-        Descripcion.setColumns(20);
-        Descripcion.setRows(5);
-        Descripcion.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane2.setViewportView(Descripcion);
-
-        jLabel11.setText("Descripción");
 
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -107,11 +81,11 @@ public class ComentarioCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Comentario"
+                "Fecha", "Comentario"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -119,6 +93,17 @@ public class ComentarioCliente extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(Comentario);
+        if (Comentario.getColumnModel().getColumnCount() > 0) {
+            Comentario.getColumnModel().getColumn(0).setResizable(false);
+            Comentario.getColumnModel().getColumn(0).setPreferredWidth(5);
+        }
+
+        jButton1.setText("Nuevo Comentario");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,88 +112,45 @@ public class ComentarioCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(IDComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(IDPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel8)
-                                .addGap(24, 24, 24)
-                                .addComponent(IDVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
                         .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(110, 110, 110))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 86, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(114, 114, 114))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel9))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(IDComentario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(IDPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel8)
-                    .addComponent(IDVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jButton4)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
                     .addComponent(jButton3))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     MenuCliente m = new MenuCliente();
-          m.setVisible(true); 
-          dispose();        // TODO add your handling code here:
+    dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -218,113 +160,35 @@ public class ComentarioCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try {
-            DefaultTableModel model = (DefaultTableModel) Comentario.getModel();
+           DefaultTableModel model = (DefaultTableModel) Comentario.getModel();
             while (model.getRowCount() > 0) {
                 model.setRowCount(0);
             }
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
-        Connection conexion = conector.iniciarConexion();
+            String consulta = "SELECT * FROM vw_recent_coments;";
 
-        
-
-        int IDCom = -5;
-        int IDPer = -3;
-        int IDVen = 1;
-        int IDPro = -1;
-        
-
-        if (!StringUtils.isNullOrEmpty(IDComentario.getText())) {
-            IDCom = Integer.parseInt(IDComentario.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(IDPersona.getText())) {
-            IDPer = Integer.parseInt(IDPersona.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(IDVenta.getText())) {
-            IDVen = Integer.parseInt(IDVenta.getText());
-        }
-       
-
-        String Descrip = Descripcion.toString();
-
-        
-
-        String consulta = "select com_descripcion from Comentario where com_id LIke '" + IDCom + "' OR com_descripcion Like '" + Descrip + "'OR Persona_per_id like '" + IDPer + "' OR Venta_ven_id Like '" + IDVen + "';";
-        PreparedStatement s;
-        try {
+            PreparedStatement s;
+            try {
             s = conexion.prepareStatement(consulta);
             ResultSet resultado = s.executeQuery();
             while (resultado.next()) {
-               
-                String D = resultado.getString(1);
+                Date fecha = resultado.getDate(2);
+                String des = resultado.getString(1);
                 
-                
-                System.out.println(String.format("%s",D));
-                DefaultTableModel model = (DefaultTableModel) Comentario.getModel();
-                model.addRow(new Object[]{D});
+
+                System.out.println(String.format("%s %s", fecha.toString(), des.toString()));
+                DefaultTableModel model1 = (DefaultTableModel) Comentario.getModel();
+                model1.addRow(new Object[]{fecha,des});
             }
 
-        } catch (SQLException ex) {
+            } catch (SQLException ex) {
             Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }       
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-         //INSERTAR****************
-         try {
-            DefaultTableModel model = (DefaultTableModel) Comentario.getModel();
-            while (model.getRowCount() > 0) {
-                model.setRowCount(0);
-            }
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
-        Connection conexion = conector.iniciarConexion();
-
-        
-
-        int IDCom = 0;
-        int IDPer = 0;
-        int IDVen = 1;
-        int IDPro = -1;
-        
-
-        if (!StringUtils.isNullOrEmpty(IDComentario.getText())) {
-            IDCom = Integer.parseInt(IDComentario.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(IDPersona.getText())) {
-            IDPer = Integer.parseInt(IDPersona.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(IDVenta.getText())) {
-            IDVen = Integer.parseInt(IDVenta.getText());
-        }
-       
-
-        String Descrip = Descripcion.toString();   
-                      
-          String consulta = "insert into comentario(com_id, com_descripcion, Persona_per_id, Venta_ven_id) "
-                + " values ('" + IDCom + "', '" + Descrip + "', '" + IDPer + "', '" + IDVen + "');";
-          
-        System.out.println(consulta);
-
-        PreparedStatement s;
-        try {
-            s = conexion.prepareStatement(consulta);
-            int resultado = s.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Registro satisfactorio", "Exito", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(ComentarioCliente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Imposible añadir el registro", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,23 +231,37 @@ public class ComentarioCliente extends javax.swing.JFrame {
             }
         });
     }
+        private void cargarTabla() {
+        String consulta = "SELECT * FROM vw_Comentario;";
 
+            PreparedStatement s;
+            try {
+            s = conexion.prepareStatement(consulta);
+            ResultSet resultado = s.executeQuery();
+            while (resultado.next()) {
+                Date fecha = resultado.getDate(2);
+                String des = resultado.getString(1);
+                
+
+                System.out.println(String.format("%s %s", fecha.toString(), des.toString()));
+                DefaultTableModel model = (DefaultTableModel) Comentario.getModel();
+                model.addRow(new Object[]{fecha,des});
+            }
+
+            } catch (SQLException ex) {
+            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Comentario;
-    private javax.swing.JTextArea Descripcion;
-    private javax.swing.JTextField IDComentario;
-    private javax.swing.JTextField IDPersona;
-    private javax.swing.JTextField IDVenta;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

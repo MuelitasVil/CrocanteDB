@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 import java.util.Properties;
 import javax.swing.table.DefaultTableModel;
@@ -21,13 +23,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Manuel Martinez
  */
 public class CalificacionCliente extends javax.swing.JFrame {
-
+    Connection conexion;
     /**
      * Creates new form Clientes_Calificacion
      */
     public CalificacionCliente() {
-        initComponents();       
-        
+        initComponents();  
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        conexion = conector.iniciarConexion();
+        cargarTipos();
+        cargarTabla();
     }
 
     /**
@@ -42,27 +47,23 @@ public class CalificacionCliente extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        calificacion = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        Fecha = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        IDComentario = new javax.swing.JTextField();
         estrellas = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        ComboProducto = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        ComboTipo = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        calificacion = new javax.swing.JTable();
+        jSeparator5 = new javax.swing.JSeparator();
         jButton5 = new javax.swing.JButton();
-        IDCalificacion = new javax.swing.JFormattedTextField();
-        jLabel9 = new javax.swing.JLabel();
-        IDPersona = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        IDProducto = new javax.swing.JTextField();
-        ProductoText4 = new javax.swing.JTextField();
-        productoText1 = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,16 +79,11 @@ public class CalificacionCliente extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(390, 403));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Calificacion del Producto");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 11, -1, -1));
-
-        jLabel2.setText("Fecha");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
-
-        jLabel3.setText("IDCalificación");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
         jButton1.setText("Ir a Comentario");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -95,29 +91,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 110, -1));
-
-        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        calificacion.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "IDCalificación", "Estrellas", "Fecha", "IDPersona", "IDComentario", "IDProducto"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(calificacion);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 370, 120));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 110, -1));
 
         jButton3.setLabel("Volver");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +99,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 110, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 110, -1));
 
         jButton4.setText("Buscar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -133,26 +107,10 @@ public class CalificacionCliente extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 90, -1));
-
-        Fecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("26-07-2021"))));
-        Fecha.setText("2021-07-26");
-        Fecha.setToolTipText("");
-        Fecha.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        Fecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FechaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 80, 20));
-        Fecha.getAccessibleContext().setAccessibleName("");
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 90, 20));
 
         jLabel6.setText("Producto");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
-
-        jLabel7.setText("IDComentario");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-        getContentPane().add(IDComentario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 80, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
         estrellas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "5", "4", "3", "2", "1" }));
         estrellas.addActionListener(new java.awt.event.ActionListener() {
@@ -160,29 +118,62 @@ public class CalificacionCliente extends javax.swing.JFrame {
                 estrellasActionPerformed(evt);
             }
         });
-        getContentPane().add(estrellas, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
+        getContentPane().add(estrellas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
 
         jLabel8.setText("Num estrellas");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, 20));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 20));
 
-        jButton5.setText("Insertar");
+        getContentPane().add(ComboProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 110, -1));
+
+        jLabel11.setText("Tipo Producto");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        ComboTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboTipoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ComboTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 110, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, 130));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 370, 0));
+
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        calificacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Fecha", "Estrellas", "Cédula", "Producto", "Precio", "Tipo", "Estado producto"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(calificacion);
+        if (calificacion.getColumnModel().getColumnCount() > 0) {
+            calificacion.getColumnModel().getColumn(1).setResizable(false);
+            calificacion.getColumnModel().getColumn(2).setResizable(false);
+            calificacion.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 440, 150));
+        getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 440, 10));
+
+        jButton5.setText("Mejores Productos");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 90, -1));
-        getContentPane().add(IDCalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 80, -1));
-
-        jLabel9.setText("IDPersona");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
-        getContentPane().add(IDPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 80, -1));
-
-        jLabel10.setText("IDProducto");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
-        getContentPane().add(IDProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 70, -1));
-        getContentPane().add(ProductoText4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 80, -1));
-        getContentPane().add(productoText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 80, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -206,130 +197,114 @@ public class CalificacionCliente extends javax.swing.JFrame {
         }
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         Connection conexion = conector.iniciarConexion();
-
-        String Productoname = productoText1.toString();
-
-        int IDCal = 0;
-        int IDPer = 0;
-        int IDPro = 1;
-        int IDCom = -1;
         int num = 6;
-
-        if (!StringUtils.isNullOrEmpty(IDCalificacion.getText())) {
-            IDCal = Integer.parseInt(IDCalificacion.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(IDPersona.getText())) {
-            IDPer = Integer.parseInt(IDPersona.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(IDProducto.getText())) {
-            IDPro = Integer.parseInt(IDProducto.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(IDComentario.getText())) {
-            IDCom = Integer.parseInt(IDComentario.getText());
-        }
-
+          
+        String TipoPro = ComboProducto.getSelectedItem().toString();
+        String NombrePro = ComboProducto.getSelectedItem().toString();
         String Estrellas = estrellas.getSelectedItem().toString();
-
-        if (!StringUtils.isNullOrEmpty(Estrellas)) {
+        
+             
+         
+                    
+            if (!StringUtils.isNullOrEmpty(Estrellas)) {
             num = Integer.parseInt(Estrellas);
-        }
+            
 
-        String consulta = "select * from calificación where cal_id LIke '" + IDCal + "' OR cal_estrellas Like '" + num + "' OR cal_fecha Like '2021-08-05'"
-                + "OR Persona_per_id like '" + IDPer + "' OR Comentario_com_id Like '" + IDCom + "' OR Producto_pro_id Like '" + IDPro + "';";
+            String consulta = "select cal_fecha, cal_estrellas, Persona_per_id, pro_nombre, pro_precio, tip_tipo, pro_estado from calificación Join producto on (calificación.Producto_pro_id=producto.pro_id) Join tipo on (producto.Tipo_tip_id=Tipo.tip_id) where cal_estrellas Like '" + num + "' AND Producto.pro_nombre Like '" +NombrePro+ "';";
 
-        PreparedStatement s;
-        try {
+            PreparedStatement s;
+            try {
             s = conexion.prepareStatement(consulta);
             ResultSet resultado = s.executeQuery();
             while (resultado.next()) {
-                int idcal = resultado.getInt(1);
+                Date fecha = resultado.getDate(1);
                 int star = resultado.getInt(2);
-                Date fecha1 = resultado.getDate(3);
-                int idperso = resultado.getInt(4);
-                int idcomen = resultado.getInt(5);
-                int idproducto = resultado.getInt(6);
+                int perso = resultado.getInt(3);
+                String pro = resultado.getString(4);
+                int precio = resultado.getInt(5);
+                String tipo = resultado.getString(6);
+                int pro_estado = resultado.getInt(7);
 
-                System.out.println(String.format("%s %s %s %s %s", Integer.toString(idcal), Integer.toString(star), fecha1.toString(), Integer.toString(idperso), Integer.toString(idcomen), Integer.toString(idproducto)));
+                System.out.println(String.format("%s %s %s %s %s %s %s", fecha.toString(), Integer.toString(star), Integer.toString(perso), pro.toString(), Integer.toString(precio), tipo.toString() ,Integer.toString(pro_estado)));
                 DefaultTableModel model = (DefaultTableModel) calificacion.getModel();
-                model.addRow(new Object[]{idcal, star, fecha1, idperso, idcomen, idproducto});
+                model.addRow(new Object[]{fecha, star,perso, pro, precio, tipo, pro_estado});
+            }
+
+            } catch (SQLException ex) {
+            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+            else
+            {
+             String consulta = "select cal_fecha, cal_estrellas, Persona_per_id, pro_nombre, pro_precio, tip_tipo, pro_estado from calificación Join producto on (calificación.Producto_pro_id=producto.pro_id) Join tipo on (producto.Tipo_tip_id=Tipo.tip_id) where Producto.pro_nombre Like '" +NombrePro+ "';";
+
+            PreparedStatement s;
+            try {
+            s = conexion.prepareStatement(consulta);
+            ResultSet resultado = s.executeQuery();
+            while (resultado.next()) {
+                Date fecha = resultado.getDate(1);
+                int star = resultado.getInt(2);
+                int perso = resultado.getInt(3);
+                String pro = resultado.getString(4);
+                int precio = resultado.getInt(5);
+                String tipo = resultado.getString(6);
+                int pro_estado = resultado.getInt(7);
+
+                System.out.println(String.format("%s %s %s %s %s %s %s", fecha.toString(), Integer.toString(star), Integer.toString(perso), pro.toString(), Integer.toString(precio), tipo.toString() ,Integer.toString(pro_estado)));
+                DefaultTableModel model = (DefaultTableModel) calificacion.getModel();
+                model.addRow(new Object[]{fecha, star,perso, pro, precio, tipo, pro_estado});
+            }
+
+            } catch (SQLException ex) {
+            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+            
+             
+             
+         
+         
+         
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void estrellasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estrellasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_estrellasActionPerformed
+
+    private void ComboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboTipoActionPerformed
+        ComboProducto.removeAllItems();
+        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
+        Connection conexion = conector.iniciarConexion();  
+        
+        String Tipo = ComboTipo.getSelectedItem().toString();// TODO add your handling code here:
+        String consulta = "select pro_nombre from producto Join tipo on (producto.Tipo_tip_id=Tipo.tip_id) where Tipo.tip_tipo='" + Tipo + "';";
+        PreparedStatement s;
+        try {
+            System.out.println(consulta);
+            s = conexion.prepareStatement(consulta);
+            System.out.println(s);
+            ResultSet resultado = s.executeQuery();
+            while (resultado.next()) {
+                String Menu = resultado.getString(1);
+                System.out.println(Menu);
+                ComboProducto.addItem(Menu);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void FechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FechaActionPerformed
-        //
-        //import java.util.Date;
-
-        //Date d = new Date();        // TODO add your handling code here:
-    }//GEN-LAST:event_FechaActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        MenuCliente m = new MenuCliente();
-        m.setVisible(true);
-        dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_ComboTipoActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
-        Connection conexion = conector.iniciarConexion();
-
-        String Productoname = productoText1.toString();
-
-        int IDCal = 0;
-        int IDPer = 0;
-        int IDPro = 1;
-        int IDCom = -1;
-        int num = 6;
-
-        if (!StringUtils.isNullOrEmpty(IDCalificacion.getText())) {
-            IDCal = Integer.parseInt(IDCalificacion.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(IDPersona.getText())) {
-            IDPer = Integer.parseInt(IDPersona.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(IDProducto.getText())) {
-            IDPro = Integer.parseInt(IDProducto.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(IDComentario.getText())) {
-            IDCom = Integer.parseInt(IDComentario.getText());
-        }
-
-        String Estrellas = estrellas.getSelectedItem().toString();
-
-        if (!StringUtils.isNullOrEmpty(Estrellas)) {
-            num = Integer.parseInt(Estrellas);
-        }
-
-        String consulta = "insert into calificación(cal_id, cal_estrellas, cal_fecha, Persona_per_id, Comentario_com_id,Producto_pro_id) "
-                + "        values ('" + IDCal + "', '" + num + "', curdate(), '" + IDPer + "', '" + IDCom + "', " + IDPro + ");";
-        System.out.println(consulta);
-
-        PreparedStatement s;
-        try {
-            s = conexion.prepareStatement(consulta);
-            int resultado = s.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Registro satisfactorio", "Exito", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(ComentarioCliente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Imposible añadir el registro", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        // TODO add your handling code here:
+    CalificacionPromedio m = new CalificacionPromedio();
+    m.setVisible(true);
+               // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void estrellasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estrellasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_estrellasActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 //try {
@@ -401,14 +376,57 @@ public class CalificacionCliente extends javax.swing.JFrame {
             }
         });
     }
+        private void cargarTipos() {
+        String tipo = "select tip_tipo from Tipo;";
+        PreparedStatement s;
+        try {
+            System.out.println(tipo);
+            s = conexion.prepareStatement(tipo);
+            System.out.println(s);
+            ResultSet resultado = s.executeQuery();
+            while (resultado.next()) {
+                String Menu = resultado.getString(1);
+                System.out.println(Menu);
+                ComboTipo.addItem(Menu);
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
+        
+        
+        
+        private void cargarTabla() {
+        String consulta = "select cal_fecha, cal_estrellas, Persona_per_id, pro_nombre, pro_precio, tip_tipo, pro_estado from calificación Join producto on (calificación.Producto_pro_id=producto.pro_id) Join tipo on (producto.Tipo_tip_id=Tipo.tip_id);";
+
+            PreparedStatement s;
+            try {
+            s = conexion.prepareStatement(consulta);
+            ResultSet resultado = s.executeQuery();
+            while (resultado.next()) {
+                Date fecha = resultado.getDate(1);
+                int star = resultado.getInt(2);
+                int perso = resultado.getInt(3);
+                String pro = resultado.getString(4);
+                int precio = resultado.getInt(5);
+                String tipo = resultado.getString(6);
+                int pro_estado = resultado.getInt(7);
+
+                System.out.println(String.format("%s %s %s %s %s %s %s", fecha.toString(), Integer.toString(star), Integer.toString(perso), pro.toString(), Integer.toString(precio), tipo.toString() ,Integer.toString(pro_estado)));
+                DefaultTableModel model = (DefaultTableModel) calificacion.getModel();
+                model.addRow(new Object[]{fecha, star,perso, pro, precio, tipo, pro_estado});
+            }
+
+            } catch (SQLException ex) {
+            Logger.getLogger(CalificacionCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField Fecha;
-    private javax.swing.JFormattedTextField IDCalificacion;
-    private javax.swing.JTextField IDComentario;
-    private javax.swing.JTextField IDPersona;
-    private javax.swing.JTextField IDProducto;
-    private javax.swing.JTextField ProductoText4;
+    private javax.swing.JComboBox<String> ComboProducto;
+    private javax.swing.JComboBox<String> ComboTipo;
     private javax.swing.JTable calificacion;
     private javax.swing.JComboBox<String> estrellas;
     private javax.swing.JButton jButton1;
@@ -416,16 +434,16 @@ public class CalificacionCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField productoText1;
     // End of variables declaration//GEN-END:variables
 }
