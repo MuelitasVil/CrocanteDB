@@ -6,7 +6,6 @@
 package com.unal.crocante;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,13 +26,13 @@ public class LocalProveedorInsumo extends javax.swing.JFrame {
         initComponents();
 
         String matris[][] = new String[20][4];
-        
+
         matris[0][0] = "";
         matris[0][1] = "";
         matris[0][2] = "";
         matris[0][3] = "";
-        
-                            jTable1.setModel(new javax.swing.table.DefaultTableModel(
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 matris,
                 new String[]{
                     "Nombre del Proveedor", "ID insumo", "Nombre Insumo", "Cantidad",}));
@@ -65,6 +64,7 @@ public class LocalProveedorInsumo extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(580, 630));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -90,8 +90,9 @@ public class LocalProveedorInsumo extends javax.swing.JFrame {
         });
         getContentPane().add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 120, 30));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Insumo Proveedor");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 12, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
         getContentPane().add(id_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 230, 32));
 
         jLabel2.setText("Id :");
@@ -226,7 +227,7 @@ public class LocalProveedorInsumo extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

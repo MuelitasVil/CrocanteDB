@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.unal.crocante;
 
 import com.mysql.cj.jdbc.CallableStatement;
@@ -25,7 +21,7 @@ public class LocalEmpleado extends javax.swing.JFrame {
      */
     public LocalEmpleado() {
         initComponents();
-        
+
         MysqlConexion conexion = new MysqlConexion();
 
         String usuario = "Venus";
@@ -45,7 +41,7 @@ public class LocalEmpleado extends javax.swing.JFrame {
             String matris[][] = new String[num_gastos][6];
 
             Statement s = conectar.createStatement();
-            ResultSet rs = s.executeQuery("select emp_id, concat(per_nombre,'"+" "+"', per_apellido) , emp_horasSemanales, sal_valor,Sede_sede_id  from Empleado join Cargo on (Cargo_car_id = car_id) join Persona on (Persona_per_id = per_id) join Salario on (Empleado_emp_id = emp_id) where emp_estado = 1;");
+            ResultSet rs = s.executeQuery("select emp_id, concat(per_nombre,'" + " " + "', per_apellido) , emp_horasSemanales, sal_valor,Sede_sede_id  from Empleado join Cargo on (Cargo_car_id = car_id) join Persona on (Persona_per_id = per_id) join Salario on (Empleado_emp_id = emp_id) where emp_estado = 1;");
 
 // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
             int i = 0;
@@ -67,7 +63,7 @@ public class LocalEmpleado extends javax.swing.JFrame {
             jTable1.setModel(new javax.swing.table.DefaultTableModel(
                     matris,
                     new String[]{
-                        "ID", "Nombre del Empleado", "horas semanales","Salario","sede"
+                        "ID", "Nombre del Empleado", "horas semanales", "Salario", "sede"
                     }));
 
         } catch (SQLException sqle) {
@@ -128,6 +124,7 @@ public class LocalEmpleado extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Empleados");
 
         jButton2.setText("Atras");
@@ -160,14 +157,15 @@ public class LocalEmpleado extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(118, 118, 118)
+                                .addComponent(Pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(213, 213, 213)
+                                .addComponent(jLabel1)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(Pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -194,7 +192,7 @@ public class LocalEmpleado extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jButton2)
-                    .addContainerGap(492, Short.MAX_VALUE)))
+                    .addContainerGap(500, Short.MAX_VALUE)))
         );
 
         pack();
@@ -211,7 +209,7 @@ public class LocalEmpleado extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-       MysqlConexion conexion = new MysqlConexion();
+        MysqlConexion conexion = new MysqlConexion();
 
         String usuario = "Venus";
         String apellido = "Baquero";
@@ -230,12 +228,12 @@ public class LocalEmpleado extends javax.swing.JFrame {
             String matris[][] = new String[num_gastos][6];
 
             Statement s = conectar.createStatement();
-            ResultSet rs = s.executeQuery("select emp_id, concat(per_nombre,'"+" "+"', per_apellido) , emp_horasSemanales, sal_valor,Sede_sede_id  from Empleado join Cargo on (Cargo_car_id = car_id) join Persona on (Persona_per_id = per_id) join Salario on (Empleado_emp_id = emp_id) where emp_estado = 1;");
+            ResultSet rs = s.executeQuery("select emp_id, concat(per_nombre,'" + " " + "', per_apellido) , emp_horasSemanales, sal_valor,Sede_sede_id  from Empleado join Cargo on (Cargo_car_id = car_id) join Persona on (Persona_per_id = per_id) join Salario on (Empleado_emp_id = emp_id) where emp_estado = 1;");
 
 // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
             int i = 0;
 
-               while (rs.next()) {
+            while (rs.next()) {
 
                 matris[i][0] = rs.getString(1);
                 matris[i][1] = rs.getString(2);
@@ -252,7 +250,7 @@ public class LocalEmpleado extends javax.swing.JFrame {
             jTable1.setModel(new javax.swing.table.DefaultTableModel(
                     matris,
                     new String[]{
-                        "ID", "Nombre del Empleado", "horas semanales","Salario","sede"
+                        "ID", "Nombre del Empleado", "horas semanales", "Salario", "sede"
                     }));
 
         } catch (SQLException sqle) {
@@ -264,12 +262,11 @@ public class LocalEmpleado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        new Menu().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void PagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagarActionPerformed
-        
+
         MysqlConexion conexion = new MysqlConexion();
 
         String usuario = "Venus";
@@ -280,22 +277,22 @@ public class LocalEmpleado extends javax.swing.JFrame {
         conexion.setUser(usuario);
 
         Connection conectar = conexion.iniciarConexion();
-        
+
         try {
 
-                        String Consulta = "{call gast_salario()}";
+            String Consulta = "{call gast_salario()}";
 
-                        CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
+            CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
 
-                        procedimiento.execute();
+            procedimiento.execute();
 
-                        JOptionPane.showMessageDialog(this, "Se realizo el pago con exito");
+            JOptionPane.showMessageDialog(this, "Se realizo el pago con exito");
 
-                    } catch (SQLException ex) {
-                        Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
-                        JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
-                    }
-        
+        } catch (SQLException ex) {
+            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_PagarActionPerformed
 
     /**
@@ -305,7 +302,7 @@ public class LocalEmpleado extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

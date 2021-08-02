@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.unal.crocante;
 
 import java.sql.Connection;
@@ -64,6 +60,7 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Editar Gastos");
 
         jLabel5.setText("Sede");
@@ -77,7 +74,7 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,10 +84,10 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Costo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(191, 191, 191)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(100, 100, 100)
                                 .addComponent(jButton2)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -130,11 +127,11 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         MysqlConexion conexion = new MysqlConexion();
-        
+
         String usuario = "Venus";
         String apellido = "Baquero";
         String contrasena = "gerente";
-        
+
         conexion.setPassword(contrasena);
         conexion.setUser(usuario);
 
@@ -142,8 +139,7 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
 
         String S_ID = id_txt.getText();
         String S_Costo = Costo_txt.getText();
-        String s_Sede =(String) sede_txt.getSelectedItem();
-
+        String s_Sede = (String) sede_txt.getSelectedItem();
 
         try {
 
@@ -159,7 +155,7 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
 
                 int sede = Integer.parseInt(s_Sede);
 
-                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de actualizar al empleado con el ID :"+id+"\n Con el salario : "+S_Costo);
+                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de actualizar al empleado con el ID :" + id + "\n Con el salario : " + S_Costo);
 
                 if (i == 0) {
 
@@ -170,12 +166,9 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
                         actualizar.setInt(1, costo);
                         actualizar.setInt(2, id);
 
-
                         int retorno = actualizar.executeUpdate();
-                        
-                        JOptionPane.showMessageDialog(this, "La actualizacion de la informacion fue un exito");
 
-                        
+                        JOptionPane.showMessageDialog(this, "La actualizacion de la informacion fue un exito");
 
                     } catch (SQLException ex) {
                         Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,11 +180,12 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
                     dispose();
                 }
 
-            }} catch (Exception ex) {
-                Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
-
             }
+        } catch (Exception ex) {
+            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
+
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -207,7 +201,7 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

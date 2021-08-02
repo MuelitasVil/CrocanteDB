@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,13 +35,16 @@ public class Inicio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton_Registrar = new javax.swing.JButton();
-        jButton_Aceptar = new javax.swing.JButton();
+        registrarButton = new javax.swing.JButton();
+        jButton_Aceptar = crearBoton();
         Texto_Apellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         textoContrasena = new javax.swing.JPasswordField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Texto_Usuario.addActionListener(new java.awt.event.ActionListener() {
@@ -48,24 +52,25 @@ public class Inicio extends javax.swing.JFrame {
                 Texto_UsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(Texto_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 310, 41));
+        getContentPane().add(Texto_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 220, 41));
 
         jLabel1.setText("Contraseña");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 92, 38));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 70, 38));
 
         jLabel2.setText("Apellido");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 102, 38));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 60, 38));
 
-        jLabel3.setText("Inicio");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Inicio Crocante");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
 
-        jButton_Registrar.setText("Registrar");
-        jButton_Registrar.addActionListener(new java.awt.event.ActionListener() {
+        registrarButton.setText("Registrar");
+        registrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_RegistrarActionPerformed(evt);
+                registrarButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 150, 70));
+        getContentPane().add(registrarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 150, 70));
 
         jButton_Aceptar.setText("Aceptar");
         jButton_Aceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -73,18 +78,24 @@ public class Inicio extends javax.swing.JFrame {
                 jButton_AceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 140, 70));
+        getContentPane().add(jButton_Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 100, 50));
 
         Texto_Apellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Texto_ApellidoActionPerformed(evt);
             }
         });
-        getContentPane().add(Texto_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 310, 41));
+        getContentPane().add(Texto_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 220, 41));
 
         jLabel4.setText("Usuario");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 102, 38));
-        getContentPane().add(textoContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 222, 310, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 60, 38));
+        getContentPane().add(textoContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 220, 40));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\JFCowboy\\Desktop\\hamburger.png")); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 240, 180));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\JFCowboy\\Desktop\\hamburger.png")); // NOI18N
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 250, 240, 180));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -146,7 +157,7 @@ public class Inicio extends javax.swing.JFrame {
 
         } else {
 
-            JOptionPane.showMessageDialog(null, "No se ha podido conectar correctamente a la base de datos\nVuelva a ingresar su ingresario y contraseña");
+            JOptionPane.showMessageDialog(null, "No se ha podido conectar correctamente a la base de datos\nVuelva a ingresar su usuario y contraseña");
 
         }
 
@@ -156,11 +167,11 @@ public class Inicio extends javax.swing.JFrame {
     private static final String CAJERO = "Cajero";
     private static final String GERENTE = "Gerente";
 
-    private void jButton_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarActionPerformed
+    private void registrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarButtonActionPerformed
 
         new Registro().setVisible(true);
 
-    }//GEN-LAST:event_jButton_RegistrarActionPerformed
+    }//GEN-LAST:event_registrarButtonActionPerformed
 
     private void Texto_ApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Texto_ApellidoActionPerformed
         // TODO add your handling code here:
@@ -206,15 +217,20 @@ public class Inicio extends javax.swing.JFrame {
     public javax.swing.JTextField Texto_Apellido;
     public javax.swing.JTextField Texto_Usuario;
     public javax.swing.JButton jButton_Aceptar;
-    public javax.swing.JButton jButton_Registrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    public javax.swing.JButton registrarButton;
     private javax.swing.JPasswordField textoContrasena;
     // End of variables declaration//GEN-END:variables
 
-    private void If(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public javax.swing.JButton crearBoton() {
+
+        ImageIcon imageIcon = new ImageIcon("resources\\accessKey.jpeg");
+        return new javax.swing.JButton(imageIcon);
+
     }
 }

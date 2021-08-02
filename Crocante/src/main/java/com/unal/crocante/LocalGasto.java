@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.unal.crocante;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +23,11 @@ public class LocalGasto extends javax.swing.JFrame {
 
         initComponents();
 
+        llenarGasto();
+
+    }
+
+    private void llenarGasto() {
         MysqlConexion conexion = new MysqlConexion();
 
         String usuario = "Venus";
@@ -77,7 +77,6 @@ public class LocalGasto extends javax.swing.JFrame {
             System.out.println("Imposible realizar consulta ... FAIL");
             sqle.printStackTrace();
         }
-
     }
 
     /**
@@ -143,7 +142,15 @@ public class LocalGasto extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Gastos");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -236,8 +243,9 @@ public class LocalGasto extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel1)
+                                        .addGap(205, 205, 205)
                                         .addComponent(jButton2))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(Costo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,8 +258,8 @@ public class LocalGasto extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jLabel1))
                 .addGap(39, 39, 39)
@@ -284,11 +292,6 @@ public class LocalGasto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_EliminarActionPerformed
 
-    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
-        new LocalGastoEditar().setVisible(true);
-
-    }//GEN-LAST:event_EditarActionPerformed
-
     private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
 
         new LocalGastoInsertar().setVisible(true);
@@ -300,13 +303,26 @@ public class LocalGasto extends javax.swing.JFrame {
         LocalMenu prov = new LocalMenu();
         prov.setVisible(true);
         dispose();
-       
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tipo_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo_txtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipo_txtActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+
+        System.out.println("identificado");
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        while (model.getRowCount() > 0) {
+            model.setRowCount(0);
+        }
+        llenarGasto();
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+        new LocalGastoEditar().setVisible(true);
+    }//GEN-LAST:event_EditarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -335,26 +351,24 @@ public class LocalGasto extends javax.swing.JFrame {
 
             if ("Todo".equals(S_Tipo)) {
 
-               
                 try {
-                    
-                     if ("".equals(S_Costo)) {
 
-                    costo = 0;
+                    if ("".equals(S_Costo)) {
 
-                } else {
+                        costo = 0;
 
-                    costo = Integer.parseInt(S_Costo);
+                    } else {
 
-                }
+                        costo = Integer.parseInt(S_Costo);
 
-                     
+                    }
+
                     String matris[][] = new String[num_gastos][6];
 
                     Statement s = conectar.createStatement();
-                    ResultSet rs = s.executeQuery("select * from Gasto where gast_fecha > '"+Fecha+"' and gast_costo > "+costo+" order by gast_id desc");
+                    ResultSet rs = s.executeQuery("select * from Gasto where gast_fecha > '" + Fecha + "' and gast_costo > " + costo + " order by gast_id desc");
 
-// Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
+                    // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
                     int i = 0;
 
                     while (rs.next()) {
@@ -383,10 +397,7 @@ public class LocalGasto extends javax.swing.JFrame {
 
             } else {
 
-                
-
                 try {
-                    
 
                     if ("".equals(S_Costo)) {
 
@@ -401,9 +412,9 @@ public class LocalGasto extends javax.swing.JFrame {
                     String matris[][] = new String[num_gastos][6];
 
                     Statement s = conectar.createStatement();
-                    ResultSet rs = s.executeQuery("select * from Gasto where gast_fecha > '"+Fecha+"' and gast_costo > " +costo+ " and gast_tipo = '"+S_Tipo+"' order by gast_id desc");
+                    ResultSet rs = s.executeQuery("select * from Gasto where gast_fecha > '" + Fecha + "' and gast_costo > " + costo + " and gast_tipo = '" + S_Tipo + "' order by gast_id desc");
 
-// Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
+                    // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
                     int i = 0;
 
                     while (rs.next()) {
@@ -436,8 +447,6 @@ public class LocalGasto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
 
         }
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -447,7 +456,7 @@ public class LocalGasto extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

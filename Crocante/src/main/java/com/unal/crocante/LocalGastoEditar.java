@@ -5,7 +5,6 @@
  */
 package com.unal.crocante;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -23,19 +22,16 @@ public class LocalGastoEditar extends javax.swing.JFrame {
      * Creates new form LocalGasto_editar
      */
     public LocalGastoEditar() {
-        
+
         initComponents();
-        
 
     }
-        
-    
-        MysqlConexion conexion = new MysqlConexion();
 
-        String usuario = "Venus";
-        String apellido = "Baquero";
-        String contrasena = "gerente";
-    
+    MysqlConexion conexion = new MysqlConexion();
+
+    String usuario = "Venus";
+    String apellido = "Baquero";
+    String contrasena = "gerente";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,11 +60,12 @@ public class LocalGastoEditar extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre Gasto :");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Editar Gastos");
 
         jLabel3.setText("Costo :");
 
-        tipo_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nomina", "Servicio", "Insumo", "Otro", " " }));
+        tipo_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nomina", "Servicios", "Insumos", "Otros" }));
         tipo_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipo_txtActionPerformed(evt);
@@ -102,7 +99,7 @@ public class LocalGastoEditar extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,10 +120,10 @@ public class LocalGastoEditar extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(sede_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(104, 104, 104)
                         .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -170,77 +167,71 @@ public class LocalGastoEditar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-
-
         conexion.setPassword(contrasena);
         conexion.setUser(usuario);
-        
+
         Connection conectar = conexion.iniciarConexion();
-        
+
         String S_ID = id_txt.getText();
-        
+
         String nombre = Nombre_txt.getText();
 
         String S_Costo = Costo_txt.getText();
 
-        String Tipo =(String) tipo_txt.getSelectedItem();
+        String Tipo = (String) tipo_txt.getSelectedItem();
 
-        String s_Sede =(String) sede_txt.getSelectedItem();
+        String s_Sede = (String) sede_txt.getSelectedItem();
 
         System.out.println(Tipo);
 
-        
         try {
-            
-        
-        if (("".equals(nombre)) || ("".equals(S_Costo)) || ("".equals(Tipo))) {
 
-            JOptionPane.showMessageDialog(this, "La informacion esta incompleta vuelva a intentar");
+            if (("".equals(nombre)) || ("".equals(S_Costo)) || ("".equals(Tipo))) {
 
-        } else {
-            
-            int id = Integer.parseInt(S_ID);
+                JOptionPane.showMessageDialog(this, "La informacion esta incompleta vuelva a intentar");
 
-            int costo = Integer.parseInt(S_Costo);
+            } else {
 
-            int sede = Integer.parseInt(s_Sede);
+                int id = Integer.parseInt(S_ID);
 
-            int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de actualizar el producto con el ID :"+id+"?\nnombre :"+nombre+"\ncosto :"+S_Costo+"\ntipo :"+Tipo+"\nsede :"+s_Sede);
+                int costo = Integer.parseInt(S_Costo);
 
-            if (i == 0) {
+                int sede = Integer.parseInt(s_Sede);
 
-                try {
+                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de actualizar el producto con el ID :" + id + "?\nnombre :" + nombre + "\ncosto :" + S_Costo + "\ntipo :" + Tipo + "\nsede :" + s_Sede);
 
-                    PreparedStatement actualizar = conectar.prepareStatement("Update Gasto set gast_descripción = ?, gast_costo = ?, gast_tipo = ?, Sede_sede_id = ?  where gast_id = ?");
-                   
-                    actualizar.setString(1, nombre);
-                    actualizar.setInt(2, costo);
-                    actualizar.setString(3, Tipo);
-                    actualizar.setInt(4, sede);
-                    actualizar.setInt(5, id);
-                    
-                    int retorno = actualizar.executeUpdate();
+                if (i == 0) {
 
-                     JOptionPane.showMessageDialog(this, "La informacion se ha actualizado con exito");
-                    
+                    try {
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+                        PreparedStatement actualizar = conectar.prepareStatement("Update Gasto set gast_descripción = ?, gast_costo = ?, gast_tipo = ?, Sede_sede_id = ?  where gast_id = ?");
+
+                        actualizar.setString(1, nombre);
+                        actualizar.setInt(2, costo);
+                        actualizar.setString(3, Tipo);
+                        actualizar.setInt(4, sede);
+                        actualizar.setInt(5, id);
+
+                        int retorno = actualizar.executeUpdate();
+
+                        JOptionPane.showMessageDialog(this, "La informacion se ha actualizado con exito");
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } else if (i == 2) {
+
+                    dispose();
                 }
 
-            } else if (i == 2) {
-
-                dispose();
             }
-            
-        }} catch (Exception ex) {
-                Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
+            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
 
-            }
-
-        
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -257,7 +248,7 @@ public class LocalGastoEditar extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
