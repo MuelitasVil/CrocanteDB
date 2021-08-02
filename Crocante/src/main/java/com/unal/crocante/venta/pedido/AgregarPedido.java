@@ -31,8 +31,6 @@ public class AgregarPedido extends javax.swing.JFrame {
      */
     public AgregarPedido() {
         initComponents();
-
-        llenarInfoMenu();
     }
 
     public AgregarPedido(int idVenta) {
@@ -277,7 +275,7 @@ public class AgregarPedido extends javax.swing.JFrame {
                     + "where tip_tipo = '" + tipoProd + "';";
         } else {
             consulta = "select pro_id, pro_nombre, tip_tipo, pro_precio "
-                    + "from producto join tipo on (tip_id=Tipo_tip_id) ";
+                    + "from producto join tipo on (tip_id=Tipo_tip_id); ";
         }
 
         PreparedStatement s;

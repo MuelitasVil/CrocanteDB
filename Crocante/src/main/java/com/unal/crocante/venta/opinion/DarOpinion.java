@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author JFCowboy
+ * @author VenusBaquero
  */
 public class DarOpinion extends javax.swing.JFrame {
 
