@@ -112,7 +112,7 @@ public class LocalProveedorIInventario extends javax.swing.JFrame {
         A_proveedor1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         Agregar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Atras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -145,6 +145,7 @@ public class LocalProveedorIInventario extends javax.swing.JFrame {
         });
         getContentPane().add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 120, 30));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Inventario  Proveedor");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
         getContentPane().add(id_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 230, 32));
@@ -175,7 +176,7 @@ public class LocalProveedorIInventario extends javax.swing.JFrame {
         jLabel4.setText("Cantidad : ");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 590, 63, -1));
 
-        jLabel5.setText("Agregar o eliminar insumo al proveedor");
+        jLabel5.setText("Agregar  insumo al proveedor");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, -1, -1));
 
         comprar_busqueda1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID insumo", "Nombre insumo" }));
@@ -244,13 +245,13 @@ public class LocalProveedorIInventario extends javax.swing.JFrame {
         });
         getContentPane().add(Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 630, 250, 40));
 
-        jButton2.setText("Atras");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Atras.setText("Atras");
+        Atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                AtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, -1));
+        getContentPane().add(Atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -586,10 +587,10 @@ public class LocalProveedorIInventario extends javax.swing.JFrame {
         llenarDatos();
     }//GEN-LAST:event_formFocusGained
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtrasActionPerformed
         new LocalProveedorInsumo().setVisible(false);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_AtrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -637,6 +638,7 @@ public class LocalProveedorIInventario extends javax.swing.JFrame {
     private javax.swing.JTextField A_proveedor;
     private javax.swing.JTextField A_proveedor1;
     private javax.swing.JButton Agregar;
+    private javax.swing.JButton Atras;
     private javax.swing.JButton Buscar;
     private javax.swing.JTextField Cantidad;
     private javax.swing.JButton Comprar1;
@@ -646,7 +648,6 @@ public class LocalProveedorIInventario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comprar_busqueda;
     private javax.swing.JComboBox<String> comprar_busqueda1;
     private javax.swing.JTextField id_txt;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

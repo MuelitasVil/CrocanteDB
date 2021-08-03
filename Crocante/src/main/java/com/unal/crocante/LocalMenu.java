@@ -55,6 +55,11 @@ public class LocalMenu extends javax.swing.JFrame {
         });
 
         Insumos.setText("Productos");
+        Insumos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsumosActionPerformed(evt);
+            }
+        });
 
         Gastos.setText("Gastos");
         Gastos.addActionListener(new java.awt.event.ActionListener() {
@@ -131,12 +136,19 @@ public class LocalMenu extends javax.swing.JFrame {
     private void ProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProveedoresActionPerformed
         LocalProveedor prov = new LocalProveedor();
         prov.setVisible(true);
-        //dispose();// TODO add your handling code here:
+        dispose();// TODO add your handling code here:
     }//GEN-LAST:event_ProveedoresActionPerformed
 
+    private void InsumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsumosActionPerformed
+        LocalProducto prov = new LocalProducto();
+        prov.setVisible(true);
+        dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_InsumosActionPerformed
+
     private void EmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpleadosActionPerformed
-        EmpleadoPrincipal emp = new EmpleadoPrincipal();
-        emp.setVisible(true);
+        EmpleadoPrincipal prov = new EmpleadoPrincipal();
+        prov.setVisible(true);
+
     }//GEN-LAST:event_EmpleadosActionPerformed
 
     /**
