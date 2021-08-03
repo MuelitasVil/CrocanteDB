@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author Manuel Martinez
  */
-public class LocalProveedorInsumoInsertar extends javax.swing.JFrame {
+public class LocalProductoAgregar extends javax.swing.JFrame {
 
     /**
-     * Creates new form LocalProveedorInsumoInsertar
+     * Creates new form LocalProductoAgregar
      */
-    public LocalProveedorInsumoInsertar() {
+    public LocalProductoAgregar() {
         initComponents();
     }
 
@@ -34,34 +34,45 @@ public class LocalProveedorInsumoInsertar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        Nombre_txt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        Nombre_txt = new javax.swing.JTextField();
         Costo_txt = new javax.swing.JTextField();
-        Agregar_insumo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        Agregar_gasto = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        Atras = new javax.swing.JButton();
+        tipo_txt = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Insertar");
-
-        jLabel2.setText("Nombre Gasto :");
+        jLabel2.setText("Nombre Producto :");
 
         jLabel3.setText("Costo :");
 
-        Agregar_insumo.setText("Agregar");
-        Agregar_insumo.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("Tipo :");
+
+        Agregar_gasto.setText("Agregar");
+        Agregar_gasto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Agregar_insumoActionPerformed(evt);
+                Agregar_gastoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Atras");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Insertar Producto");
+
+        Atras.setText("Atras");
+        Atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                AtrasActionPerformed(evt);
+            }
+        });
+
+        tipo_txt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hamburguesa", "Perro Caliente", "Carnes", "Varios", "Mazorcada", "Salchipapa", "Bebidas", "Adiciones" }));
+        tipo_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipo_txtActionPerformed(evt);
             }
         });
 
@@ -70,38 +81,46 @@ public class LocalProveedorInsumoInsertar extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(Agregar_insumo, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(148, 148, 148)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(86, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Agregar_gasto, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(tipo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2)
+                        .addComponent(jLabel4)
                         .addComponent(jLabel3))
-                    .addGap(17, 17, 17)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(79, 79, 79)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                            .addComponent(jButton2))
-                        .addComponent(Costo_txt, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(Nombre_txt, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGap(27, 29, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Atras, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(Costo_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                        .addComponent(Nombre_txt))
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(188, Short.MAX_VALUE)
-                .addComponent(Agregar_insumo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addGap(34, 34, 34)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addComponent(tipo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Agregar_gasto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(28, 28, 28)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jButton2))
+                    .addGap(31, 31, 31)
+                    .addComponent(Atras)
                     .addGap(21, 21, 21)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Nombre_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,32 +129,36 @@ public class LocalProveedorInsumoInsertar extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Costo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3))
-                    .addContainerGap(82, Short.MAX_VALUE)))
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel4)
+                    .addGap(88, 88, 88)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Agregar_insumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar_insumoActionPerformed
+    private void Agregar_gastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar_gastoActionPerformed
         
         MysqlConexion conexion = new MysqlConexion();
-        
+
         String usuario = "Venus";
-        String apellido = "Baquero";
         String contrasena = "gerente";
-        
+
         conexion.setPassword(contrasena);
         conexion.setUser(usuario);
-        
+
         
         Connection conectar = conexion.iniciarConexion();
 
         String nombre = Nombre_txt.getText();
-        
-        String cantidad = Costo_txt.getText(); 
 
+        String S_Costo = Costo_txt.getText();
 
-        if (("".equals(nombre)) || "".equals(cantidad)) {
+        String Tipo = (String) tipo_txt.getSelectedItem();
+
+        System.out.println(Tipo);
+
+        if (("".equals(nombre)) || ("".equals(S_Costo)) || ("".equals(Tipo))) {
 
             JOptionPane.showMessageDialog(this, "La informacion esta incompleta vuelva a intentar");
 
@@ -143,20 +166,21 @@ public class LocalProveedorInsumoInsertar extends javax.swing.JFrame {
 
             try {
 
+                int costo = Integer.parseInt(S_Costo);
 
-                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de agregar este insumo?\nnombre :" + nombre + "\ncantidad:" + cantidad);
+                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de agregar este producto?\nnombre :" + nombre + "\ncosto :" + S_Costo + "\ntipo :" + Tipo);
 
                 if (i == 0) {
 
                     try {
 
-                        String Consulta = "{call Agregar_Insumo (?,?,?,?)}";
+                        String Consulta = "call Insertar_producto(?, ?, ?);";
 
                         CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
 
                         procedimiento.setString(1, nombre);
-                        procedimiento.setString(2, cantidad);
-
+                        procedimiento.setInt(2, costo);
+                        procedimiento.setString(3, Tipo);
 
                         procedimiento.execute();
 
@@ -179,11 +203,16 @@ public class LocalProveedorInsumoInsertar extends javax.swing.JFrame {
             }
 
         }
-    }//GEN-LAST:event_Agregar_insumoActionPerformed
+    }//GEN-LAST:event_Agregar_gastoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-                 dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtrasActionPerformed
+
+        dispose();
+    }//GEN-LAST:event_AtrasActionPerformed
+
+    private void tipo_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipo_txtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,31 +231,33 @@ public class LocalProveedorInsumoInsertar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorInsumoInsertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProductoAgregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorInsumoInsertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProductoAgregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorInsumoInsertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProductoAgregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorInsumoInsertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProductoAgregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LocalProveedorInsumoInsertar().setVisible(true);
+                new LocalProductoAgregar().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Agregar_insumo;
+    private javax.swing.JButton Agregar_gasto;
+    private javax.swing.JButton Atras;
     private javax.swing.JTextField Costo_txt;
     private javax.swing.JTextField Nombre_txt;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JComboBox<String> tipo_txt;
     // End of variables declaration//GEN-END:variables
 }
