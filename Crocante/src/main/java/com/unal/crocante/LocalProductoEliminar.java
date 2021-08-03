@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author Manuel Martinez
  */
-public class LocalProveedorEliminar extends javax.swing.JFrame {
+public class LocalProductoEliminar extends javax.swing.JFrame {
 
     /**
-     * Creates new form LocalProveedorEliminar
+     * Creates new form LocalProductoEliminar
      */
-    public LocalProveedorEliminar() {
+    public LocalProductoEliminar() {
         initComponents();
     }
 
@@ -43,11 +43,11 @@ public class LocalProveedorEliminar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Eliminiar");
+        jLabel1.setText("Eliminar Producto");
 
         jLabel6.setText("ID :");
 
-        Eliminar.setText("ELIMINAR");
+        Eliminar.setText("Eliminar");
         Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarActionPerformed(evt);
@@ -65,60 +65,61 @@ public class LocalProveedorEliminar extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(72, 72, 72)
-                                .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(64, 64, 64)
+                        .addComponent(jButton2)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton2))
-                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+
         MysqlConexion conexion = new MysqlConexion();
 
         String usuario = "Venus";
+        String apellido = "Baquero";
         String contrasena = "gerente";
 
         conexion.setPassword(contrasena);
         conexion.setUser(usuario);
 
         Connection conectar = conexion.iniciarConexion();
-        
-        
+
         String S_ID = id_txt.getText();
 
         try {
 
-            if (("".equals(S_ID))) {
+            if (("".equals(id_txt))) {
 
                 JOptionPane.showMessageDialog(this, "La informacion esta incompleta vuelva a intentar");
 
@@ -126,22 +127,23 @@ public class LocalProveedorEliminar extends javax.swing.JFrame {
 
                 int id = Integer.parseInt(S_ID);
 
-                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de Eliminar el producto con el ID :" + id, "ELIMINAR GASTO", JOptionPane.WARNING_MESSAGE);
+                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar al empleado con el ID :"+id);
 
                 if (i == 0) {
 
                     try {
 
-                        PreparedStatement eliminar = conectar.prepareStatement("Update Proveedor set prov_estado = 0 where prov_id = ?");
+                        PreparedStatement actualizar = conectar.prepareStatement("Update Producto set pro_estado = 0 where pro_id = ?");
 
-                        eliminar.setInt(1, id);
+                        actualizar.setInt(1, id);
 
-                        int retorno = eliminar.executeUpdate();
+                        int retorno = actualizar.executeUpdate();
 
-                        JOptionPane.showMessageDialog(this, "La informacion se ha eliminado con exito");
+                        JOptionPane.showMessageDialog(this, "La eliminacion del empleado fue un exito");
 
                     } catch (SQLException ex) {
                         Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
                     }
 
                 } else if (i == 2) {
@@ -149,19 +151,16 @@ public class LocalProveedorEliminar extends javax.swing.JFrame {
                     dispose();
                 }
 
+            }} catch (Exception ex) {
+                Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
+
             }
-        } catch (Exception ex) {
-            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
-
-        }
-
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         dispose();
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -181,20 +180,20 @@ public class LocalProveedorEliminar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProductoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProductoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProductoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProductoEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LocalProveedorEliminar().setVisible(true);
+                new LocalProductoEliminar().setVisible(true);
             }
         });
     }

@@ -53,7 +53,7 @@
                       <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="Atras" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="32" max="32767" attributes="0"/>
@@ -66,7 +66,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Atras" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -125,9 +125,9 @@
           <StringArray count="5">
             <StringItem index="0" value="Nomina"/>
             <StringItem index="1" value="Servicio"/>
-            <StringItem index="2" value="Insumo"/>
+            <StringItem index="2" value="Insumos"/>
             <StringItem index="3" value="Otro"/>
-            <StringItem index="4" value=" "/>
+            <StringItem index="4" value=""/>
           </StringArray>
         </Property>
       </Properties>
@@ -177,12 +177,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="id_txt">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="Atras">
       <Properties>
         <Property name="text" type="java.lang.String" value="Atras"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AtrasActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
