@@ -202,7 +202,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
             num = Integer.parseInt(Estrellas);
             
 
-            String consulta = "select cal_fecha, cal_estrellas, Persona_per_id, pro_nombre, pro_precio, tip_tipo, pro_estado from calificación Join producto on (calificación.Producto_pro_id=producto.pro_id) Join tipo on (producto.Tipo_tip_id=Tipo.tip_id) where cal_estrellas Like '" + num + "' AND Producto.pro_nombre Like '" +NombrePro+ "';";
+            String consulta = "select cal_fecha, cal_estrellas, Persona_per_id, pro_nombre, pro_precio, tip_tipo, pro_estado from calificación Join producto on (calificación.Producto_pro_id=producto.pro_id) Join tipo on (producto.Tipo_tip_id=Tipo.tip_id) where cal_estrellas Like '" + num + "' AND Producto.pro_nombre Like '" +NombrePro+ "' order by ven_fecha desc ;";
 
             PreparedStatement s;
             try {

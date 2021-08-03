@@ -337,7 +337,7 @@ public class EditarVenta extends javax.swing.JFrame {
             formaPagoComboBox.setSelectedItem(resultado.getString(4));
             estadoPagoComboBox.setSelectedItem(resultado.getString(5));
             modalidadComboBox.setSelectedItem(resultado.getString(6));
-            idFormattedTextField.setValue(resultado.getInt(8));
+            idFormattedTextField.setValue(resultado.getLong(8));
 
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);

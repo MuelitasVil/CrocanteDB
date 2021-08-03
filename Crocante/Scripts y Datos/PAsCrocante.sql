@@ -153,7 +153,28 @@ END;
 $$ 
 DELIMITER ;
 
-Call Tipo_mas_dia('Sabado');
+
+Call Tipo_mas_dia('Miercoles');
 
 
+drop Procedure if exists Venta_Producto_dia;
+DELIMITER $$
+create Procedure Venta_Producto_dia(dia varchar(40))
+BEGIN
 
+	Drop table if exists numventas;
+	Create table if not exists numventas(
+    id int,    
+    ventas int
+    );
+    
+	insert into numventas select pro_id, count(pro_id) From Producto JOIN Pedido ON (pro_id = Producto_pro_id)  JOIN Venta ON (ven_id = Venta_ven_id) where ven_diaSemana = dia group by pro_id;
+ 
+	Select distinct pro_nombre, ven_diaSemana, ventas from Producto Join pedido ON (pro_id=pedido.Producto_pro_id) Join Venta ON (ven_id=pedido.Venta_ven_id) Join Numventas ON (Pro_id=Numventas.id) where ven_diaSemana=dia and ven_fecha between date_sub(now(),INTERVAL 6 MONTH) and now() Order by ventas desc;
+END;
+$$ 
+DELIMITER ;
+
+
+ 
+Call Venta_Producto_dia('Lunes');
