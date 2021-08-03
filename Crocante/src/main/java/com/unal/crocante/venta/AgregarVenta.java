@@ -14,11 +14,19 @@ import javax.swing.JOptionPane;
  */
 public class AgregarVenta extends javax.swing.JFrame {
 
+    long idCliente;
+
     /**
      * Creates new form EditarVenta
      */
     public AgregarVenta() {
         initComponents();
+    }
+
+    public AgregarVenta(long idCliente) {
+        this();
+        this.idCliente = idCliente;
+        idFormattedTextField.setValue(idCliente);
     }
 
     /**

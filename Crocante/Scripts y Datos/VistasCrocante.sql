@@ -75,7 +75,7 @@ CREATE VIEW vw_Comentario AS SELECT com_descripcion, ven_fecha
 FROM Comentario JOIN Venta ON (ven_id = Venta_ven_id); 
 SELECT * FROM vw_Comentario;
 
-CREATE VIEW vw_recent_coments AS SELECT com_descripcion 
+CREATE VIEW vw_recent_coments AS SELECT date(ven_fecha), com_descripcion 
 FROM Comentario JOIN Venta ON (ven_id = Venta_ven_id)
 where ven_fecha between date_sub(now(),INTERVAL 1 WEEK) and now();
 SELECT * FROM vw_recent_coments;
@@ -106,8 +106,8 @@ select * from vw_Barrio_mas_vende;
  -- Mejores clientes :)
  
 Create View vw_Mejores_Clientes as SELECT per_nombre as 'Nombre', per_apellido as 'Apellido', per_teléfono as 'Teléfono', count(ven_id) as'Total Ventas' 
-FROM Persona join venta on (ven_id=venta.ven_id) where per_id=Persona_per_id group by per_id HAVING count(ven_id) > 1 ;
- 
+FROM Persona join venta on (ven_id=venta.ven_id) where per_id=Persona_per_id and per_id not like 0 group by per_id HAVING count(ven_id) > 1 ;
+
 -- Tabla total ventas último mes :)
  
 Create View vw_Venta_Mes as Select sum(ven_precioTotal), count(ven_id) 
