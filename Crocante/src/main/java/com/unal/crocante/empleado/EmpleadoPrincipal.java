@@ -74,6 +74,13 @@ public class EmpleadoPrincipal extends javax.swing.JFrame {
         Pagar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         empleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,6 +110,11 @@ public class EmpleadoPrincipal extends javax.swing.JFrame {
         });
 
         editButton.setText("Editar");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
         workerLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         workerLabel.setText("Empleados");
@@ -209,8 +221,27 @@ public class EmpleadoPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_PagarActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-
+        AgregarEmpleado nuevo = new AgregarEmpleado();
+        nuevo.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        DefaultTableModel model = (DefaultTableModel) empleados.getModel();
+        while (model.getRowCount() > 0) {
+            model.setRowCount(0);
+        }
+        llenarInfoEmpleado();
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        int row = empleados.getSelectedRow();
+        if (row >= 0) {
+            EditarEmpleado edit = new EditarEmpleado((String) empleados.getModel().getValueAt(row, 1));
+            edit.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ninguna venta.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
 
     /**
      * @param args the command line arguments

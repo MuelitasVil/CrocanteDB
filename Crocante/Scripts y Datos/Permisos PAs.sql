@@ -10,3 +10,5 @@ GRANT EXECUTE ON Function proyecto.Numero_gasto TO 'Gerencia'@'localhost';
 GRANT EXECUTE ON PROCEDURE Agregar_Gasto TO 'Gerencia'@'localhost';
 GRANT EXECUTE ON PROCEDURE gast_salario TO 'Gerencia'@'localhost';
 GRANT EXECUTE ON PROCEDURE stop_domicilio TO 'Gerencia'@'localhost';
+GRANT EXECUTE ON PROCEDURE ingreso_empleado TO 'Gerencia'@'localhost';
+GRANT EXECUTE ON PROCEDURE update_empleado TO 'Gerencia'@'localhost';

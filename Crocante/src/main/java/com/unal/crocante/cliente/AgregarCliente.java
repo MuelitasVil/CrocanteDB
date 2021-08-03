@@ -135,7 +135,7 @@ public class AgregarCliente extends javax.swing.JFrame {
 
         editText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         editText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        editText.setText("Agregar Cliente");
+        editText.setText("Agregar Persona");
 
         addBtn.setText("Aceptar");
         addBtn.addActionListener(new java.awt.event.ActionListener() {

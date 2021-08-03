@@ -144,7 +144,7 @@ public class EditarCliente extends javax.swing.JFrame {
 
         editText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         editText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        editText.setText("Editar Cliente");
+        editText.setText("Editar Persona");
 
         editBtn.setText("Aceptar");
         editBtn.addActionListener(new java.awt.event.ActionListener() {

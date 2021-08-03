@@ -6,7 +6,8 @@
 package com.unal.crocante.empleado;
 
 import com.unal.crocante.MysqlConexion;
-import com.unal.crocante.cliente.EditarCliente;
+import com.unal.crocante.cliente.AgregarCliente;
+import com.unal.crocante.venta.domicilio.GenerarDomicilio;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,27 +18,20 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author JFCowboy
+ * @author Manuel Martinez
  */
-public class EditarEmpleado extends javax.swing.JFrame {
+public class AgregarEmpleado extends javax.swing.JFrame {
 
-    String name;
     Connection conexion;
 
-    public EditarEmpleado(String name) {
-        this();
-        this.name = name;
+    /**
+     * Creates new form LocalEmpleadoEditar
+     */
+    public AgregarEmpleado() {
+        initComponents();
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         conexion = conector.iniciarConexion();
-        llenarInfoEmpleado();
-    }
-
-    /**
-     * Creates new form EditarEmpleado
-     */
-    public EditarEmpleado() {
-        initComponents();
-
+        cargarCargos();
     }
 
     /**
@@ -49,51 +43,25 @@ public class EditarEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ccFormattedTextField = new javax.swing.JFormattedTextField();
-        horasLabel = new javax.swing.JLabel();
-        checkButton = new javax.swing.JButton();
-        addLabel = new javax.swing.JLabel();
-        cancelButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        addLabel = new javax.swing.JLabel();
         ccLabel = new javax.swing.JLabel();
-        salarioFormattedTextField = new javax.swing.JFormattedTextField();
-        cargoComboBox = new javax.swing.JComboBox<>();
-        sedeFormattedTextField = new javax.swing.JFormattedTextField();
+        ccFormattedTextField = new javax.swing.JFormattedTextField();
+        checkButton = new javax.swing.JButton();
+        horasLabel = new javax.swing.JLabel();
         horasFormattedTextField = new javax.swing.JFormattedTextField();
-        salarioLabel = new javax.swing.JLabel();
-        cargoLabel = new javax.swing.JLabel();
         sedeLabel = new javax.swing.JLabel();
-        unactiveButton = new javax.swing.JButton();
+        cargoLabel = new javax.swing.JLabel();
+        cargoComboBox = new javax.swing.JComboBox<>();
+        salarioLabel = new javax.swing.JLabel();
+        sedeFormattedTextField = new javax.swing.JFormattedTextField();
+        salarioFormattedTextField = new javax.swing.JFormattedTextField();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-                formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-            }
-        });
-
-        ccFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        horasLabel.setText("Horas:");
-
-        checkButton.setText("Comprobar");
-        checkButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkButtonActionPerformed(evt);
-            }
-        });
-
-        addLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        addLabel.setText("Editar Empleado");
-
-        cancelButton.setText("Cancelar");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
 
         addButton.setText("Aceptar");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -102,26 +70,40 @@ public class EditarEmpleado extends javax.swing.JFrame {
             }
         });
 
+        cancelButton.setText("Cancelar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        addLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        addLabel.setText("Agregar Empleado");
+
         ccLabel.setText("Cédula:");
 
-        salarioFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        ccFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        sedeFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        checkButton.setText("Comprobar");
+        checkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkButtonActionPerformed(evt);
+            }
+        });
+
+        horasLabel.setText("Horas:");
 
         horasFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        salarioLabel.setText("Salario:");
+        sedeLabel.setText("Sede:");
 
         cargoLabel.setText("Cargo:");
 
-        sedeLabel.setText("Sede:");
+        salarioLabel.setText("Salario:");
 
-        unactiveButton.setText("Inactivar");
-        unactiveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                unactiveButtonActionPerformed(evt);
-            }
-        });
+        sedeFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        salarioFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,16 +112,13 @@ public class EditarEmpleado extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(unactiveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ccLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(horasLabel)
                             .addComponent(sedeLabel)
                             .addComponent(cargoLabel)
@@ -157,7 +136,7 @@ public class EditarEmpleado extends javax.swing.JFrame {
                                     .addComponent(ccFormattedTextField, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(checkButton)))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,16 +164,50 @@ public class EditarEmpleado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salarioLabel)
                     .addComponent(salarioFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(unactiveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+
+        long cc;
+        cc = Long.parseLong(ccFormattedTextField.getText());
+
+        int horas = Integer.parseInt(horasFormattedTextField.getText());
+        int sede = Integer.parseInt(sedeFormattedTextField.getText());
+        String cargo = cargoComboBox.getSelectedItem().toString();
+        int salario = Integer.parseInt(salarioFormattedTextField.getText());
+
+        String consulta = "call ingreso_empleado(?, ?, ?,?, ?);";
+
+        PreparedStatement s;
+
+        try {
+            s = conexion.prepareStatement(consulta);
+            s.setLong(1, cc);
+            s.setInt(2, horas);
+            s.setInt(3, sede);
+            s.setString(4, cargo);
+            s.setInt(5, salario);
+            int resultado = s.executeUpdate();
+            dispose();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AgregarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Fallo la creación", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void checkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkButtonActionPerformed
         long id;
@@ -211,7 +224,7 @@ public class EditarEmpleado extends javax.swing.JFrame {
 
             if (resultado.getInt(1) > 0) {
             } else {
-                EditarCliente emp = new EditarCliente();
+                AgregarCliente emp = new AgregarCliente();
                 emp.setVisible(true);
             }
 
@@ -219,76 +232,8 @@ public class EditarEmpleado extends javax.swing.JFrame {
             Logger.getLogger(AgregarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "No se insertaron datos validos", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_checkButtonActionPerformed
-
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        dispose();
-    }//GEN-LAST:event_cancelButtonActionPerformed
-
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-
-        long cc;
-        cc = Long.parseLong(ccFormattedTextField.getText());
-
-        int horas = Integer.parseInt(horasFormattedTextField.getText());
-        int sede = Integer.parseInt(sedeFormattedTextField.getText());
-        String cargo = cargoComboBox.getSelectedItem().toString();
-        int salario = Integer.parseInt(salarioFormattedTextField.getText());
-
-        String consulta = "call update_empleado(?, ?, ?,?, ?);";
-
-        PreparedStatement s;
-
-        try {
-            s = conexion.prepareStatement(consulta);
-            s.setLong(1, cc);
-            s.setInt(2, horas);
-            s.setInt(3, sede);
-            s.setString(4, cargo);
-            s.setInt(5, salario);
-            int resultado = s.executeUpdate();
-            dispose();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AgregarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Fallo la edición", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_addButtonActionPerformed
-
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        llenarInfoEmpleado();
-    }//GEN-LAST:event_formWindowGainedFocus
-
-    private void unactiveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unactiveButtonActionPerformed
-        String getEmpId = "select emp_id"
-                + " from empleado join persona on (per_id = Persona_per_id)"
-                + " where concat (per_nombre, ' ', per_apellido) = ?";
-
-        PreparedStatement s;
-        try {
-            s = conexion.prepareStatement(getEmpId);
-            s.setString(1, name);
-            ResultSet resultado = s.executeQuery();
-            resultado.next();
-
-            String desactivar = "update empleado"
-                    + " set emp_estado = ?"
-                    + " where emp_id = ?";
-
-            PreparedStatement d;
-            try {
-                d = conexion.prepareStatement(desactivar);
-                d.setInt(1, 0);
-                d.setInt(2, resultado.getInt(1));
-
-            } catch (SQLException ex) {
-                Logger.getLogger(EditarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(EditarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_unactiveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,20 +252,23 @@ public class EditarEmpleado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarEmpleado().setVisible(true);
+                new AgregarEmpleado().setVisible(true);
             }
         });
     }
@@ -336,48 +284,27 @@ public class EditarEmpleado extends javax.swing.JFrame {
     private javax.swing.JButton checkButton;
     private javax.swing.JFormattedTextField horasFormattedTextField;
     private javax.swing.JLabel horasLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JFormattedTextField salarioFormattedTextField;
     private javax.swing.JLabel salarioLabel;
     private javax.swing.JFormattedTextField sedeFormattedTextField;
     private javax.swing.JLabel sedeLabel;
-    private javax.swing.JButton unactiveButton;
     // End of variables declaration//GEN-END:variables
 
-    private void llenarInfoEmpleado() {
-        String consulta = "select * from vw_Empleado where nombre = ?;";
+    private void cargarCargos() {
+        String cargo = "select car_nombre"
+                + " from Cargo;";
         PreparedStatement s;
         try {
-            s = conexion.prepareStatement(consulta);
-            s.setString(1, name);
+            s = conexion.prepareStatement(cargo);
             ResultSet resultado = s.executeQuery();
-            resultado.next();
-
-            horasFormattedTextField.setValue(resultado.getInt(5));
-            sedeFormattedTextField.setValue(resultado.getInt(1));
-            cargoComboBox.setSelectedItem(resultado.getString(3));
-            salarioFormattedTextField.setValue(resultado.getInt(6));
-
-            String getCC = "select * from persona"
-                    + " where concat(per_nombre, ' ', per_apellido) = ? ;";
-            System.out.println(getCC);
-
-            PreparedStatement c;
-
-            try {
-                c = conexion.prepareStatement(getCC);
-                c.setString(1, resultado.getString(2));
-                ResultSet cedula = c.executeQuery();
-                cedula.next();
-
-                ccFormattedTextField.setValue(cedula.getLong(1));
-            } catch (SQLException ex) {
-                Logger.getLogger(EditarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-
+            while (resultado.next()) {
+                String car = resultado.getString(1);
+                cargoComboBox.addItem(car);
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(EditarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "No se insertaron datos validos", "Error", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(GenerarDomicilio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

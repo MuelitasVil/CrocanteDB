@@ -39,8 +39,9 @@ CREATE VIEW vw_Adiciones AS SELECT pro_nombre AS Producto, pro_precio AS Precio 
 CREATE VIEW vw_Empleado AS SELECT Sede_sede_id, concat(per_nombre," ", per_apellido) as nombre, car_nombre, car_descripción, emp_horasSemanales, sal_valor
 FROM Empleado JOIN Persona ON (per_id = Persona_per_id)
 	JOIN Cargo ON (car_id = Cargo_car_id)
-    JOIN Salario ON (emp_id = Empleado_emp_id);
-    
+    JOIN Salario ON (emp_id = Empleado_emp_id) 
+    where emp_estado = 1;
+
 select * from vw_Empleado;
 
 
