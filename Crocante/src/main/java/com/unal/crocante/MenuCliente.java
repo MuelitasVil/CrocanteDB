@@ -118,7 +118,7 @@ public class MenuCliente extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     CalificacionCliente rank = new CalificacionCliente();
     rank.setVisible(true);
-    
+    dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
                                        
@@ -137,7 +137,8 @@ public class MenuCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        ComentarioCliente coments = new ComentarioCliente();
-       coments.setVisible(true);// TODO add your handling code here:
+       coments.setVisible(true);
+       dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

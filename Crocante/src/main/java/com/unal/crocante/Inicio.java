@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,7 +36,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton_Registrar = new javax.swing.JButton();
-        jButton_Aceptar = new javax.swing.JButton();
+        jButton_Aceptar = crearBoton();
         Texto_Apellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         textoContrasena = new javax.swing.JPasswordField();
@@ -214,7 +215,10 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPasswordField textoContrasena;
     // End of variables declaration//GEN-END:variables
 
-    private void If(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public javax.swing.JButton crearBoton() {
+
+        ImageIcon imageIcon = new ImageIcon("src\\main\\resources\\accessKey.jpeg");
+        return new javax.swing.JButton(imageIcon);
+
     }
 }

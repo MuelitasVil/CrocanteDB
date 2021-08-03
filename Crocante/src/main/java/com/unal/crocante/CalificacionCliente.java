@@ -202,7 +202,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
             num = Integer.parseInt(Estrellas);
             
 
-            String consulta = "select cal_fecha, cal_estrellas, Persona_per_id, pro_nombre, pro_precio, tip_tipo, pro_estado from calificación Join producto on (calificación.Producto_pro_id=producto.pro_id) Join tipo on (producto.Tipo_tip_id=Tipo.tip_id) where cal_estrellas Like '" + num + "' AND Producto.pro_nombre Like '" +NombrePro+ "';";
+            String consulta = "select cal_fecha, cal_estrellas, Persona_per_id, pro_nombre, pro_precio, tip_tipo, pro_estado from calificación Join producto on (calificación.Producto_pro_id=producto.pro_id) Join tipo on (producto.Tipo_tip_id=Tipo.tip_id) where cal_estrellas Like '" + num + "' AND Producto.pro_nombre Like '" +NombrePro+ "' order by ven_fecha desc ;";
 
             PreparedStatement s;
             try {
@@ -261,7 +261,10 @@ public class CalificacionCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      dispose();        // TODO add your handling code here:
+      
+        MenuCliente mc = new MenuCliente();
+        mc.setVisible(false);
+        dispose();       // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void estrellasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estrellasActionPerformed
