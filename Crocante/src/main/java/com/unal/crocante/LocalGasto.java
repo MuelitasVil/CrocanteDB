@@ -39,7 +39,7 @@ public class LocalGasto extends javax.swing.JFrame {
 
         Connection conectar = conexion.iniciarConexion();
 
-        int num_gastos = conexion.Contar_tablas(conectar, "Gasto");
+        int num_gastos = conexion.ContarTablas(conectar, "Gasto");
 
         System.out.println(num_gastos);
         try {
@@ -323,7 +323,7 @@ public class LocalGasto extends javax.swing.JFrame {
 
         Connection conectar = conexion.iniciarConexion();
 
-        int num_gastos = conexion.Contar_tablas(conectar, "Gasto");
+        int num_gastos = conexion.ContarTablas(conectar, "Gasto");
 
         System.out.println(num_gastos);
 

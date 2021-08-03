@@ -38,7 +38,7 @@ public class LocalProveedor extends javax.swing.JFrame {
 
         Connection conectar = conexion.iniciarConexion();
 
-        int num_gastos = conexion.Contar_tablas(conectar, "proveedor");
+        int num_gastos = conexion.ContarTablas(conectar, "proveedor");
 
         System.out.println(num_gastos);
         try {

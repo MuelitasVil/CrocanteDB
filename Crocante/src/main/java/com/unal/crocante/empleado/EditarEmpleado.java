@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unal.crocante;
+package com.unal.crocante.empleado;
 
+import com.unal.crocante.LocalGastoInsertar;
+import com.unal.crocante.MysqlConexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -16,12 +18,12 @@ import javax.swing.JOptionPane;
  *
  * @author Manuel Martinez
  */
-public class LocalEmpleadoEditar extends javax.swing.JFrame {
+public class EditarEmpleado extends javax.swing.JFrame {
 
     /**
      * Creates new form LocalEmpleadoEditar
      */
-    public LocalEmpleadoEditar() {
+    public EditarEmpleado() {
         initComponents();
     }
 
@@ -130,11 +132,11 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         MysqlConexion conexion = new MysqlConexion();
-        
+
         String usuario = "Venus";
         String apellido = "Baquero";
         String contrasena = "gerente";
-        
+
         conexion.setPassword(contrasena);
         conexion.setUser(usuario);
 
@@ -142,8 +144,7 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
 
         String S_ID = id_txt.getText();
         String S_Costo = Costo_txt.getText();
-        String s_Sede =(String) sede_txt.getSelectedItem();
-
+        String s_Sede = (String) sede_txt.getSelectedItem();
 
         try {
 
@@ -159,7 +160,7 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
 
                 int sede = Integer.parseInt(s_Sede);
 
-                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de actualizar al empleado con el ID :"+id+"\n Con el salario : "+S_Costo);
+                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de actualizar al empleado con el ID :" + id + "\n Con el salario : " + S_Costo);
 
                 if (i == 0) {
 
@@ -170,12 +171,9 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
                         actualizar.setInt(1, costo);
                         actualizar.setInt(2, id);
 
-
                         int retorno = actualizar.executeUpdate();
-                        
-                        JOptionPane.showMessageDialog(this, "La actualizacion de la informacion fue un exito");
 
-                        
+                        JOptionPane.showMessageDialog(this, "La actualizacion de la informacion fue un exito");
 
                     } catch (SQLException ex) {
                         Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,11 +185,12 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
                     dispose();
                 }
 
-            }} catch (Exception ex) {
-                Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
-
             }
+        } catch (Exception ex) {
+            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
+
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -207,7 +206,7 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -217,20 +216,21 @@ public class LocalEmpleadoEditar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LocalEmpleadoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LocalEmpleadoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LocalEmpleadoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LocalEmpleadoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LocalEmpleadoEditar().setVisible(true);
+                new EditarEmpleado().setVisible(true);
             }
         });
     }

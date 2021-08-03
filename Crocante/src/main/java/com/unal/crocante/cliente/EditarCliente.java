@@ -1,5 +1,6 @@
 package com.unal.crocante.cliente;
 
+import static com.mysql.cj.util.StringUtils.isNullOrEmpty;
 import com.unal.crocante.MysqlConexion;
 import com.unal.crocante.venta.AgregarVenta;
 import com.unal.crocante.venta.VentaPrincipal;
@@ -7,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -201,19 +204,19 @@ public class EditarCliente extends javax.swing.JFrame {
             id = Long.parseLong(idFormattedTextField.getText());
             nombre = nombreTextField.getText();
 
-            if (!(apellidoTextField.getText().equals(null))) {
+            if (!isNullOrEmpty(apellidoTextField.getText())) {
                 apellido = apellidoTextField.getText();
             }
 
-            if (!dirTextField.getText().equals(null)) {
+            if (!isNullOrEmpty(dirTextField.getText())) {
                 direccion = dirTextField.getText();
             }
 
-            if (!phoneFormattedTextField.getText().equals(null)) {
+            if (!isNullOrEmpty(phoneFormattedTextField.getText())) {
                 phone = Long.parseLong(phoneFormattedTextField.getText());
             }
 
-            if (!mailTextField.getText().equals(null)) {
+            if (!isNullOrEmpty(mailTextField.getText())) {
                 correo = mailTextField.getText();
             }
 
@@ -236,7 +239,11 @@ public class EditarCliente extends javax.swing.JFrame {
             s.setString(2, nombre);
             s.setString(3, apellido);
             s.setString(4, direccion);
-            s.setLong(5, phone);
+            if (Objects.isNull(phone)) {
+                s.setNull(5, Types.BIGINT);
+            } else {
+                s.setLong(5, phone);
+            }
             s.setString(6, correo);
             s.setLong(7, idPersona);
 
@@ -317,17 +324,18 @@ public class EditarCliente extends javax.swing.JFrame {
             idFormattedTextField.setValue(resultado.getLong(1));
             nombreTextField.setText(resultado.getString(2));
 
-            if (!resultado.getString(3).equals(null)) {
+            if (resultado.getString(3) != null) {
                 apellidoTextField.setText(resultado.getString(3));
             }
 
-            if (!resultado.getString(4).equals(null)) {
+            if (resultado.getString(4) != null) {
                 dirTextField.setText(resultado.getString(4));
             }
+            if (resultado.getString(5) != null) {
+                phoneFormattedTextField.setText(resultado.getString(5));
+            }
 
-            phoneFormattedTextField.setText(resultado.getString(5));
-
-            if (!resultado.getString(6).equals(null)) {
+            if (resultado.getString(6) != null) {
                 mailTextField.setText(resultado.getString(6));
             }
 

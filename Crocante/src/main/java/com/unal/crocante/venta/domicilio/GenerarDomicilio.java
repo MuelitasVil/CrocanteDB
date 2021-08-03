@@ -344,7 +344,7 @@ public class GenerarDomicilio extends javax.swing.JFrame {
             d.setInt(1, idVenta);
             ResultSet resultado = d.executeQuery();
             resultado.next();
-            if (!resultado.getString(1).equals(null)) {
+            if (resultado.getString(1) != null) {
                 dirTextField.setText(resultado.getString(1));
             }
 
