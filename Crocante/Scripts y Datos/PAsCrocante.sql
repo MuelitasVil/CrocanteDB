@@ -162,8 +162,6 @@ drop Procedure if exists Venta_Producto_dia;
 DELIMITER $$
 create Procedure Venta_Producto_dia(dia varchar(40))
 BEGIN
-drop procedure if exists gast_salario;
-DELIMITER $$
 
 	Drop table if exists numventas;
 	Create table if not exists numventas(

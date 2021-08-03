@@ -92,7 +92,7 @@ DELIMITER ;
 GRANT EXECUTE ON Procedure proyecto.Insertar_insumo_proveedor TO 'Gerencia'@'localhost';
 
 
-Call Insertar_insumo_proveedor(1,5);
+
 
 -- ------------------------------- Procedimiento para insertar insumo al proveedor con id --------------------------------------------
 
@@ -260,4 +260,3 @@ select pro_id, pro_nombre, pro_precio, tip_tipo from producto join Tipo on (Tipo
 
 select * from tipo;
 
-select * from Producto join Tipo on (Tipo_tip_id = tip_id) where pro_precio > costo and tip_tipo = tipo order by pro_Id desc

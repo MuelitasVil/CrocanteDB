@@ -18,7 +18,7 @@ DELIMITER ;
 
 GRANT EXECUTE ON function proyecto.Mostrar_Cargo TO 'Caja'@'localhost';
 
-GRANT EXECUTE ON function proyecto.Mostrar_Cargo TO 'Gerente'@'localhost';
+GRANT EXECUTE ON function proyecto.Mostrar_Cargo TO 'Gerencia'@'localhost';
 
 select Mostrar_Cargo('Venus');
 

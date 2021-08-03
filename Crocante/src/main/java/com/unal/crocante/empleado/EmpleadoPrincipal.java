@@ -73,6 +73,7 @@ public class EmpleadoPrincipal extends javax.swing.JFrame {
         Pagar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         empleados = new javax.swing.JTable();
+        backButton = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,6 +140,13 @@ public class EmpleadoPrincipal extends javax.swing.JFrame {
         empleados.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(empleados);
 
+        backButton.setText("Volver");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,35 +154,37 @@ public class EmpleadoPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
+                        .addGap(133, 133, 133)
                         .addComponent(addButton)
-                        .addGap(100, 100, 100)
-                        .addComponent(editButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(editButton)
+                        .addGap(13, 13, 13)
+                        .addComponent(Pagar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(backButton)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(279, 279, 279)
-                        .addComponent(workerLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(282, 282, 282)
-                        .addComponent(Pagar)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                        .addGap(205, 205, 205)
+                        .addComponent(workerLabel)))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(36, 36, 36)
                 .addComponent(workerLabel)
-                .addGap(35, 35, 35)
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
-                    .addComponent(editButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Pagar)
-                .addGap(25, 25, 25))
+                    .addComponent(editButton)
+                    .addComponent(Pagar))
+                .addGap(18, 18, 18)
+                .addComponent(backButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -233,6 +243,10 @@ public class EmpleadoPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_editButtonActionPerformed
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -272,6 +286,7 @@ public class EmpleadoPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pagar;
     private javax.swing.JButton addButton;
+    private javax.swing.JButton backButton;
     private javax.swing.JButton editButton;
     private javax.swing.JTable empleados;
     private javax.swing.JScrollPane jScrollPane1;
