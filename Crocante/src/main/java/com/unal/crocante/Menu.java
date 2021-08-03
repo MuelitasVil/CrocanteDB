@@ -6,6 +6,11 @@
 package com.unal.crocante;
 
 import com.unal.crocante.venta.VentaPrincipal;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -166,11 +171,36 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_LocalActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Inicio local = new Inicio();
-    local.setVisible(true);
-    dispose();
-    JOptionPane.showMessageDialog(this, "Se ha cerrado sesión satisfactoriamente", "Salir", JOptionPane.CLOSED_OPTION);
-    // TODO add your handling code here:
+        try {
+
+            MysqlConexion conexion = new MysqlConexion();
+
+            String usuario = "Venus";
+            String contrasena = "gerente";
+
+            conexion.setPassword(contrasena);
+
+            conexion.setUser(usuario);
+
+            Connection conectar = conexion.iniciarConexion();
+
+            String Consulta = "{call Borrar_sesion()}";
+
+            CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
+
+            procedimiento.execute();
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+        }
+
+        Inicio local = new Inicio();
+        local.setVisible(true);
+        dispose();
+        JOptionPane.showMessageDialog(this, "Se ha cerrado sesión satisfactoriamente", "Salir", JOptionPane.CLOSED_OPTION);
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

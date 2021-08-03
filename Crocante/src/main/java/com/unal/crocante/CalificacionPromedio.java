@@ -509,9 +509,45 @@ public class CalificacionPromedio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Menu m = new Menu();
-        m.setVisible(true);
-        dispose();        // TODO add your handling code here:
+        
+        
+            
+        try {
+           
+            PreparedStatement s = conexion.prepareStatement("SELECT car_nombre FROM Persona join Empleado on (per_id = persona_per_id) join Sesion on (a = per_nombre) join Cargo on (car_id = Cargo_car_id);");
+
+            ResultSet resultado = s.executeQuery();
+
+            resultado.next();
+            
+            String cargo = resultado.getString(1);
+            
+            System.out.println(cargo);
+            
+            if ("Cajero".equals(cargo)){
+                
+                 Vista_caja m = new Vista_caja();
+                 m.setVisible(true);
+                 dispose();
+            
+            }else{
+                
+                 Menu m = new Menu();
+                 m.setVisible(true);
+                 dispose();   
+            
+            
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CalificacionPromedio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+
+
+        
+       // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void GananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GananActionPerformed
