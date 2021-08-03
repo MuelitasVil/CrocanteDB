@@ -249,11 +249,13 @@ public class LocalProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_AtrasActionPerformed
 
     private void Inventario_proveedores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventario_proveedores1ActionPerformed
-        // TODO add your handling code here:
+         
+        new LocalProveedorCompras().setVisible(true);
+         
     }//GEN-LAST:event_Inventario_proveedores1ActionPerformed
 
     private void Agregar_proveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar_proveedoresActionPerformed
-        // TODO add your handling code here:
+        new LocalProductoAgregar().setVisible(true);
     }//GEN-LAST:event_Agregar_proveedoresActionPerformed
 
     /**
