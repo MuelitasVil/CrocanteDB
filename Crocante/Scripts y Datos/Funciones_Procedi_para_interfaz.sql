@@ -181,4 +181,24 @@ select * from salario;
 SELECT * FROM CARGO;
 
 
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Nombre(nombre varchar(50))
+BEGIN
+select per_nombre, per_apellido from Cargo join Empleado on (Cargo_car_id = car_id) join Persona on (Persona_per_id = per_id) where nombre=per_nombre;
+END$$
+DELIMITER ;
+DELIMITER $$
+CREATE  PROCEDURE time_domicilio()
+BEGIN 
+SELECT (SEC_TO_TIME(ROUND(AVG(TIME_TO_SEC(dom_tiempoEntrega))))) 
+FROM domicilio JOIN venta ON (ven_id = Venta_ven_id) WHERE ven_fecha between date_sub(now(),INTERVAL 6 MONTH) and now(); 
+END$$
+DELIMITER ;
+DELIMITER $$
 
+CREATE  PROCEDURE time_domicilio_Barrio()
+BEGIN 
+SELECT bar_nombre, SEC_TO_TIME(ROUND(AVG(TIME_TO_SEC(dom_tiempoEntrega)))) 
+FROM domicilio JOIN Barrio ON (bar_id = Barrio_bar_id) GROUP BY bar_id;
+END$$
+DELIMITER ;
