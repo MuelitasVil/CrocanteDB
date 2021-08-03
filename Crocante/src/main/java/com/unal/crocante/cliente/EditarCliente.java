@@ -2,8 +2,10 @@ package com.unal.crocante.cliente;
 
 import com.unal.crocante.MysqlConexion;
 import com.unal.crocante.venta.AgregarVenta;
+import com.unal.crocante.venta.VentaPrincipal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,17 +15,24 @@ import javax.swing.JOptionPane;
  *
  * @author VenusBaquero
  */
-public class AgregarCliente extends javax.swing.JFrame {
+public class EditarCliente extends javax.swing.JFrame {
 
     Connection conexion;
+    long idPersona;
 
     /**
      * Creates new form AgregarCliente
      */
-    public AgregarCliente() {
+    public EditarCliente() {
         initComponents();
+    }
+
+    public EditarCliente(long idPersona) {
+        this();
+        this.idPersona = idPersona;
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         conexion = conector.iniciarConexion();
+        cargarInfoCliente();
     }
 
     /**
@@ -50,7 +59,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         mailLabel = new javax.swing.JLabel();
         mailTextField = new javax.swing.JTextField();
         editText = new javax.swing.JLabel();
-        addBtn = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,12 +141,12 @@ public class AgregarCliente extends javax.swing.JFrame {
 
         editText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         editText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        editText.setText("Agregar Cliente");
+        editText.setText("Editar Cliente");
 
-        addBtn.setText("Aceptar");
-        addBtn.addActionListener(new java.awt.event.ActionListener() {
+        editBtn.setText("Aceptar");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtnActionPerformed(evt);
+                editBtnActionPerformed(evt);
             }
         });
 
@@ -154,7 +163,7 @@ public class AgregarCliente extends javax.swing.JFrame {
                             .addComponent(editText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
-                        .addComponent(addBtn)
+                        .addComponent(editBtn)
                         .addGap(27, 27, 27)
                         .addComponent(cancelBtn)))
                 .addContainerGap(58, Short.MAX_VALUE))
@@ -168,7 +177,7 @@ public class AgregarCliente extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBtn)
+                    .addComponent(editBtn)
                     .addComponent(cancelBtn))
                 .addContainerGap())
         );
@@ -180,7 +189,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
-    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         long id = -1;
         String nombre = null;
         String apellido = null;
@@ -191,6 +200,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         try {
             id = Long.parseLong(idFormattedTextField.getText());
             nombre = nombreTextField.getText();
+
             if (!(apellidoTextField.getText().equals(null))) {
                 apellido = apellidoTextField.getText();
             }
@@ -213,28 +223,32 @@ public class AgregarCliente extends javax.swing.JFrame {
             return;
         }
 
-        String insert = "insert into persona values (?,?,?,?,?,?);";
-        System.out.println(insert);
+        String update = "update persona"
+                + " set per_id = ?, per_nombre = ?, per_apellido= ?,"
+                + " per_dirección = ?, per_teléfono = ?, per_correo = ?"
+                + " where per_id = ?;";
+        System.out.println(update);
 
         PreparedStatement s;
         try {
-            s = conexion.prepareStatement(insert);
+            s = conexion.prepareStatement(update);
             s.setLong(1, id);
             s.setString(2, nombre);
             s.setString(3, apellido);
             s.setString(4, direccion);
             s.setLong(5, phone);
             s.setString(6, correo);
+            s.setLong(7, idPersona);
 
             int resultado = s.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Registro satisfactorio", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Edición satisfactorio", "Exito", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } catch (SQLException ex) {
             Logger.getLogger(AgregarVenta.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Imposible añadir el registro", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Imposible editar el registro", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-    }//GEN-LAST:event_addBtnActionPerformed
+    }//GEN-LAST:event_editBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,31 +267,32 @@ public class AgregarCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarCliente().setVisible(true);
+                new EditarCliente().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addBtn;
     private javax.swing.JLabel apellidoLabel;
     private javax.swing.JTextField apellidoTextField;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel dirLabel;
     private javax.swing.JTextField dirTextField;
+    private javax.swing.JButton editBtn;
     private javax.swing.JLabel editText;
     private javax.swing.JFormattedTextField idFormattedTextField;
     private javax.swing.JLabel idLabel;
@@ -289,4 +304,36 @@ public class AgregarCliente extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField phoneFormattedTextField;
     private javax.swing.JLabel phoneLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarInfoCliente() {
+        String consulta = "select * from persona where per_id = ?;";
+        PreparedStatement s;
+        try {
+            s = conexion.prepareStatement(consulta);
+            s.setLong(1, idPersona);
+            ResultSet resultado = s.executeQuery();
+            resultado.next();
+
+            idFormattedTextField.setValue(resultado.getLong(1));
+            nombreTextField.setText(resultado.getString(2));
+
+            if (!resultado.getString(3).equals(null)) {
+                apellidoTextField.setText(resultado.getString(3));
+            }
+
+            if (!resultado.getString(4).equals(null)) {
+                dirTextField.setText(resultado.getString(4));
+            }
+
+            phoneFormattedTextField.setText(resultado.getString(5));
+
+            if (!resultado.getString(6).equals(null)) {
+                mailTextField.setText(resultado.getString(6));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "No se insertaron datos validos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

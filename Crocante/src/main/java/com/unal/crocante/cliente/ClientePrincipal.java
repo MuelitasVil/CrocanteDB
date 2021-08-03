@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -51,6 +52,13 @@ public class ClientePrincipal extends javax.swing.JFrame {
         refreshButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,8 +86,18 @@ public class ClientePrincipal extends javax.swing.JFrame {
         backButton.setText("Volver");
 
         addButton.setText("Agregar");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         editButton.setText("Editar");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
         sellButton.setText("Realizar Venta");
 
@@ -176,6 +194,33 @@ public class ClientePrincipal extends javax.swing.JFrame {
         searchFormattedTextField.setText(null);
         llenarInfoClientes(clienteQuery);
     }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        AgregarCliente nuevo = new AgregarCliente();
+        nuevo.setVisible(true);
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        DefaultTableModel model = (DefaultTableModel) clientes.getModel();
+        while (model.getRowCount() > 0) {
+            model.setRowCount(0);
+        }
+        String clienteQuery = "select * from persona"
+                + " left join empleado on (per_id = Persona_per_id)"
+                + " where Persona_per_id is null;";
+        llenarInfoClientes(clienteQuery);
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        int row = clientes.getSelectedRow();
+        if (row >= 0) {
+            System.out.println(clientes.getModel().getValueAt(row, 0));
+            EditarCliente edit = new EditarCliente((Long) clientes.getModel().getValueAt(row, 0));
+            edit.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ninguna venta.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
 
     /**
      * @param args the command line arguments
