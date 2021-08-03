@@ -87,6 +87,11 @@ public class ClientePrincipal extends javax.swing.JFrame {
         clienteLabel.setText("Clientes");
 
         backButton.setText("Volver");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         addButton.setText("Agregar");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -251,6 +256,10 @@ public class ClientePrincipal extends javax.swing.JFrame {
         dispose();
 
     }//GEN-LAST:event_sellButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
