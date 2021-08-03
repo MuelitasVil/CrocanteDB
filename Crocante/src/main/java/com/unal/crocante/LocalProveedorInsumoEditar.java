@@ -5,8 +5,8 @@
  */
 package com.unal.crocante;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author Manuel Martinez
  */
-public class LocalProveedorEditar extends javax.swing.JFrame {
+public class LocalProveedorInsumoEditar extends javax.swing.JFrame {
 
     /**
-     * Creates new form LocalProveedorEditar
+     * Creates new form LocalProveedorInsumoEditar
      */
-    public LocalProveedorEditar() {
+    public LocalProveedorInsumoEditar() {
         initComponents();
     }
 
@@ -39,12 +39,10 @@ public class LocalProveedorEditar extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Nombre_txt = new javax.swing.JTextField();
-        numero_txt = new javax.swing.JTextField();
+        Costo_txt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        correo_txt = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,9 +50,9 @@ public class LocalProveedorEditar extends javax.swing.JFrame {
 
         jLabel6.setText("ID :");
 
-        jLabel2.setText("Nombre :");
+        jLabel2.setText("Nombre Gasto :");
 
-        jLabel3.setText("numero");
+        jLabel3.setText("Costo :");
 
         jButton1.setText("Editar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,60 +68,41 @@ public class LocalProveedorEditar extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Correo");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(61, 61, 61)
-                        .addComponent(correo_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(56, 56, 56)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(127, 127, 127)
+                    .addGap(37, 37, 37)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(numero_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Nombre_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(64, 64, 64)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(7, 7, 7)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Costo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Nombre_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(154, 154, 154)
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(36, 36, 36)
-                .addComponent(jLabel2)
-                .addGap(42, 42, 42)
-                .addComponent(jLabel3)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(correo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(69, 69, 69))
+                .addContainerGap(226, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -131,28 +110,34 @@ public class LocalProveedorEditar extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addComponent(jButton2))
                     .addGap(26, 26, 26)
-                    .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(Nombre_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Nombre_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2))
                     .addGap(18, 18, 18)
-                    .addComponent(numero_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(77, 77, 77)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Costo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3))
+                    .addContainerGap(79, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         MysqlConexion conexion = new MysqlConexion();
-
+        
         String usuario = "Venus";
+        String apellido = "Baquero";
         String contrasena = "gerente";
-
+        
         conexion.setPassword(contrasena);
         conexion.setUser(usuario);
+        
         conexion.setPassword(contrasena);
         conexion.setUser(usuario);
 
@@ -162,13 +147,14 @@ public class LocalProveedorEditar extends javax.swing.JFrame {
 
         String nombre = Nombre_txt.getText();
 
-        String S_Numero = numero_txt.getText();
+        String cantidad = Costo_txt.getText();
 
-        String Correo = correo_txt.getText();
+
+
 
         try {
 
-            if (("".equals(S_ID)) || ("".equals(nombre)) || ("".equals(S_Numero)) || ("".equals(Correo))) {
+            if (("".equals(cantidad)) || ("".equals(S_ID)) || ("".equals(nombre))) {
 
                 JOptionPane.showMessageDialog(this, "La informacion esta incompleta vuelva a intentar");
 
@@ -176,29 +162,27 @@ public class LocalProveedorEditar extends javax.swing.JFrame {
 
                 int id = Integer.parseInt(S_ID);
 
-                int Numero = Integer.parseInt(S_Numero);
 
-                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de actualizar el proveedor con el ID :" + id + "?\nnombre :" + nombre);
+
+                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de actualizar el producto con el ID "+id+" con la siguiente informacion ?\nnombre :"+nombre+"\ncantidad :"+cantidad);
 
                 if (i == 0) {
 
                     try {
 
-                        PreparedStatement actualizar = conectar.prepareStatement("Update Proveedor set prov_nombre = ?, prov_número = ?, prov_correo = ? where prov_id = ?");
+                        String Consulta = "{call editar_Insumo (?,?,?)}";
 
-                        actualizar.setString(1, nombre);
-                        actualizar.setInt(2, Numero);
-                        actualizar.setString(3, Correo);
-                        actualizar.setInt(4, id);
+                        CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
+                        
+                        procedimiento.setInt(1, id);
+                        procedimiento.setString(2, nombre);
+                        procedimiento.setString(3, cantidad);
 
                         procedimiento.execute();
-
-                        JOptionPane.showMessageDialog(this, "Se realizo el pago con exito");
 
                         JOptionPane.showMessageDialog(this, "La informacion se ha actualizado con exito");
 
                     } catch (SQLException ex) {
-                        
                         Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
                         JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
                     }
@@ -208,12 +192,11 @@ public class LocalProveedorEditar extends javax.swing.JFrame {
                     dispose();
                 }
 
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
+            }} catch (Exception ex) {
+                Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
 
-        }
+            }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -239,35 +222,33 @@ public class LocalProveedorEditar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProveedorInsumoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProveedorInsumoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProveedorInsumoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LocalProveedorEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocalProveedorInsumoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LocalProveedorEditar().setVisible(true);
+                new LocalProveedorInsumoEditar().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Costo_txt;
     private javax.swing.JTextField Nombre_txt;
-    private javax.swing.JTextField correo_txt;
     private javax.swing.JTextField id_txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField numero_txt;
     // End of variables declaration//GEN-END:variables
 }
