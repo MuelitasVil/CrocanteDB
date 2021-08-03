@@ -207,6 +207,7 @@ public class ClientePrincipal extends javax.swing.JFrame {
                 + " left join empleado on (per_id = Persona_per_id)"
                 + " where Persona_per_id is null;";
         searchFormattedTextField.setText(null);
+        searchFormattedTextField.setValue(null);
         llenarInfoClientes(clienteQuery);
     }//GEN-LAST:event_refreshButtonActionPerformed
 
