@@ -32,60 +32,66 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         Texto_Usuario = new javax.swing.JTextField();
+        jButton_Aceptar = new javax.swing.JButton();
+        textoContrasena = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        Ver = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton_Registrar = new javax.swing.JButton();
-        jButton_Aceptar = crearBoton();
-        Texto_Apellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        textoContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 102, 255));
+        setMaximumSize(new java.awt.Dimension(230, 260));
+        setMinimumSize(new java.awt.Dimension(230, 260));
+        setPreferredSize(new java.awt.Dimension(330, 230));
+        setSize(new java.awt.Dimension(230, 260));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        Texto_Usuario.setToolTipText("");
         Texto_Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Texto_UsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(Texto_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 310, 41));
+        getContentPane().add(Texto_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 140, -1));
 
-        jLabel1.setText("Contraseña");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 92, 38));
-
-        jLabel2.setText("Apellido");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 102, 38));
-
-        jLabel3.setText("Inicio");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
-
-        jButton_Registrar.setText("Registrar");
-        jButton_Registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_RegistrarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 150, 70));
-
-        jButton_Aceptar.setText("Aceptar");
+        jButton_Aceptar.setText("Ingresar");
         jButton_Aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 140, 70));
+        getContentPane().add(jButton_Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 90, -1));
+        getContentPane().add(textoContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, 30));
 
-        Texto_Apellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Texto_ApellidoActionPerformed(evt);
+        jLabel1.setForeground(new java.awt.Color(240, 109, 19));
+        jLabel1.setText("CONTRASEÑA");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+
+        jLabel2.setForeground(new java.awt.Color(240, 109, 19));
+        jLabel2.setText("USUARIO");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        Ver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VerMouseClicked(evt);
             }
         });
-        getContentPane().add(Texto_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 310, 41));
+        getContentPane().add(Ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
 
-        jLabel4.setText("Usuario");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 102, 38));
-        getContentPane().add(textoContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 222, 310, 40));
+        jPanel1.setBackground(new java.awt.Color(240, 109, 19));
+        jPanel1.setForeground(new java.awt.Color(0, 99, 154));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, -10, 110, 220));
+
+        jLabel3.setForeground(new java.awt.Color(240, 109, 19));
+        jLabel3.setText("CONTRASEÑA");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+
+        jLabel4.setForeground(new java.awt.Color(240, 109, 19));
+        jLabel4.setText("USUARIO");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -98,7 +104,6 @@ public class Inicio extends javax.swing.JFrame {
 
 // Se llaman todos los string necdesarios de los cuadros de texto
         String usuario = Texto_Usuario.getText();
-        String apellido = Texto_Apellido.getText();
         String contrasena = String.valueOf(textoContrasena.getPassword());
 
 // Se envia al objeto conexion el usuario y la contrasena
@@ -114,22 +119,29 @@ public class Inicio extends javax.swing.JFrame {
 // Preparamos la consulta para buscar el cargo de la persona y que pueda acceder a su vista correspondiente
 
                 String consulta = "select Mostrar_Cargo('" + usuario + "')";
-
-                PreparedStatement s = conectar.prepareStatement(consulta);
-                ResultSet resultado = s.executeQuery();
+                String NombreC =  "Call Mostrar_Nombre('" + usuario + "');";
+                
+                PreparedStatement a = conectar.prepareStatement(consulta);
+                ResultSet resultado = a.executeQuery();
                 resultado.next();
-
+                
+                PreparedStatement b = conectar.prepareStatement(NombreC);
+                ResultSet resultado2 = b.executeQuery();
+                resultado2.next();
+                
+                               
                 String cargo = resultado.getString(1);
-
+                String Apellido = resultado2.getString(2);
+                
                 if (GERENTE.equals(cargo)) {
 
-                    JOptionPane.showMessageDialog(null, "Bienvenido Gerente : " + usuario + " " + apellido);
+                    JOptionPane.showMessageDialog(null, "Bienvenido Gerente : " + usuario + " " +""+ Apellido);
                     new Menu().setVisible(true);
                     dispose();
 
                 } else if (CAJERO.equals(cargo)) {
 
-                    JOptionPane.showMessageDialog(null, "Bienvenido Cajero : " + usuario + " " + apellido);
+                    JOptionPane.showMessageDialog(null, "Bienvenido Cajero : " + usuario + " " + Apellido);
 
                 } else {
 
@@ -154,18 +166,16 @@ public class Inicio extends javax.swing.JFrame {
 // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_AceptarActionPerformed
+
+    private void VerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerMouseClicked
+     if (Ver.isSelected()) {
+      textoContrasena.setEchoChar((char)0); //password = JPasswordField
+   } else {
+      textoContrasena.setEchoChar('*');
+   }   // TODO add your handling code here:
+    }//GEN-LAST:event_VerMouseClicked
     private static final String CAJERO = "Cajero";
     private static final String GERENTE = "Gerente";
-
-    private void jButton_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarActionPerformed
-
-        new Registro().setVisible(true);
-
-    }//GEN-LAST:event_jButton_RegistrarActionPerformed
-
-    private void Texto_ApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Texto_ApellidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Texto_ApellidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,14 +214,14 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTextField Texto_Apellido;
     public javax.swing.JTextField Texto_Usuario;
+    private javax.swing.JCheckBox Ver;
     public javax.swing.JButton jButton_Aceptar;
-    public javax.swing.JButton jButton_Registrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField textoContrasena;
     // End of variables declaration//GEN-END:variables
 
