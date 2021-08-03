@@ -99,7 +99,7 @@ public class MysqlConexion {
 
     // ------------------------------ Funcion para contar Gastos ------------------------
     // ----------------------------- Funcion para cerrar la conexion ------------------------------------------------
-    public static int Contar_tablas(Connection conexion, String tabla) {
+    public static int ContarTablas(Connection conexion, String tabla) {
 
         try {
 

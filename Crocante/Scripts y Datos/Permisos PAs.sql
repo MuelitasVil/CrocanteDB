@@ -19,3 +19,5 @@ GRANT EXECUTE ON PROCEDURE stop_domicilio TO 'Gerencia'@'localhost';
 GRANT EXECUTE ON PROCEDURE Venta_Producto_dia TO 'Gerencia'@'localhost';
 GRANT EXECUTE ON PROCEDURE time_domicilio TO 'Gerencia'@'localhost';
 GRANT EXECUTE ON PROCEDURE time_domicilio_Barrio TO 'Gerencia'@'localhost';
+GRANT EXECUTE ON PROCEDURE ingreso_empleado TO 'Gerencia'@'localhost';
+GRANT EXECUTE ON PROCEDURE update_empleado TO 'Gerencia'@'localhost';

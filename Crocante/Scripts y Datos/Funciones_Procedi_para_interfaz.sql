@@ -141,3 +141,68 @@ BEGIN
     END IF;
 END $$
 DELIMITER ;
+
+
+DROP PROCEDURE if exists ingreso_empleado;
+DELIMITER $$
+CREATE PROCEDURE ingreso_empleado (CC BIGINT(10), horas INT, sede INT, cargo VARCHAR(30), salario INT) 
+BEGIN
+	DECLARE car INT;
+    DECLARE empId INT;
+    SELECT car_id INTO car FROM cargo WHERE car_nombre = cargo;
+    
+    START TRANSACTION;
+		INSERT INTO Empleado (emp_horasSemanales, Sede_sede_id, Cargo_car_id, Persona_per_id, emp_estado) 
+			VALUES (horas, sede, car, CC, 1);
+		
+        SELECT emp_id INTO empId FROM Empleado WHERE Persona_per_id = CC;
+        
+		INSERT INTO Salario VALUES (empId, salario);
+	COMMIT;
+END $$
+DELIMITER ;
+
+
+DROP PROCEDURE if exists update_empleado;
+DELIMITER $$
+CREATE PROCEDURE update_empleado (CC BIGINT(10), horas INT, sede INT, cargo VARCHAR(30), salario INT) 
+BEGIN
+	DECLARE car INT;
+    DECLARE empId INT;
+    SELECT car_id INTO car FROM cargo WHERE car_nombre = cargo;
+    
+    START TRANSACTION;
+		UPDATE Empleado SET emp_horasSemanales = horas, Sede_sede_id = sede, Cargo_car_id = car where Persona_per_id = CC;		
+        SELECT emp_id INTO empId FROM Empleado WHERE Persona_per_id = CC;
+        update salario set sal_valor = salario where Empleado_emp_id = empId ;
+	COMMIT;
+END $$
+DELIMITER ;
+
+select * from persona;
+select * from empleado;
+select * from salario;
+SELECT * FROM CARGO;
+
+
+DELIMITER $$
+CREATE PROCEDURE Mostrar_Nombre(nombre varchar(50))
+BEGIN
+select per_nombre, per_apellido from Cargo join Empleado on (Cargo_car_id = car_id) join Persona on (Persona_per_id = per_id) where nombre=per_nombre;
+END$$
+DELIMITER ;
+DELIMITER $$
+CREATE  PROCEDURE time_domicilio()
+BEGIN 
+SELECT (SEC_TO_TIME(ROUND(AVG(TIME_TO_SEC(dom_tiempoEntrega))))) 
+FROM domicilio JOIN venta ON (ven_id = Venta_ven_id) WHERE ven_fecha between date_sub(now(),INTERVAL 6 MONTH) and now(); 
+END$$
+DELIMITER ;
+DELIMITER $$
+
+CREATE  PROCEDURE time_domicilio_Barrio()
+BEGIN 
+SELECT bar_nombre, SEC_TO_TIME(ROUND(AVG(TIME_TO_SEC(dom_tiempoEntrega)))) 
+FROM domicilio JOIN Barrio ON (bar_id = Barrio_bar_id) GROUP BY bar_id;
+END$$
+DELIMITER ;

@@ -63,5 +63,3 @@ call Editar_producto("H",1,'Hamburguesa', 11);
 
 select * from producto;
 select * from tipo;
-
-

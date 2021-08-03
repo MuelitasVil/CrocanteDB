@@ -27,9 +27,9 @@ public class LocalProducto extends javax.swing.JFrame {
         initComponents();
         llenarDatos();
     }
-    
-        private void llenarDatos() {
-        
+
+    private void llenarDatos() {
+
         MysqlConexion conexion = new MysqlConexion();
 
         String usuario = "Venus";
@@ -41,7 +41,7 @@ public class LocalProducto extends javax.swing.JFrame {
 
         Connection conectar = conexion.iniciarConexion();
 
-        int num_gastos = conexion.Contar_tablas(conectar, "producto");
+        int num_gastos = conexion.ContarTablas(conectar, "producto");
 
         System.out.println(num_gastos);
         try {
@@ -245,8 +245,8 @@ public class LocalProducto extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        new LocalProductoAgregar().setVisible(true);        
-        
+        new LocalProductoAgregar().setVisible(true);
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tipo_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo_txtActionPerformed
@@ -268,7 +268,7 @@ public class LocalProducto extends javax.swing.JFrame {
 
         Connection conectar = conexion.iniciarConexion();
 
-        int num_gastos = conexion.Contar_tablas(conectar, "Producto");
+        int num_gastos = conexion.ContarTablas(conectar, "Producto");
 
         System.out.println(num_gastos);
         String S_Costo = Costo_txt.getText();
@@ -293,87 +293,87 @@ public class LocalProducto extends javax.swing.JFrame {
                     String matris[][] = new String[num_gastos][6];
 
                     Statement s = conectar.createStatement();
-                    ResultSet rs = s.executeQuery("select pro_id, pro_nombre, pro_precio, tip_tipo from Producto join Tipo on (Tipo_tip_id = tip_id) where pro_precio > "+costo+" and pro_estado = 1 order by pro_Id desc");
+                    ResultSet rs = s.executeQuery("select pro_id, pro_nombre, pro_precio, tip_tipo from Producto join Tipo on (Tipo_tip_id = tip_id) where pro_precio > " + costo + " and pro_estado = 1 order by pro_Id desc");
 
                     // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
                     int i = 0;
 
                     while (rs.next()) {
 
-                matris[i][0] = rs.getString(1);
-                matris[i][1] = rs.getString(2);
-                matris[i][2] = rs.getString(3);
-                matris[i][3] = rs.getString(4);
+                        matris[i][0] = rs.getString(1);
+                        matris[i][1] = rs.getString(2);
+                        matris[i][2] = rs.getString(3);
+                        matris[i][3] = rs.getString(4);
 
-                i++;
-
-            }
-
-            System.out.println(matris);
-
-            jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                    matris,
-                    new String[]{
-                        "ID", "Nombre del Producto", "Precio", "Tipo"
-                    }));
-
-                    } catch (SQLException sqle) {
-                        System.out.println("Imposible realizar consulta ... FAIL");
-                        sqle.printStackTrace();
-                    }
-
-                } else {
-
-                    try {
-
-                        if ("".equals(S_Costo)) {
-
-                            costo = 0;
-
-                        } else {
-
-                            costo = Integer.parseInt(S_Costo);
-
-                        }
-
-                        String matris[][] = new String[num_gastos][6];
-
-                        Statement s = conectar.createStatement();
-                        ResultSet rs = s.executeQuery("select pro_id, pro_nombre, pro_precio, tip_tipo from Producto join Tipo on (Tipo_tip_id = tip_id) where pro_precio > "+costo+" and tip_tipo = '"+S_Tipo+"' and pro_estado = 1 order by pro_Id desc;");
-
-                        // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
-                        int i = 0;
-
-                        while (rs.next()) {
-
-                matris[i][0] = rs.getString(1);
-                matris[i][1] = rs.getString(2);
-                matris[i][2] = rs.getString(3);
-                matris[i][3] = rs.getString(4);
-
-                i++;
-
-            }
-
-            System.out.println(matris);
-
-            jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                    matris,
-                    new String[]{
-                        "ID", "Nombre del Producto", "Precio", "Tipo"
-                    }));
-
-                        } catch (SQLException sqle) {
-                            System.out.println("Imposible realizar consulta ... FAIL");
-                            sqle.printStackTrace();
-                        }
+                        i++;
 
                     }
-                } catch (Exception ex) {
-                    Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
 
+                    System.out.println(matris);
+
+                    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                            matris,
+                            new String[]{
+                                "ID", "Nombre del Producto", "Precio", "Tipo"
+                            }));
+
+                } catch (SQLException sqle) {
+                    System.out.println("Imposible realizar consulta ... FAIL");
+                    sqle.printStackTrace();
                 }
+
+            } else {
+
+                try {
+
+                    if ("".equals(S_Costo)) {
+
+                        costo = 0;
+
+                    } else {
+
+                        costo = Integer.parseInt(S_Costo);
+
+                    }
+
+                    String matris[][] = new String[num_gastos][6];
+
+                    Statement s = conectar.createStatement();
+                    ResultSet rs = s.executeQuery("select pro_id, pro_nombre, pro_precio, tip_tipo from Producto join Tipo on (Tipo_tip_id = tip_id) where pro_precio > " + costo + " and tip_tipo = '" + S_Tipo + "' and pro_estado = 1 order by pro_Id desc;");
+
+                    // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
+                    int i = 0;
+
+                    while (rs.next()) {
+
+                        matris[i][0] = rs.getString(1);
+                        matris[i][1] = rs.getString(2);
+                        matris[i][2] = rs.getString(3);
+                        matris[i][3] = rs.getString(4);
+
+                        i++;
+
+                    }
+
+                    System.out.println(matris);
+
+                    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                            matris,
+                            new String[]{
+                                "ID", "Nombre del Producto", "Precio", "Tipo"
+                            }));
+
+                } catch (SQLException sqle) {
+                    System.out.println("Imposible realizar consulta ... FAIL");
+                    sqle.printStackTrace();
+                }
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
+
+        }
 
     }//GEN-LAST:event_Recargar_datos_gastosActionPerformed
 
@@ -382,20 +382,20 @@ public class LocalProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_Costo_txtActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-       
+
         System.out.println("identificado");
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         while (model.getRowCount() > 0) {
             model.setRowCount(0);
         }
         llenarDatos();
-        
+
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
+
         new LocalProductoEliminar().setVisible(true);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -403,9 +403,9 @@ public class LocalProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-     LocalMenu local = new LocalMenu();
-     local.setVisible(true);
-     dispose();            // TODO add your handling code here:
+        LocalMenu local = new LocalMenu();
+        local.setVisible(true);
+        dispose();            // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -415,7 +415,7 @@ public class LocalProducto extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

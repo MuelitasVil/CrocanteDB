@@ -28,7 +28,7 @@ public class LocalProveedorCompras extends javax.swing.JFrame {
         initComponents();
         llenarDatos();
     }
-    
+
     private void llenarDatos() {
         MysqlConexion conexion = new MysqlConexion();
 
@@ -41,7 +41,7 @@ public class LocalProveedorCompras extends javax.swing.JFrame {
 
         Connection conectar = conexion.iniciarConexion();
 
-        int num_gastos = conexion.Contar_tablas(conectar, "proveedor");
+        int num_gastos = conexion.ContarTablas(conectar, "proveedor");
 
         System.out.println(num_gastos);
         try {
@@ -281,14 +281,14 @@ public class LocalProveedorCompras extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        
+
         System.out.println("identificado");
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         while (model.getRowCount() > 0) {
             model.setRowCount(0);
         }
         llenarDatos();
-        
+
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void ID_gastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ID_gastoActionPerformed
@@ -317,7 +317,6 @@ public class LocalProveedorCompras extends javax.swing.JFrame {
 
         String S_id_gasto = ID_gasto1.getText();
 
-
         try {
 
             if (("".equals(S_id_gasto))) {
@@ -328,42 +327,37 @@ public class LocalProveedorCompras extends javax.swing.JFrame {
 
                 int id_gasto = Integer.parseInt(S_id_gasto);
 
-                    int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la compra con el Id "+S_id_gasto);
+                int i = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la compra con el Id " + S_id_gasto);
 
-                    if (i == 0) {
+                if (i == 0) {
 
-                        try {
+                    try {
 
+                        String Consulta = "{call Eliminar_compra_insumo(?)}";
+                        CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
+                        procedimiento.setInt(1, id_gasto);
 
-                            String Consulta = "{call Eliminar_compra_insumo(?)}";
-                            CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
-                            procedimiento.setInt(1, id_gasto);
+                        procedimiento.execute();
 
+                        JOptionPane.showMessageDialog(this, "La informacion se ha actualizado con exito");
 
-                            procedimiento.execute();
+                    } catch (SQLException ex) {
 
-                            JOptionPane.showMessageDialog(this, "La informacion se ha actualizado con exito");
-
-                        } catch (SQLException ex) {
-
-                            Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
-                            JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
-                        }
-
-                    } else if (i == 2) {
-
-                        dispose();
+                        Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "La conexion fallo, vuelva a intentar", "Error de conexion", JOptionPane.ERROR_MESSAGE);
                     }
 
-                } 
+                } else if (i == 2) {
+
+                    dispose();
+                }
+
             }
-         catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
 
-    }
-        
-
+        }
 
     }//GEN-LAST:event_Editar_CompraActionPerformed
 
@@ -403,7 +397,7 @@ public class LocalProveedorCompras extends javax.swing.JFrame {
 
                 int precio = Integer.parseInt(S_precio);
 
-                int i = JOptionPane.showConfirmDialog(this, S_precio+"¿Estas seguro de actualizar la compra con el Id "+S_id_gasto+" Con los siguientes datos : \nCantidad :"+S_cantidad+"?\nPrecio Unitario :");
+                int i = JOptionPane.showConfirmDialog(this, S_precio + "¿Estas seguro de actualizar la compra con el Id " + S_id_gasto + " Con los siguientes datos : \nCantidad :" + S_cantidad + "?\nPrecio Unitario :");
 
                 if (i == 0) {
 
@@ -433,8 +427,7 @@ public class LocalProveedorCompras extends javax.swing.JFrame {
                 }
 
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(LocalGastoInsertar.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Ingrese nuevamente los datos", "Datos incorrectos", JOptionPane.WARNING_MESSAGE);
 
@@ -452,7 +445,7 @@ public class LocalProveedorCompras extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

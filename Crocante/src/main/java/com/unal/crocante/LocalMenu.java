@@ -5,6 +5,8 @@
  */
 package com.unal.crocante;
 
+import com.unal.crocante.empleado.EmpleadoPrincipal;
+
 /**
  *
  * @author Manuel Martinez
@@ -118,10 +120,10 @@ public class LocalMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GastosActionPerformed
-        
+
         LocalGasto gasto = new LocalGasto();
         gasto.setVisible(true);
-        dispose(); 
+        dispose();
 
     }//GEN-LAST:event_GastosActionPerformed
 
@@ -138,20 +140,16 @@ public class LocalMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_ProveedoresActionPerformed
 
     private void InsumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsumosActionPerformed
-       LocalProducto prov = new LocalProducto();
+        LocalProducto prov = new LocalProducto();
         prov.setVisible(true);
         dispose();// TODO add your handling code here:
     }//GEN-LAST:event_InsumosActionPerformed
 
     private void EmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpleadosActionPerformed
-    LocalEmpleado prov = new LocalEmpleado();
-    prov.setVisible(true);  
-    dispose();// TODO add your handling code here:
+        EmpleadoPrincipal prov = new EmpleadoPrincipal();
+        prov.setVisible(true);
+
     }//GEN-LAST:event_EmpleadosActionPerformed
-
-
-    
-
 
     /**
      * @param args the command line arguments
@@ -160,7 +158,7 @@ public class LocalMenu extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

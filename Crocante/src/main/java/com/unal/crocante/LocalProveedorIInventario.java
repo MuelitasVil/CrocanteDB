@@ -44,7 +44,7 @@ public class LocalProveedorIInventario extends javax.swing.JFrame {
 
         Connection conectar = conexion.iniciarConexion();
 
-        int num_gastos = conexion.Contar_tablas(conectar, "Proveedor");
+        int num_gastos = conexion.ContarTablas(conectar, "Proveedor");
 
         System.out.println(num_gastos);
         try {
@@ -281,7 +281,7 @@ public class LocalProveedorIInventario extends javax.swing.JFrame {
 
                 int id = Integer.parseInt(S_ID);
 
-                int num_gastos = conexion.Contar_tablas(conectar, "proveedor");
+                int num_gastos = conexion.ContarTablas(conectar, "proveedor");
 
                 System.out.println(num_gastos);
                 try {

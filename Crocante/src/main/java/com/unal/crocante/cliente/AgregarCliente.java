@@ -1,10 +1,13 @@
 package com.unal.crocante.cliente;
 
+import static com.mysql.cj.util.StringUtils.isNullOrEmpty;
 import com.unal.crocante.MysqlConexion;
 import com.unal.crocante.venta.AgregarVenta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -132,7 +135,7 @@ public class AgregarCliente extends javax.swing.JFrame {
 
         editText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         editText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        editText.setText("Agregar Cliente");
+        editText.setText("Agregar Persona");
 
         addBtn.setText("Aceptar");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -185,25 +188,25 @@ public class AgregarCliente extends javax.swing.JFrame {
         String nombre = null;
         String apellido = null;
         String direccion = null;
-        long phone = 0;
+        Long phone = null;
         String correo = null;
 
         try {
             id = Long.parseLong(idFormattedTextField.getText());
             nombre = nombreTextField.getText();
-            if (!(apellidoTextField.getText().equals(null))) {
+            if (!isNullOrEmpty(apellidoTextField.getText())) {
                 apellido = apellidoTextField.getText();
             }
 
-            if (!dirTextField.getText().equals(null)) {
+            if (!isNullOrEmpty(dirTextField.getText())) {
                 direccion = dirTextField.getText();
             }
 
-            if (!phoneFormattedTextField.getText().equals(null)) {
+            if (!isNullOrEmpty(phoneFormattedTextField.getText())) {
                 phone = Long.parseLong(phoneFormattedTextField.getText());
             }
 
-            if (!mailTextField.getText().equals(null)) {
+            if (!isNullOrEmpty(mailTextField.getText())) {
                 correo = mailTextField.getText();
             }
 
@@ -223,7 +226,12 @@ public class AgregarCliente extends javax.swing.JFrame {
             s.setString(2, nombre);
             s.setString(3, apellido);
             s.setString(4, direccion);
-            s.setLong(5, phone);
+            if (Objects.isNull(phone)) {
+                s.setNull(5, Types.BIGINT);
+            } else {
+                s.setLong(5, phone);
+            }
+
             s.setString(6, correo);
 
             int resultado = s.executeUpdate();
