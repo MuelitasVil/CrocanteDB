@@ -1,9 +1,17 @@
 package com.unal.crocante;
 
+import com.mysql.cj.jdbc.CallableStatement;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -112,12 +120,27 @@ public class Inicio extends javax.swing.JFrame {
 
 // Se llama la funcion iniciarConexion() y se crea la variable conectar que va a servir para todo lo de mysql
         Connection conectar = conexion.iniciarConexion();
+        if (conectar != null)
+            
+        try {
+            String Consulta = "{call insertar_sesion('"+usuario+"')}";
+
+            CallableStatement procedimiento = (CallableStatement) conectar.prepareCall(Consulta);
+
+            procedimiento.execute();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        
+      
 
 // Se comprueba si la conexion fue exitosa
         if (conectar != null) {
             try {
 // Preparamos la consulta para buscar el cargo de la persona y que pueda acceder a su vista correspondiente
-
+                
                 String consulta = "select Mostrar_Cargo('" + usuario + "')";
                 String NombreC =  "Call Mostrar_Nombre('" + usuario + "');";
                 
@@ -142,6 +165,8 @@ public class Inicio extends javax.swing.JFrame {
                 } else if (CAJERO.equals(cargo)) {
 
                     JOptionPane.showMessageDialog(null, "Bienvenido Cajero : " + usuario + " " + Apellido);
+                    new Vista_caja().setVisible(true);
+                    dispose();
 
                 } else {
 

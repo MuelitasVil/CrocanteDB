@@ -5,8 +5,10 @@
  */
 package com.unal.crocante.venta;
 
+import com.unal.crocante.CalificacionPromedio;
 import com.unal.crocante.Menu;
 import com.unal.crocante.MysqlConexion;
+import com.unal.crocante.Vista_caja;
 import com.unal.crocante.venta.domicilio.VerDomicilio;
 import com.unal.crocante.venta.opinion.DarOpinion;
 import com.unal.crocante.venta.pedido.VerPedido;
@@ -207,9 +209,48 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBtnActionPerformed
-        Menu menu = new Menu();
-        menu.setVisible(true);
-        dispose();
+        
+        try {
+           
+            MysqlConexion conexion = new MysqlConexion();
+
+            String usuario = "Venus";
+            String apellido = "Baquero";
+            String contrasena = "gerente";
+
+            conexion.setPassword(contrasena);
+            conexion.setUser(usuario);
+
+            Connection conectar = conexion.iniciarConexion();
+            
+            PreparedStatement s = conectar.prepareStatement("SELECT car_nombre FROM Persona join Empleado on (per_id = persona_per_id) join Sesion on (a = per_nombre) join Cargo on (car_id = Cargo_car_id);");
+
+            ResultSet resultado = s.executeQuery();
+
+            resultado.next();
+            
+            String cargo = resultado.getString(1);
+            
+            System.out.println(cargo);
+            
+            if ("Cajero".equals(cargo)){
+                
+                 Vista_caja m = new Vista_caja();
+                 m.setVisible(true);
+                 dispose();
+            
+            }else{
+     
+                 Menu m = new Menu();
+                 m.setVisible(true);
+                 dispose();   
+            
+            
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CalificacionPromedio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_volverBtnActionPerformed
 
     private void deliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryBtnActionPerformed
