@@ -63,6 +63,8 @@ public class CalificacionCliente extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         calificacion = new javax.swing.JTable();
         jSeparator5 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,7 +80,6 @@ public class CalificacionCliente extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(390, 403));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -166,6 +167,12 @@ public class CalificacionCliente extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 140));
         getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 470, 10));
+
+        jPanel1.setBackground(new java.awt.Color(240, 109, 19));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 40));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 530, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -263,7 +270,7 @@ public class CalificacionCliente extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
       
         MenuCliente mc = new MenuCliente();
-        mc.setVisible(false);
+        mc.setVisible(true);
         dispose();       // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -425,6 +432,8 @@ public class CalificacionCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
