@@ -261,7 +261,10 @@ public class CalificacionCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      dispose();        // TODO add your handling code here:
+      
+        MenuCliente mc = new MenuCliente();
+        mc.setVisible(false);
+        dispose();       // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void estrellasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estrellasActionPerformed
