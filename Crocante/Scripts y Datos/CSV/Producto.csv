@@ -1,48 +1,48 @@
 pro_id;pro_nombre;pro_precio;tip_id;pro_estado
-11;H.Sencilla;7000;1;1
-12;H.Especial;9000;1;1
-13;H.Ranchera;11500;1;1
-14;H.Criolla;11000;1;1
-15;H.Hawaiana;10000;1;1
-16;H.Apanada;9000;1;1
-17;H.Pollofit;12000;1;1
-18;H.Mexicana;13000;1;1
-19;H.Premium;12000;1;1
-21;P.Sencillo;6000;2;1
-22;P.Americano;8000;2;1
-23;P.Ranchero;10000;2;1
-24;P.Criollo;10000;2;1
-25;P.Choriperro;8000;2;1
-26;P.Trasmilenio;13000;2;1
-27;P.TrasmilenioSobrecupo;19000;2;1
-31;Alitas;10000;3;1
-32;AlitasHOT;11000;3;1
-33;Alitas Familiar;30000;3;1
-34;Costillas;12000;3;1
-35;Pechuga Asada;12000;3;1
-36;Churrasco;15000;3;1
-37;Parrillada;35000;3;1
-41;Patacón;15000;4;1
-42;MiniEmpanada;3500;4;1
-51;M. Sencilla;10000;5;1
-52;M. Especial;13000;5;1
-53;M. Superespecial;18000;5;1
-61;S. Sencilla;7000;6;1
-62;S. Especial;10000;6;1
-63;S. Superespecial;15000;6;1
-71;Gaseosa/te 350;2500;7;1
-72;Gaseosa 250;2000;7;1
-73;Jugos en agua;3500;7;1
-74;Jugos en leche;4500;7;1
-75;Limonada;3500;7;1
-76;Limonada Hierbabuena;4000;7;1
-77;Cerveza 2500;2500;7;1
-78;Cerveza 4000;4000;7;1
-79;Malteada;7500;7;1
-81;Papa francesa o criolla;3000;8;1
-82;Papa en casquitos;3500;8;1
-83;Queso doble crema;1500;8;1
-84;Queso cheddar;2000;8;1
-85;Tocineta;2000;8;1
-86;Carne hamburgesa;3000;8;1
-87;Huevos de codornis;3000;8;1
+101;H.Sencilla;7000;1;1
+102;H.Especial;9000;1;1
+103;H.Ranchera;11500;1;1
+104;H.Criolla;11000;1;1
+105;H.Hawaiana;10000;1;1
+106;H.Apanada;9000;1;1
+107;H.Pollofit;12000;1;1
+108;H.Mexicana;13000;1;1
+109;H.Premium;12000;1;1
+201;P.Sencillo;6000;2;1
+202;P.Americano;8000;2;1
+203;P.Ranchero;10000;2;1
+204;P.Criollo;10000;2;1
+205;P.Choriperro;8000;2;1
+206;P.Trasmilenio;13000;2;1
+207;P.TrasmilenioSobrecupo;19000;2;1
+301;Alitas;10000;3;1
+302;AlitasHOT;11000;3;1
+303;Alitas Familiar;30000;3;1
+304;Costillas;12000;3;1
+305;Pechuga Asada;12000;3;1
+306;Churrasco;15000;3;1
+307;Parrillada;35000;3;1
+401;Patacón;15000;4;1
+402;MiniEmpanada;3500;4;1
+501;M. Sencilla;10000;5;1
+502;M. Especial;13000;5;1
+503;M. Superespecial;18000;5;1
+601;S. Sencilla;7000;6;1
+602;S. Especial;10000;6;1
+603;S. Superespecial;15000;6;1
+701;Gaseosa/te 350;2500;7;1
+702;Gaseosa 250;2000;7;1
+703;Jugos en agua;3500;7;1
+704;Jugos en leche;4500;7;1
+705;Limonada;3500;7;1
+706;Limonada Hierbabuena;4000;7;1
+707;Cerveza 2500;2500;7;1
+708;Cerveza 4000;4000;7;1
+709;Malteada;7500;7;1
+801;Papa francesa o criolla;3000;8;1
+802;Papa en casquitos;3500;8;1
+803;Queso doble crema;1500;8;1
+804;Queso cheddar;2000;8;1
+805;Tocineta;2000;8;1
+806;Carne hamburgesa;3000;8;1
+807;Huevos de codornis;3000;8;1

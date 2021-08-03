@@ -254,6 +254,10 @@ select * from detallecomprainsumo;
 select * from gasto;
 select * from proveedor;
 select * from compraalproveedor;
+select * from producto;
 
+select pro_id, pro_nombre, pro_precio, tip_tipo from producto join Tipo on (Tipo_tip_id = tip_id);
 
+select * from tipo;
 
+select * from Producto join Tipo on (Tipo_tip_id = tip_id) where pro_precio > costo and tip_tipo = tipo order by pro_Id desc

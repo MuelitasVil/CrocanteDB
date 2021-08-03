@@ -1,6 +1,9 @@
 package com.unal.crocante.cliente;
 
+import com.unal.crocante.CalificacionPromedio;
+import com.unal.crocante.Menu;
 import com.unal.crocante.MysqlConexion;
+import com.unal.crocante.Vista_caja;
 import com.unal.crocante.venta.AgregarVenta;
 import com.unal.crocante.venta.VentaPrincipal;
 import java.sql.Connection;
@@ -258,7 +261,34 @@ public class ClientePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_sellButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        dispose();
+        try {
+           
+            PreparedStatement s = conexion.prepareStatement("SELECT car_nombre FROM Persona join Empleado on (per_id = persona_per_id) join Sesion on (a = per_nombre) join Cargo on (car_id = Cargo_car_id);");
+
+            ResultSet resultado = s.executeQuery();
+
+            resultado.next();
+            
+            String cargo = resultado.getString(1);
+            
+            System.out.println(cargo);
+            
+            if ("Cajero".equals(cargo)){
+                
+                 Vista_caja m = new Vista_caja();
+                 m.setVisible(true);
+                 dispose();
+            
+            }else{
+                
+                 dispose();   
+            
+            
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CalificacionPromedio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
