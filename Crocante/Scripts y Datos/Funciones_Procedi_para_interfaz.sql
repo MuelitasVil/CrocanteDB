@@ -137,3 +137,48 @@ BEGIN
     END IF;
 END $$
 DELIMITER ;
+
+
+DROP PROCEDURE if exists ingreso_empleado;
+DELIMITER $$
+CREATE PROCEDURE ingreso_empleado (CC BIGINT(10), horas INT, sede INT, cargo VARCHAR(30), salario INT) 
+BEGIN
+	DECLARE car INT;
+    DECLARE empId INT;
+    SELECT car_id INTO car FROM cargo WHERE car_nombre = cargo;
+    
+    START TRANSACTION;
+		INSERT INTO Empleado (emp_horasSemanales, Sede_sede_id, Cargo_car_id, Persona_per_id, emp_estado) 
+			VALUES (horas, sede, car, CC, 1);
+		
+        SELECT emp_id INTO empId FROM Empleado WHERE Persona_per_id = CC;
+        
+		INSERT INTO Salario VALUES (empId, salario);
+	COMMIT;
+END $$
+DELIMITER ;
+
+
+DROP PROCEDURE if exists update_empleado;
+DELIMITER $$
+CREATE PROCEDURE update_empleado (CC BIGINT(10), horas INT, sede INT, cargo VARCHAR(30), salario INT) 
+BEGIN
+	DECLARE car INT;
+    DECLARE empId INT;
+    SELECT car_id INTO car FROM cargo WHERE car_nombre = cargo;
+    
+    START TRANSACTION;
+		UPDATE Empleado SET emp_horasSemanales = horas, Sede_sede_id = sede, Cargo_car_id = car where Persona_per_id = CC;		
+        SELECT emp_id INTO empId FROM Empleado WHERE Persona_per_id = CC;
+        update salario set sal_valor = salario where Empleado_emp_id = empId ;
+	COMMIT;
+END $$
+DELIMITER ;
+
+select * from persona;
+select * from empleado;
+select * from salario;
+SELECT * FROM CARGO;
+
+
+

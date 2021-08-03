@@ -223,6 +223,7 @@ public class AgregarEmpleado extends javax.swing.JFrame {
             resultado.next();
 
             if (resultado.getInt(1) > 0) {
+                JOptionPane.showMessageDialog(this, "Ya existe la persona", "Aviso", JOptionPane.WARNING_MESSAGE);
             } else {
                 AgregarCliente emp = new AgregarCliente();
                 emp.setVisible(true);

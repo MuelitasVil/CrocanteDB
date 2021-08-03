@@ -75,6 +75,7 @@ public class EditarCliente extends javax.swing.JFrame {
 
         idLabel.setText("Id Cliente:");
 
+        idFormattedTextField.setEditable(false);
         idFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         nombreLabel.setText("Nombre:");

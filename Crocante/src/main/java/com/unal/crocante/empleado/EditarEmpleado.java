@@ -29,6 +29,7 @@ public class EditarEmpleado extends javax.swing.JFrame {
         this.name = name;
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         conexion = conector.iniciarConexion();
+        cargarCargos();
         llenarInfoEmpleado();
     }
 
@@ -210,9 +211,10 @@ public class EditarEmpleado extends javax.swing.JFrame {
             resultado.next();
 
             if (resultado.getInt(1) > 0) {
-            } else {
-                EditarCliente emp = new EditarCliente();
+                EditarCliente emp = new EditarCliente(id);
                 emp.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "No existe la persona", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
 
         } catch (SQLException ex) {
@@ -280,6 +282,7 @@ public class EditarEmpleado extends javax.swing.JFrame {
                 d = conexion.prepareStatement(desactivar);
                 d.setInt(1, 0);
                 d.setInt(2, resultado.getInt(1));
+                dispose();
 
             } catch (SQLException ex) {
                 Logger.getLogger(EditarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
@@ -370,14 +373,31 @@ public class EditarEmpleado extends javax.swing.JFrame {
                 cedula.next();
 
                 ccFormattedTextField.setValue(cedula.getLong(1));
-            } catch (SQLException ex) {
-                Logger.getLogger(EditarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(EditarEmpleado.class.getName()).log(Level.SEVERE, null, ex1);
 
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(EditarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "No se insertaron datos validos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void cargarCargos() {
+        String cargo = "select car_nombre"
+                + " from Cargo;";
+        PreparedStatement s;
+        try {
+            s = conexion.prepareStatement(cargo);
+            ResultSet resultado = s.executeQuery();
+            while (resultado.next()) {
+                String car = resultado.getString(1);
+                cargoComboBox.addItem(car);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
