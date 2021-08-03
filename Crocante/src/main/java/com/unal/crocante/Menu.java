@@ -30,7 +30,7 @@ public class Menu extends javax.swing.JFrame {
 
         Clientes = new javax.swing.JButton();
         Venta = new javax.swing.JButton();
-        Ganancias = new javax.swing.JButton();
+        Estadisticas = new javax.swing.JButton();
         Local = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -50,10 +50,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        Ganancias.setText("Ganancias");
-        Ganancias.addActionListener(new java.awt.event.ActionListener() {
+        Estadisticas.setText("Estadísticas");
+        Estadisticas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GananciasActionPerformed(evt);
+                EstadisticasActionPerformed(evt);
             }
         });
 
@@ -84,7 +84,7 @@ public class Menu extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Ganancias, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Estadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -99,7 +99,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Ganancias, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Estadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -118,11 +118,11 @@ public class Menu extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_VentaActionPerformed
 
-    private void GananciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GananciasActionPerformed
-        Ganancias ganancia = new Ganancias();
-        ganancia.setVisible(true);
+    private void EstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstadisticasActionPerformed
+        CalificacionPromedio analisis = new CalificacionPromedio();
+        analisis.setVisible(true);
         dispose();
-    }//GEN-LAST:event_GananciasActionPerformed
+    }//GEN-LAST:event_EstadisticasActionPerformed
 
     private void LocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocalActionPerformed
         LocalMenu local = new LocalMenu();
@@ -168,7 +168,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Clientes;
-    public javax.swing.JButton Ganancias;
+    public javax.swing.JButton Estadisticas;
     public javax.swing.JButton Local;
     public javax.swing.JButton Venta;
     private javax.swing.JLabel jLabel1;

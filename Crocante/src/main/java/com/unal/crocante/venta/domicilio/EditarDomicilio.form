@@ -23,13 +23,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jPanel1" max="32767" attributes="0"/>
-                          <Component id="editText" max="32767" attributes="0"/>
+                          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="deliveryText" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -39,15 +39,15 @@
                       <Component id="cancelBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="46" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="23" max="32767" attributes="0"/>
-              <Component id="editText" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <Component id="deliveryText" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -61,6 +61,15 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JLabel" name="deliveryText">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="18" style="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Editar Domicilio"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JButton" name="addBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
@@ -77,19 +86,19 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="precioLabel" min="-2" pref="91" max="-2" attributes="0"/>
-                      <Component id="formaPagoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="estadoPagoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="modalidadLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="personaIdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="dirLabel" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
+                      <Component id="estadoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="precioLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="empleadoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="barrioIdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="49" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="estadoPagoComboBox" alignment="1" max="32767" attributes="0"/>
-                      <Component id="formaPagoComboBox" max="32767" attributes="0"/>
-                      <Component id="modalidadComboBox" pref="102" max="32767" attributes="0"/>
-                      <Component id="idFormattedTextField" max="32767" attributes="0"/>
-                      <Component id="precioFormattedTextField" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="estadoComboBox" alignment="0" max="32767" attributes="0"/>
+                      <Component id="empleadoComboBox" alignment="0" pref="102" max="32767" attributes="0"/>
+                      <Component id="precioFormattedTextField" alignment="1" max="32767" attributes="0"/>
+                      <Component id="dirTextField" max="32767" attributes="0"/>
+                      <Component id="barrioComboBox" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               </Group>
@@ -99,28 +108,28 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="precioLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="precioFormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dirLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dirTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="formaPagoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="formaPagoComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="estadoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="estadoComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="estadoPagoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="estadoPagoComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="precioLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="precioFormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="modalidadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="modalidadComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="empleadoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="empleadoComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="personaIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="idFormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="barrioIdLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="barrioComboBox" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
               </Group>
@@ -128,11 +137,35 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JLabel" name="dirLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="dirTextField">
+        </Component>
+        <Component class="javax.swing.JLabel" name="estadoLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Estado:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="estadoComboBox">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="No Enviado"/>
+                <StringItem index="1" value="En Camino"/>
+                <StringItem index="2" value="Entregado"/>
+                <StringItem index="3" value="Cancelado"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
         <Component class="javax.swing.JLabel" name="precioLabel">
           <Properties>
-            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="precioFormattedTextField"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Precio:"/>
           </Properties>
         </Component>
@@ -141,93 +174,40 @@
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format format="#0" subtype="-1" type="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="formaPagoLabel">
+        <Component class="javax.swing.JLabel" name="empleadoLabel">
           <Properties>
-            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="formaPagoComboBox"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Forma de Pago:"/>
+            <Property name="text" type="java.lang.String" value="Empleado:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="formaPagoComboBox">
+        <Component class="javax.swing.JComboBox" name="empleadoComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Efectivo"/>
-                <StringItem index="1" value="Tarjeta"/>
-                <StringItem index="2" value="Online"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="estadoPagoLabel">
+        <Component class="javax.swing.JLabel" name="barrioIdLabel">
           <Properties>
-            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="estadoPagoComboBox"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Estado del pago:"/>
+            <Property name="text" type="java.lang.String" value="Barrio:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="estadoPagoComboBox">
+        <Component class="javax.swing.JComboBox" name="barrioComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="No pago"/>
-                <StringItem index="1" value="Pagado"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="modalidadLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Modalidad:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="modalidadComboBox">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Presencial"/>
-                <StringItem index="1" value="Domicilio"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="personaIdLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Id Cliente:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="idFormattedTextField">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="#0" subtype="-1" type="0"/>
-            </Property>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="editText">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Agregar Venta"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="cancelBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>

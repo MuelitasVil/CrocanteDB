@@ -14,11 +14,19 @@ import javax.swing.JOptionPane;
  */
 public class AgregarVenta extends javax.swing.JFrame {
 
+    long idCliente;
+
     /**
      * Creates new form EditarVenta
      */
     public AgregarVenta() {
         initComponents();
+    }
+
+    public AgregarVenta(long idCliente) {
+        this();
+        this.idCliente = idCliente;
+        idFormattedTextField.setValue(idCliente);
     }
 
     /**
@@ -58,6 +66,7 @@ public class AgregarVenta extends javax.swing.JFrame {
         precioLabel.setText("Precio:");
 
         precioFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        precioFormattedTextField.setText("0");
 
         formaPagoLabel.setLabelFor(formaPagoComboBox);
         formaPagoLabel.setText("Forma de Pago:");
@@ -67,7 +76,7 @@ public class AgregarVenta extends javax.swing.JFrame {
         estadoPagoLabel.setLabelFor(estadoPagoComboBox);
         estadoPagoLabel.setText("Estado del pago:");
 
-        estadoPagoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No pago", "Pagado", " " }));
+        estadoPagoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No pago", "Pagado" }));
 
         modalidadLabel.setText("Modalidad:");
 
@@ -182,13 +191,13 @@ public class AgregarVenta extends javax.swing.JFrame {
         String formaPago = null;
         String estadoPago = null;
         String modalidad = null;
-        int id = 0;
+        long id = 0;
         try {
             precio = Integer.parseInt(precioFormattedTextField.getText());
             formaPago = formaPagoComboBox.getSelectedItem().toString();
             estadoPago = estadoPagoComboBox.getSelectedItem().toString();
             modalidad = modalidadComboBox.getSelectedItem().toString();
-            id = Integer.parseInt(idFormattedTextField.getText());
+            id = Long.parseLong(idFormattedTextField.getText());
 
         } catch (NumberFormatException numberFormatException) {
             Logger.getLogger(AgregarVenta.class.getName()).log(Level.SEVERE, null, numberFormatException);
@@ -197,7 +206,7 @@ public class AgregarVenta extends javax.swing.JFrame {
         }
 
         String consulta = "insert into venta (ven_fecha, ven_precioTotal, ven_formaPago, ven_estadoPago, ven_modalidad, ven_diaSemana, Persona_per_id, Sede_sede_id,ven_estado) "
-                + "        values (curdate(), " + precio + ", '" + formaPago + "', '" + estadoPago + "', '" + modalidad + "', dayname(curdate()), " + id + ", 1, 1);";
+                + "        values (now(), " + precio + ", '" + formaPago + "', '" + estadoPago + "', '" + modalidad + "', dayname(curdate()), " + id + ", 1, 1);";
         System.out.println(consulta);
 
         PreparedStatement s;

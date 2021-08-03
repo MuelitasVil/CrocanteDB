@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unal.crocante.venta.pedido;
 
 import com.unal.crocante.MysqlConexion;
@@ -31,17 +26,16 @@ public class AgregarPedido extends javax.swing.JFrame {
      */
     public AgregarPedido() {
         initComponents();
-
-        llenarInfoMenu();
     }
 
     public AgregarPedido(int idVenta) {
         this();
         this.idVenta = idVenta;
-        llenarInfoMenu();
 
         MysqlConexion conector = new MysqlConexion("Venus", "gerente");
         conexion = conector.iniciarConexion();
+        cargarTipos();
+        llenarInfoMenu();
     }
 
     /**
@@ -99,7 +93,7 @@ public class AgregarPedido extends javax.swing.JFrame {
         seleccionLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         seleccionLabel.setText("Crear Pedido");
 
-        menuComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Menu", "Hamburguesa", "Perro Caliente", "Carnes", "Varios", "Mazorcada", "Salchipapa", "Bebidas", "Adiciones" }));
+        menuComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Menu" }));
         menuComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuComboBoxActionPerformed(evt);
@@ -185,7 +179,7 @@ public class AgregarPedido extends javax.swing.JFrame {
         if (row >= 0) {
             int producto = (int) menu.getModel().getValueAt(row, 0);
             System.out.println(producto);
-            int cedula = obtenerCedula();
+            long cedula = obtenerCedula();
 
             String queryInsert = "insert into pedido values (" + producto + "," + idVenta + "," + cedula + ");";
             PreparedStatement s;
@@ -201,15 +195,15 @@ public class AgregarPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addBtnActionPerformed
 
-    private int obtenerCedula() {
-        int cc = -1;
+    private long obtenerCedula() {
+        long cc = -1;
         String queryGetCc = "select get_CC_venta(" + idVenta + ");";
         PreparedStatement s;
         try {
             s = conexion.prepareStatement(queryGetCc);
             ResultSet result = s.executeQuery();
             result.next();
-            cc = result.getInt(1);
+            cc = result.getLong(1);
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -262,13 +256,6 @@ public class AgregarPedido extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void llenarInfoMenu() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        MysqlConexion conector = new MysqlConexion("Venus", "gerente");
-        Connection conexion = conector.iniciarConexion();
         tipoProd = (String) menuComboBox.getSelectedItem();
         String consulta;
         if (!"Menu".equals(tipoProd)) {
@@ -277,7 +264,7 @@ public class AgregarPedido extends javax.swing.JFrame {
                     + "where tip_tipo = '" + tipoProd + "';";
         } else {
             consulta = "select pro_id, pro_nombre, tip_tipo, pro_precio "
-                    + "from producto join tipo on (tip_id=Tipo_tip_id) ";
+                    + "from producto join tipo on (tip_id=Tipo_tip_id); ";
         }
 
         PreparedStatement s;
@@ -294,6 +281,21 @@ public class AgregarPedido extends javax.swing.JFrame {
                 model.addRow(new Object[]{id, producto, tipo, precio});
             }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void cargarTipos() {
+        String tipos = "select tip_tipo from tipo;";
+        PreparedStatement t;
+        try {
+            t = conexion.prepareStatement(tipos);
+            ResultSet resultado = t.executeQuery();
+            while (resultado.next()) {
+                menuComboBox.addItem(resultado.getString(1));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

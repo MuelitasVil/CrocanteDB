@@ -22,13 +22,13 @@ public class LocalProveedor extends javax.swing.JFrame {
      */
     public LocalProveedor() {
         initComponents();
-        
+
         llenarDatos();
     }
 
     private void llenarDatos() {
         MysqlConexion conexion = new MysqlConexion();
-        
+
         String usuario = "Venus";
         String apellido = "Baquero";
         String contrasena = "gerente";
@@ -49,26 +49,26 @@ public class LocalProveedor extends javax.swing.JFrame {
             ResultSet rs = s.executeQuery("select prov_id, prov_nombre, prov_número, prov_correo from proveedor where prov_estado = 1;");
 
 // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
-int i = 0;
+            int i = 0;
 
-while (rs.next()) {
-    
-    matris[i][0] = rs.getString(1);
-    matris[i][1] = rs.getString(2);
-    matris[i][2] = rs.getString(3);
-    matris[i][3] = rs.getString(4);
-    
-    i++;
-    
-}
+            while (rs.next()) {
 
-System.out.println(matris);
+                matris[i][0] = rs.getString(1);
+                matris[i][1] = rs.getString(2);
+                matris[i][2] = rs.getString(3);
+                matris[i][3] = rs.getString(4);
 
-jTable1.setModel(new javax.swing.table.DefaultTableModel(
-        matris,
-        new String[]{
-            "ID", "Nombre del Proveedor", "numero", "correo"
-        }));
+                i++;
+
+            }
+
+            System.out.println(matris);
+
+            jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                    matris,
+                    new String[]{
+                        "ID", "Nombre del Proveedor", "numero", "correo"
+                    }));
 
         } catch (SQLException sqle) {
             System.out.println("Imposible realizar consulta ... FAIL");
@@ -133,11 +133,6 @@ jTable1.setModel(new javax.swing.table.DefaultTableModel(
         });
 
         jButton4.setText("Borrar Proveedores");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
 
         jButton5.setText("Atras");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +203,7 @@ jTable1.setModel(new javax.swing.table.DefaultTableModel(
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         new LocalProveedorEditar().setVisible(true);
+        new LocalProveedorEditar().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -243,7 +238,7 @@ jTable1.setModel(new javax.swing.table.DefaultTableModel(
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

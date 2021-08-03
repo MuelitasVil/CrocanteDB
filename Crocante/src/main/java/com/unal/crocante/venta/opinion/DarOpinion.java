@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author JFCowboy
+ * @author VenusBaquero
  */
 public class DarOpinion extends javax.swing.JFrame {
 
@@ -244,7 +244,8 @@ public class DarOpinion extends javax.swing.JFrame {
 
         int stars = starSlider.getValue();
         String comment = commentTextArea.getText();
-        int cc = -1;
+        long cc = -1;
+        int idComment = -1;
 
         String getCC = "select Persona_per_id from Venta where ven_id = " + idVenta + ";";
         PreparedStatement s;
@@ -252,7 +253,29 @@ public class DarOpinion extends javax.swing.JFrame {
             s = conexion.prepareStatement(getCC);
             ResultSet cedula = s.executeQuery();
             cedula.next();
-            cc = cedula.getInt(1);
+            cc = cedula.getLong(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String commentInsert = "insert into comentario (com_descripcion, Persona_per_id, Venta_ven_id) "
+                + "values ('" + comment + "', " + cc + " , '" + idVenta + "');";
+
+        PreparedStatement comentarios;
+        try {
+            comentarios = conexion.prepareStatement(commentInsert);
+            int com = comentarios.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String getIdComment = "select * from comentario where Venta_ven_id = " + idVenta + ";";
+        PreparedStatement getcomentario;
+        try {
+            getcomentario = conexion.prepareStatement(getIdComment);
+            ResultSet idcom = getcomentario.executeQuery();
+            idcom.next();
+            idComment = idcom.getInt(1);
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -267,13 +290,13 @@ public class DarOpinion extends javax.swing.JFrame {
             while (producto.next()) {
 
                 int idProd = producto.getInt(1);
-                String commentInsert = "insert into comentario (com_descripcion, Persona_per_id, Producto_pro_id, Venta_ven_id) "
-                        + "values ('" + comment + "', " + cc + "," + idProd + " , '" + idVenta + "');";
 
-                PreparedStatement comentarios;
+                String insertCalificacion = "insert into calificación (cal_estrellas, cal_fecha, Persona_per_id, Comentario_com_id, Producto_pro_id) "
+                        + "values (" + stars + ", curdate()," + cc + ", " + idComment + ", " + idProd + ");";
+                PreparedStatement calif;
                 try {
-                    comentarios = conexion.prepareStatement(commentInsert);
-                    int com = comentarios.executeUpdate();
+                    calif = conexion.prepareStatement(insertCalificacion);
+                    int insertcalif = calif.executeUpdate();
                 } catch (SQLException ex) {
                     Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -283,6 +306,8 @@ public class DarOpinion extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        dispose();
 
     }//GEN-LAST:event_addButtonActionPerformed
 

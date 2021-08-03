@@ -280,7 +280,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `proyecto`.`Comentario` ;
 
 CREATE TABLE IF NOT EXISTS `proyecto`.`Comentario` (
-  `com_id` INT(10) UNSIGNED NOT NULL,
+  `com_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `com_descripcion` TEXT NULL,
   `Persona_per_id` BIGINT(10) UNSIGNED NOT NULL,
   `Venta_ven_id` INT(10) UNSIGNED NOT NULL,
@@ -421,7 +421,6 @@ CREATE TABLE IF NOT EXISTS `proyecto`.`Pedido` (
   `Producto_pro_id` INT(2) UNSIGNED NOT NULL,
   `Venta_ven_id` INT(10) UNSIGNED NOT NULL,
   `Venta_Persona_per_id` BIGINT(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`Producto_pro_id`, `Venta_ven_id`, `Venta_Persona_per_id`),
   INDEX `fk_Producto_has_Venta_Venta1_idx` (`Venta_ven_id` ASC, `Venta_Persona_per_id` ASC) VISIBLE,
   INDEX `fk_Producto_has_Venta_Producto1_idx` (`Producto_pro_id` ASC) VISIBLE,
   CONSTRAINT `fk_Producto_has_Venta_Producto1`
@@ -470,4 +469,4 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- select * from DetalleCompraInsumo;
 
-
+-- alter table pedido modify Venta_Persona_per_id BIGINT(10) UNSIGNED NOT NULL, add key(Venta_Persona_per_id);

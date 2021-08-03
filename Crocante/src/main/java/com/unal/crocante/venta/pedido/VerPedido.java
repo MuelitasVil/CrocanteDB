@@ -216,7 +216,7 @@ public class VerPedido extends javax.swing.JFrame {
         int row = pedido.getSelectedRow();
         if (row >= 0) {
             int producto = (int) pedido.getModel().getValueAt(row, 0);
-            String queryDltPedido = "delete from pedido where Producto_pro_id = " + producto + " AND Venta_ven_id = " + idVenta + ";";
+            String queryDltPedido = "delete from pedido where Producto_pro_id = " + producto + " AND Venta_ven_id = " + idVenta + " limit 1;";
             PreparedStatement s;
             try {
                 s = conexion.prepareStatement(queryDltPedido);
