@@ -203,7 +203,7 @@ public class AgregarPedido extends javax.swing.JFrame {
             s = conexion.prepareStatement(queryGetCc);
             ResultSet result = s.executeQuery();
             result.next();
-            cc = result.getInt(1);
+            cc = result.getLong(1);
         } catch (SQLException ex) {
             Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
