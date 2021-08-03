@@ -155,5 +155,17 @@ DELIMITER ;
 
 Call Tipo_mas_dia('Sabado');
 
+-- --------------------------
 
+drop procedure if exists gast_salario;
+DELIMITER $$
 
+CREATE PROCEDURE gast_salario()-- --
+BEGIN
+	DECLARE total INT;
+	SELECT SUM(sal_valor) INTO total FROM Salario JOIN Empleado ON (emp_id = Empleado_emp_id) WHERE emp_Estado = 1;
+	INSERT INTO Gasto (gast_descripción, gast_costo, gast_fecha, gast_tipo, Sede_sede_id) VALUES ('Pago Salarios', total, curdate(), 'Nomina', 1);
+END $$
+DELIMITER ; 
+
+GRANT EXECUTE ON Procedure proyecto.gast_salario To 'Gerencia'@'localhost';

@@ -32,6 +32,7 @@ public class GenerarDomicilio extends javax.swing.JFrame {
         conexion = conector.iniciarConexion();
         cargarEmpleados();
         cargarBarrio();
+        cargarDireccion();
 
     }
 
@@ -310,7 +311,7 @@ public class GenerarDomicilio extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GenerarDomicilio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -328,7 +329,28 @@ public class GenerarDomicilio extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(VentaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GenerarDomicilio.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void cargarDireccion() {
+        String dir = "select per_dirección"
+                + " from persona join venta on (per_id = Persona_per_id)"
+                + " where ven_id = ?;";
+
+        PreparedStatement d;
+        try {
+            d = conexion.prepareStatement(dir);
+            d.setInt(1, idVenta);
+            ResultSet resultado = d.executeQuery();
+            resultado.next();
+            if (!resultado.getString(1).equals(null)) {
+                dirTextField.setText(resultado.getString(1));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GenerarDomicilio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }
