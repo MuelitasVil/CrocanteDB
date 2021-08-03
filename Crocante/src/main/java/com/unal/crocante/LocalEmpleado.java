@@ -258,8 +258,8 @@ public class LocalEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_Recargar_datos_empleadoActionPerformed
 
     private void AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtrasActionPerformed
-
-        new Menu().setVisible(true);
+        LocalMenu local = new LocalMenu();
+        local.setVisible(true);
         dispose();
     }//GEN-LAST:event_AtrasActionPerformed
 
