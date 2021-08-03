@@ -195,7 +195,7 @@ public class ClientePrincipal extends javax.swing.JFrame {
             String id = searchFormattedTextField.getText();
             String clienteQuery = "select * from persona"
                     + " left join empleado on (per_id = Persona_per_id)"
-                    + " where Persona_per_id is null and per_id = " + id + ";";
+                    + " where Persona_per_id is null and per_id like '%" + id + "%';";
 
             System.out.println(clienteQuery);
             llenarInfoClientes(clienteQuery);
