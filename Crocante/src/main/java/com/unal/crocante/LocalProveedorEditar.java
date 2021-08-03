@@ -191,7 +191,7 @@ public class LocalProveedorEditar extends javax.swing.JFrame {
                         actualizar.setString(3, Correo);
                         actualizar.setInt(4, id);
 
-                        procedimiento.execute();
+                        actualizar.executeUpdate();
 
                         JOptionPane.showMessageDialog(this, "Se realizo el pago con exito");
 
